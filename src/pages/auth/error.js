@@ -1,8 +1,7 @@
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import packageJson from '/package.json';
 
-export default function Signin() {
+export default function Error() {
 	const router = useRouter();
 
 	return (
