@@ -21,24 +21,34 @@ export default function User() {
 		fetch(`/api/user/?page=${currentPage}`)
 			.then((response) => response.json())
 			.then((jsonData) => {
-				console.log(jsonData);
 				setUsers(jsonData.users);
 				setTotalPage(jsonData.totalPages);
+				if (currentPage > jsonData.totalPages) {
+					setCurrentPage(jsonData.totalPages);
+				}
 				setTimeout(() => {
 					setIsLoading(false);
 				}, 500);
 			});
 	}, [currentPage]);
 
+	useEffect(() => {
+		if (!router.query.page || router.query.page === currentPage) {
+			return;
+		}
+
+		setCurrentPage(parseInt(router.query.page));
+	}, [router.query.page]);
+
 	const handlePreviousPage = () => {
 		if (currentPage > 1) {
-			setCurrentPage(currentPage - 1);
+			router.push('?page=' + (currentPage - 1) + '#');
 		}
 	};
 
 	const handleNextPage = () => {
 		if (currentPage < totalPages) {
-			setCurrentPage(currentPage + 1);
+			router.push('?page=' + (currentPage + 1) + '#');
 		}
 	};
 
@@ -62,8 +72,8 @@ export default function User() {
 						<ul className="max-w-md divide-y divide-gray-200 w-full px-6">
 							{users[currentPage - 1] &&
 								users[currentPage - 1].map((user, index) => (
-									<li key={index + '-user-list'} className="py-1.5 sm:py-2" onClick={() => router.push('/user/' + user.username)}>
-										<div className="flex items-center space-x-4 rtl:space-x-reverse h-full">
+									<li key={index + '-user-list'} className="py-1.5 sm:py-2 h-14" onClick={() => router.push('/user/' + user.username)}>
+										<div className="flex items-center space-x-4 rtl:space-x-reverse h-full cursor-pointer">
 											<div className="flex-shrink-0">
 												<img className="w-8 h-8 rounded-full" src={user.image} alt={user.username} />
 											</div>
@@ -71,8 +81,7 @@ export default function User() {
 												<p className="text-sm font-medium text-gray-900 truncate">{user.name ? user.name : user.username}</p>
 												<p className="text-sm text-gray-500 truncate dark:text-gray-400">{user.name ? '@' + user.username : ''}</p>
 											</div>
-											{/* <div className="inline-flex items-center text-base font-semibold text-gray-900">{user.statistics.points.length >= 4 ? user.statistics.points.slice(0, -3) + 'K' : user.statistics.points} Pts</div> */}
-											<div className="inline-flex items-center text-base font-semibold text-gray-900">12 Pts</div>
+											<div className="inline-flex items-center text-base font-semibold text-gray-900">{user.statistics.points.length >= 4 ? user.statistics.points.slice(0, -3) + 'K' : user.statistics.points} PTS</div>
 										</div>
 									</li>
 								))}
