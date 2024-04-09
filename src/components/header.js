@@ -1,9 +1,11 @@
 import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export default function Header() {
 	const [navbarOpen, setNavbarOpen] = useState(false);
 	const { data: session, status } = useSession();
+	const router = useRouter();
 
 	return (
 		<div className="top-0 w-full z-30 bg-sky-600 bg-opacity-90 md:bg-opacity-90 transition duration-300 ease-in-out">
@@ -35,9 +37,9 @@ export default function Header() {
 							</li>
 							<li className="mb-[1rem] md:mb-0">
 								{session ? (
-									<a href={'/user/' + session.user.username} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
+									<button onClick={() => router.push('/user/' + session.user.username)} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
 										{session.user.name}
-									</a>
+									</button>
 								) : (
 									<button className="px-4 py-2 mt-2 font-semibold bg-white text-gray-500 transition duration-300 ease-in-out transform rounded-lg md:mt-0 ml-4 hover:text-gray-400 focus:text-gray-400 focus:bg-gray-200 focus:outline-none focus:shadow-outline" onClick={() => signIn()}>
 										Login
