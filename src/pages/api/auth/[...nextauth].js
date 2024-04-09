@@ -51,7 +51,19 @@ export const authOptions = {
 		},
 
 		async session({ session, token }) {
-			const user = await db.collection('users').findOne({ email: session.user.email });
+			const user = await db.collection('users').findOne(
+				{ email: session.user.email },
+				{
+					projection: {
+						_id: 0,
+						id: 1,
+						name: 1,
+						email: 1,
+						image: 1,
+						username: 1,
+					},
+				}
+			);
 			session.user = user;
 			return session;
 		},
