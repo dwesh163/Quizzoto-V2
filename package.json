@@ -1,6 +1,6 @@
 {
-  "name": "quizzoto-v2",
-  "version": "0.1.0",
+  "name": "quizzoto",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
