@@ -34,12 +34,12 @@ export default function Header() {
 						<ul className="md:flex flex-grow justify-end flex-wrap items-center">
 							<li>
 								<a href="/" className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
-									Careers
+									Quizzes
 								</a>
 							</li>
 							<li>
-								<a href="/" className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
-									About Us
+								<a href="/user" className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
+									Users
 								</a>
 							</li>
 							<li className="mb-[1rem] md:mb-0">
