@@ -21,16 +21,25 @@ export const authOptions = {
 
 				const newUser = {
 					id: uuidv4(),
-					email: user.email,
-					username: profile.login,
-					image: user.image,
-					provider: account.provider,
-					company: profile.company,
 					name: profile.name ? profile.name : profile.login,
+					email: user.email,
+					image: user.image,
+					username: profile.login,
+					company: profile.company,
+					location: profile.location,
+					bio: profile.bio,
+					statistics: {
+						points: '',
+						quizzes: '',
+						stars: '',
+					},
+					provider: account.provider,
+					lastLogin: new Date(),
+					firstLogin: existingUser ? existingUser.firstLogin : new Date(),
 				};
 
 				if (existingUser) {
-					await db.collection('users').updateOne({ email: user.email }, { $set: { ...newUser, id: existingUser.id } });
+					await db.collection('users').updateOne({ email: user.email }, { $set: { ...newUser, id: existingUser.id, statistics: existingUser.statistics } });
 				} else {
 					await db.collection('users').insertOne(newUser);
 				}
