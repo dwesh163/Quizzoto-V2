@@ -15,6 +15,10 @@ export default async function getUserInfo(req, res) {
 			}
 		);
 
+		if (user == null) {
+			return res.status(200).send('404');
+		}
+
 		return res.status(200).send(user);
 	} catch (error) {
 		console.error('Error:', error);
