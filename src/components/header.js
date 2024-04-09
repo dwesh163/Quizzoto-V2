@@ -1,15 +1,12 @@
 import { signIn, useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
+import { useState } from 'react';
 
 export default function Header() {
 	const [navbarOpen, setNavbarOpen] = useState(false);
 	const { data: session, status } = useSession();
 
-	const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
-
 	return (
-		<div className="fixed top-0 w-full z-30 bg-sky-600 bg-opacity-90 md:bg-opacity-90 transition duration-300 ease-in-out">
+		<div className="top-0 w-full z-30 bg-sky-600 bg-opacity-90 md:bg-opacity-90 transition duration-300 ease-in-out">
 			<div className="flex flex-col max-w-6xl px-4 mx-auto items-center justify-between md:flex-row md:px-6 lg:px-8">
 				<div className="flex items-center justify-between p-4 md:w-fit w-full">
 					<a href="/" className="text-lg font-semibold rounded-lg tracking-widest focus:outline-none focus:shadow-outline">
