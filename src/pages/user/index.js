@@ -7,29 +7,40 @@ export default function User() {
 	const router = useRouter();
 
 	const [users, setUsers] = useState({});
+	const [search, setSearch] = useState('');
 	const [isLoading, setIsLoading] = useState(true);
+
 	const [currentPage, setCurrentPage] = useState(1);
-
 	const [totalPages, setTotalPage] = useState(5);
+	const [serverSearch, setServerSearch] = useState('');
 
-	useEffect(() => {
-		if (users[currentPage - 1]) {
+	function fetchData() {
+		if (users[currentPage - 1] && serverSearch == search) {
 			return;
 		}
 
 		setIsLoading(true);
-		fetch(`/api/user/?page=${currentPage}`)
+		fetch(`/api/user/?page=${currentPage}&search=${search}`)
 			.then((response) => response.json())
 			.then((jsonData) => {
 				setUsers(jsonData.users);
+				setServerSearch(jsonData.search);
 				setTotalPage(jsonData.totalPages);
 				if (currentPage > jsonData.totalPages) {
+					router.push('?page=' + jsonData.totalPages);
 					setCurrentPage(jsonData.totalPages);
+				} else {
+					router.push('?page=' + jsonData.page);
+					setCurrentPage(jsonData.page);
 				}
 				setTimeout(() => {
 					setIsLoading(false);
 				}, 500);
 			});
+	}
+
+	useEffect(() => {
+		fetchData();
 	}, [currentPage]);
 
 	useEffect(() => {
@@ -39,6 +50,10 @@ export default function User() {
 
 		setCurrentPage(parseInt(router.query.page));
 	}, [router.query.page]);
+
+	const handleSearchChange = (event) => {
+		setSearch(event.target.value);
+	};
 
 	const handlePreviousPage = () => {
 		if (currentPage > 1) {
