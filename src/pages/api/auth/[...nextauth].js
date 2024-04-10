@@ -29,9 +29,9 @@ export const authOptions = {
 					location: profile.location,
 					bio: profile.bio,
 					statistics: {
-						points: '',
-						quizzes: '',
-						stars: '',
+						points: '0',
+						quizzes: '0',
+						stars: '0',
 					},
 					provider: account.provider,
 					lastLogin: new Date(),
