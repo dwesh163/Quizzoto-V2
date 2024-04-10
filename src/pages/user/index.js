@@ -151,7 +151,7 @@ export default function User() {
 								return buttons;
 							})()}
 						</div>
-						<button disabled={currentPage === totalPages || isLoading} onClick={handleNextPage} className="flex items-center md:w-36 w-24 gap-1 md:px-6 px-2 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:text-gray-900/90 active:text-gray-900/50 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+						<button disabled={currentPage === totalPages || isLoading} onClick={handleNextPage} className={'flex items-center md:w-36 w-24 gap-1 md:px-6 px-2 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:text-gray-900/90 active:text-gray-900/50 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ' + (users == 'none' ? 'hidden' : '')} type="button">
 							Next
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" aria-hidden="true" className="w-4 h-4">
 								<path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
