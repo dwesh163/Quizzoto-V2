@@ -142,6 +142,19 @@ export default function Question() {
 			});
 	}
 
+	function summit() {
+		setGlobalAnswers((prevGlobalAnswers) => ({
+			...prevGlobalAnswers,
+			[parseInt(history.length > 1 ? history[history.length - 1] : '1') - 1]: answers,
+		}));
+
+		fetch('/api/result', { method: 'POST', body: JSON.stringify({ slug: quiz.slug, answers: globalAnswers }) })
+			.then((response) => response.json())
+			.then((jsonData) => {
+				console.log(jsonData);
+			});
+	}
+
 	useEffect(() => getQuiz(), [router.query.slug]);
 	useEffect(() => {
 		if (!router.query.questionId || router.query.questionId < 1) {
@@ -169,8 +182,6 @@ export default function Question() {
 			router.events.off('routeChangeComplete', handleRouteChange);
 		};
 	}, [router.events]);
-
-	useEffect(() => {}, [answers]);
 
 	return (
 		<>
@@ -208,7 +219,7 @@ export default function Question() {
 
 								{question.question}
 								<AnswersBox answers={answers} setAnswers={setAnswers} question={question} />
-								{quiz.info.length == router.query.questionId && <button>SUMMIT</button>}
+								{quiz?.info?.length == router.query.questionId && <button onClick={() => summit()}>SUMMIT</button>}
 							</div>
 						</div>
 					</div>
@@ -217,5 +228,3 @@ export default function Question() {
 		</>
 	);
 }
-
-233;
