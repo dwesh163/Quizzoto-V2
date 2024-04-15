@@ -7,6 +7,7 @@ export default async function Results(req, res) {
 	const session = await getServerSession(req, res, authOptions);
 	const { slug, answers } = JSON.parse(req.body);
 	const quiz = await db.collection('quizzes').findOne({ slug: slug });
+	const id = uuidv4();
 
 	const oldResults = await db
 		.collection('results')
@@ -49,7 +50,7 @@ export default async function Results(req, res) {
 
 	let returnObject = {
 		quiz: quiz.id,
-		id: uuidv4(),
+		id: id,
 		points,
 		results,
 		roomId,
@@ -60,6 +61,5 @@ export default async function Results(req, res) {
 
 	db.collection('results').insertOne(returnObject);
 
-	delete returnObject._id;
-	return res.status(200).json(returnObject);
+	return res.status(200).json({ succes: true, id: id });
 }
