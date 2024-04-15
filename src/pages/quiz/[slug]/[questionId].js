@@ -151,7 +151,9 @@ export default function Question() {
 		fetch('/api/result', { method: 'POST', body: JSON.stringify({ slug: quiz.slug, answers: globalAnswers }) })
 			.then((response) => response.json())
 			.then((jsonData) => {
-				console.log(jsonData);
+				if (jsonData.id) {
+					router.push('/result/' + jsonData.id);
+				}
 			});
 	}
 
