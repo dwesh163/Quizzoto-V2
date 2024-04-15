@@ -68,6 +68,7 @@ export default function User() {
 										<p className="text-xs text-text tracking-widest">Questions</p>
 									</div>
 								</div>
+								<button onClick={() => router.push(quiz.slug + '/1')}>START</button>
 							</div>
 							<div className="md:w-[30rem] h-full flex flex-col gap-6">
 								<div onClick={() => router.push('/user/' + quiz.user.username)} className="flex flex-col items-center justify-center pt-6 sm:pt-0  w-full h-96 bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-xl md:shadow-xl cursor-pointer">
