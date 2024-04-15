@@ -43,6 +43,7 @@ async function insertQuiz(quiz, session) {
 		info: quiz.info,
 		creator: session.user.id,
 		questions: quiz.questions,
+		type: quiz.type,
 	};
 
 	await db.collection('quizzes').insertOne(newQuiz);
