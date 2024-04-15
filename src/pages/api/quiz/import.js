@@ -32,6 +32,8 @@ async function insertQuiz(quiz, session) {
 		return { code: 400, message: 'The slug must be unique...' };
 	}
 
+	quiz.info.length = quiz.questions.length;
+
 	const newQuiz = {
 		id: uuidv4(),
 		slug: quiz.slug,
