@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Menu from '@/components/menu';
 
-export default function User() {
+export default function Quiz() {
 	const { data: session, status } = useSession();
 	const router = useRouter();
 
@@ -49,7 +49,7 @@ export default function User() {
 						<Menu title={quiz.title} />
 						<div className="flex flex-col justify-between items-center md:flex-row gap-6 h-full">
 							<div className="bg-white md:bg-card-texture h-full bg-no-repeat bg-top p-5 md:rounded-xl md:shadow-xl w-full">
-								<h1 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-800 md:text-4xl lg:text-5xl ">{quiz.title}</h1>
+								<h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-800 md:text-4xl lg:text-5xl ">{quiz.title}</h1>
 								<div className="flex justify-evenly mt-6 py-6 border border-neutral border-r-0 border-b-0 border-l-0">
 									<div className="text-center">
 										<h3 className="font-bold text-secondary">{quiz.info.date}</h3>

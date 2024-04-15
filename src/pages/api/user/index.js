@@ -7,7 +7,7 @@ export default async function getUserInfo(req, res) {
 		const usersPerPage = 15;
 		let query = {};
 
-		if (search != '') {
+		if (search != undefined) {
 			query = {
 				$or: [{ username: { $regex: search, $options: 'i' } }, { name: { $regex: search, $options: 'i' } }],
 			};
