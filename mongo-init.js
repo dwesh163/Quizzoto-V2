@@ -2,6 +2,7 @@ db = db.getSiblingDB('quizzoto');
 
 db.createCollection('users');
 db.createCollection('quizzes');
+db.createCollection('results');
 
 db.createUser({
 	user: process.env.MONGO_INITDB_USER_USERNAME,
