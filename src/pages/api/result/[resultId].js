@@ -61,11 +61,11 @@ export default async function getResults(req, res) {
 			.toArray();
 
 		if (result.visibility == 'private' && session?.user?.email != result?.user?.email) {
-			return res.status(404).send('Not Found');
+			return res.status(404).json({ error: 'Not Found' });
 		}
 
 		if (!result) {
-			return res.status(404).send('Not Found');
+			return res.status(404).json({ error: 'Not Found' });
 		}
 
 		if (result.visibility != 'private') {
