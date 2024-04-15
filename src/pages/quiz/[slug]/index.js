@@ -63,6 +63,10 @@ export default function User() {
 										<h3 className="font-bold text-secondary">{quiz.info.points}</h3>
 										<p className="text-xs text-text tracking-widest">Points</p>
 									</div>
+									<div className="text-center">
+										<h3 className="font-bold text-secondary">{quiz.info.length}</h3>
+										<p className="text-xs text-text tracking-widest">Questions</p>
+									</div>
 								</div>
 							</div>
 							<div className="md:w-[30rem] h-full flex flex-col gap-6">
