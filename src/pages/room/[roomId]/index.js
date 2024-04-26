@@ -82,7 +82,7 @@ export default function Rooms() {
 														<img className="w-8 h-8 rounded-full" src={room.user ? room.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} />
 													</div>
 													<div className="flex-1 min-w-0">
-														<p className="text-sm font-medium text-gray-900 truncate">{room.user ? room.user.username : 'anonymous'}</p>
+														<p className="truncate">{room.user ? room.user.username : 'anonymous'}</p>
 													</div>
 												</div>
 											</td>
