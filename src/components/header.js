@@ -33,7 +33,11 @@ export default function Header() {
 					<nav className={'flex flex-col w-full'}>
 						<ul className="md:flex flex-grow justify-end flex-wrap items-center">
 							<li>
-								<a href="/" className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
+								<button onClick={() => router.push('/room')} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
+									Rooms
+								</button>
+							</li>
+							<li>
 									Quizzes
 								</a>
 							</li>
