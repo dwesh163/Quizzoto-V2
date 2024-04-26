@@ -49,6 +49,7 @@ export default async function getRoomsInfo(req, res) {
 						_id: 0,
 						points: 1,
 						roomId: 1,
+						id: 1,
 						visibility: 1,
 						'user.name': 1,
 						'user.username': 1,
@@ -61,7 +62,7 @@ export default async function getRoomsInfo(req, res) {
 			])
 			.toArray();
 
-		return res.status(200).send({ results });
+		return res.status(200).send({ results: results });
 	} catch (error) {
 		console.error('Error:', error);
 		return res.status(500).send('Internal server error');
