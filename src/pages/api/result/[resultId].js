@@ -5,7 +5,6 @@ import { authOptions } from '../auth/[...nextauth]';
 export default async function getResults(req, res) {
 	const session = await getServerSession(req, res, authOptions);
 	try {
-		console.log(req.query.resultId);
 		const [result] = await db
 			.collection('results')
 			.aggregate([
@@ -69,8 +68,13 @@ export default async function getResults(req, res) {
 		}
 
 		if (result.visibility != 'private') {
-			delete result.user.email;
-			delete result.roomId;
+			if (result?.user?.email) {
+				delete result.user.email;
+			}
+
+			if (result?.roomId) {
+				delete result.roomId;
+			}
 		}
 
 		return res.status(200).send(result);
