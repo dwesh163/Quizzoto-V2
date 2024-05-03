@@ -59,10 +59,6 @@ export default async function Results(req, res) {
 		visibility: session ? 'private' : 'hidden',
 	};
 
-	if (session) {
-		await db.collection('users').findOneAndUpdate({ id: session.user.id }, { $inc: { 'statistics.points': points, 'statistics.quizzes': 1 } }, { returnOriginal: false });
-	}
-
 	db.collection('results').insertOne(returnObject);
 
 	return res.status(200).json({ succes: true, id: id });
