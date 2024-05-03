@@ -5,12 +5,79 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Menu from '@/components/menu';
 
+function Answers({ results }) {
+	const router = useRouter();
+
+	return (
+		<div className="relative overflow-x-auto w-full">
+			<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+				<thead className="sm:text-base text-sm text-gray-900 uppercase dark:text-gray-400">
+					<tr>
+						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 sm:hidden table-cell">
+							results
+						</th>
+						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1">
+							Quizz
+						</th>
+						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell">
+							Name
+						</th>
+						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell">
+							User
+						</th>
+						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1">
+							Points
+						</th>
+					</tr>
+				</thead>
+				<tbody className="w-full">
+					{results?.map((result, index) => (
+						<tr key={'results-' + index} className="sm:text-base text-sm cursor-pointer hover:bg-slate-100" onClick={() => router.push('/result/' + result.id)}>
+							<th scope="row" className="sm:px-6 sm:py-4 px-3 py-2 font-medium text-gray-900 hidden sm:table-cell">
+								{result.quiz.title}
+							</th>
+							<td className="sm:px-6 sm:py-4 px-3 py-2 hidden sm:table-cell">{result.user ? result.user.name : ''}</td>
+							<td className="sm:px-6 sm:py-4 px-3 py-2 hidden sm:table-cell">
+								<div className="flex items-center sm:space-x-4 space-x-1 rtl:space-x-reverse h-full cursor-pointer">
+									<div className="flex-shrink-0">
+										<img className="sm:w-8 sm:h-8 w-4 h-4 rounded-full" src={result.user ? result.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} />
+									</div>
+									<div className="flex-1 min-w-0">
+										<p className="truncate">{result.user ? result.user.username : 'anonymous'}</p>
+									</div>
+								</div>
+							</td>
+							<td className="sm:px-6 sm:py-4 px-3 py-2 hidden sm:table-cell">{result.points}</td>
+							<td className="sm:hidden py-2 table-cell">
+								<div className="flex gap-2">
+									<div className="h-full flex items-center align-middle">
+										<img className="sm:w-8 sm:h-8 w-12 h-12 rounded-full" src={result.user ? result.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} />
+									</div>
+									<div className={'flex ' + (result?.user?.name ? 'flex-col' : 'items-center')}>
+										{result?.user?.name ? <p className="font-medium">{result?.user?.name}</p> : <></>}
+										<p className={!result?.user?.name ? 'font-medium' : 'text-gray-500'}>{result?.user ? result?.user?.username : 'anonymous'}</p>
+									</div>
+								</div>
+							</td>
+							<td className="sm:hidden py-2 table-cell"> {result.quiz.title}</td>
+							<td className="sm:hidden py-2 table-cell">{result.points}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	);
+}
+
 export default function Rooms() {
 	const { data: session, status } = useSession();
 	const router = useRouter();
 
 	const [room, setRoom] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
+	const [currentPage, setCurrentPage] = useState('results');
+
+	const pages = ['results', 'quizzes', 'stats'];
 
 	useEffect(() => {
 		if (!router.query.roomId) {
@@ -22,7 +89,6 @@ export default function Rooms() {
 				if (jsonData.error != 'Not Found') {
 					setRoom(jsonData);
 
-					console.log(jsonData);
 					setIsLoading(false);
 				} else {
 					setRoom('404');
@@ -50,48 +116,26 @@ export default function Rooms() {
 						)}
 					</div>
 				) : (
-					<div className="flex mt-20 md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto items-center justify-between md:flex-row md:px-6 lg:px-8">
-						<div className="relative overflow-x-auto w-full">
-							<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-								<thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
-									<tr>
-										<th scope="col" className="px-6 py-3">
-											Quizz
-										</th>
-										<th scope="col" className="px-6 py-3">
-											Name
-										</th>
-										<th scope="col" className="px-6 py-3">
-											User
-										</th>
-										<th scope="col" className="px-6 py-3">
-											Points
-										</th>
-									</tr>
-								</thead>
-								<tbody className="w-full">
-									{room?.results?.map((room, index) => (
-										<tr key={index} className="bg-white ">
-											<th scope="row" className="px-6 py-4 font-medium text-gray-900  ">
-												{room.quiz.title}
-											</th>
-											<td className="px-6 py-4">{room.user ? room.user.name : ''}</td>
-											<td className="px-6 py-4">
-												<div className="flex items-center space-x-4 rtl:space-x-reverse h-full cursor-pointer">
-													<div className="flex-shrink-0">
-														<img className="w-8 h-8 rounded-full" src={room.user ? room.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} />
-													</div>
-													<div className="flex-1 min-w-0">
-														<p className="truncate">{room.user ? room.user.username : 'anonymous'}</p>
-													</div>
-												</div>
-											</td>
-											<td className="px-6 py-4">{room.points}</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
+					<div className="flex mt-20 md:bg-[#fcfcfc] bg-white flex-col max-w-6xl mx-auto items-center justify-between md:px-6 px-4 lg:px-8">
+						<div className="w-full flex h-12 select-none mb-4">
+							{pages.map((page) => (
+								<div className="w-1/3">
+									<div key={'page-' + page} className="w-full h-full pb-1 flex cursor-pointer justify-center items-center hover:bg-gray-100" onClick={() => setCurrentPage(page)}>
+										{page.substring(0, 1).toUpperCase() + page.substring(1)}
+									</div>
+									{currentPage == page && <div className="bg-sky-600 bg-opacity-90 w-full h-1 mt-[-0.25rem]"></div>}
+								</div>
+							))}
 						</div>
+
+						{(() => {
+							switch (currentPage) {
+								case 'results':
+									return <Answers results={room?.results} />;
+								default:
+									return null;
+							}
+						})()}
 					</div>
 				)}
 			</main>
