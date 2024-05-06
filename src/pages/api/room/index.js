@@ -12,15 +12,18 @@ export default async function getRoomsInfo(req, res) {
 
 	try {
 		if (req.method == 'GET') {
+			console.log(session.user.id);
 			const rooms = await db
 				.collection('rooms')
 				.aggregate([
 					{
-						$project: { rooms: '$$ROOT', _id: 0 },
+						$match: {
+							creator: session.user.id,
+						},
 					},
 					{
 						$lookup: {
-							localField: 'rooms.creator',
+							localField: 'creator',
 							from: 'users',
 							foreignField: 'id',
 							as: 'user',
@@ -34,15 +37,13 @@ export default async function getRoomsInfo(req, res) {
 					},
 					{
 						$project: {
-							comment: '$rooms.comment',
-							creator: '$rooms.creator',
-							id: '$rooms.id',
-							time: '$rooms.time',
-							title: '$rooms.title',
-							user: {
-								image: '$user.image',
-								username: '$user.username',
-							},
+							comment: 1,
+							creator: 1,
+							id: 1,
+							time: 1,
+							title: 1,
+							'user.image': 1,
+							'user.username': 1,
 							_id: 0,
 						},
 					},
@@ -54,7 +55,15 @@ export default async function getRoomsInfo(req, res) {
 		if (req.method == 'POST') {
 			const user = await db.collection('users').findOne({ email: session.user.email });
 
-			const { title, comment } = JSON.parse(req.body);
+			const { title, comment, slug } = JSON.parse(req.body);
+
+			if (await db.collection('links').findOne({ slug: slug })) {
+				return res.status(403).send({ error: 'Slug already exists' });
+			}
+
+			const linkId = uuidv4();
+
+			await db.collection('links').insertOne({ id: linkId, slug, creatorId, used: 0 });
 
 			const id = uuidv4();
 
@@ -64,6 +73,7 @@ export default async function getRoomsInfo(req, res) {
 				time: Date.now(),
 				title,
 				comment,
+				linkId,
 				quizzes: [],
 			};
 
