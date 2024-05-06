@@ -55,40 +55,67 @@ export default function Results() {
 							<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 								<thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
 									<tr>
-										<th scope="col" className="px-6 py-3">
+										<th scope="col" className="px-3 py-3 sm:table-cell hidden">
 											Question
 										</th>
-										<th scope="col" className="px-6 py-3">
+										<th scope="col" className="px-3 py-3">
 											Answers
 										</th>
-										<th scope="col" className="px-6 py-3">
+										<th scope="col" className="px-3 py-3 sm:table-cell hidden">
 											Correct
 										</th>
-										<th scope="col" className="px-6 py-3">
+										<th scope="col" className="px-3 py-3 sm:table-cell hidden">
 											Points
 										</th>
 									</tr>
 								</thead>
 								<tbody>
 									{result?.results?.map((result, index) => (
-										<tr key={index} className="bg-white ">
-											<th scope="row" className="px-6 py-4 font-medium text-gray-900  ">
+										<tr key={index} className="bg-white">
+											<th className="px-3 py-4 font-medium sm:hidden text-gray-900 gap-2 flex flex-col">
+												{result.question}
+												<div className="w-full flex gap-1 ">
+													<div className="w-full flex flex-col gap-1">
+														<div className={'w-full flex gap-1 ' + (result.points > 0 ? 'text-green-400' : 'text-red-500')}>
+															{result.points > 0 ? <img src="/svg/correct.svg" /> : <img src="/svg/wrong.svg" />}
+															{result.userAnswer.join(', ') != '' ? result.userAnswer.join(', ') : 'EMPTY'}
+														</div>
+														<div className="w-full flex gap-1 text-green-400">
+															{result.points == 0 && <img src="/svg/correct.svg" />}
+															{result.correctAnswer.join(', ') != result.userAnswer.join(', ') && result.correctAnswer.join(', ')}
+														</div>
+													</div>
+													<div className="w-24">{result.points} Points</div>
+												</div>
+											</th>
+
+											<th scope="row" className="px-3 py-4 sm:table-cell hidden font-medium text-gray-900">
 												{result.question}
 											</th>
-											<td className="px-6 py-4">{result.userAnswer.join(', ') != '' ? result.userAnswer.join(', ') : 'EMPTY'}</td>
-											<td className="px-6 py-4">{result.correctAnswer.join(', ') != result.userAnswer.join(', ') && result.correctAnswer.join(', ')}</td>
-											<td className="px-6 py-4">{result.points}</td>
+											<td className="px-3 py-4 font-medium sm:table-cell hidden gap-1">
+												<div className={'w-full flex gap-1 ' + (result.points > 0 ? 'text-green-400' : 'text-red-500')}>
+													{result.points > 0 ? <img src="/svg/correct.svg" /> : <img src="/svg/wrong.svg" />}
+													{result.userAnswer.join(', ') != '' ? result.userAnswer.join(', ') : 'EMPTY'}
+												</div>
+											</td>
+											<td className="px-3 py-4 font-medium sm:table-cell hidden">
+												<div className="w-full flex gap-1 text-green-400">
+													{result.points == 0 && <img src="/svg/correct.svg" />}
+													{result.correctAnswer.join(', ') != result.userAnswer.join(', ') && result.correctAnswer.join(', ')}
+												</div>
+											</td>
+											<td className="px-3 py-4 font-medium sm:table-cell hidden text-center">{result.points}</td>
 										</tr>
 									))}
 								</tbody>
 								<tfoot>
 									<tr className="font-semibold text-gray-900 ">
-										<th scope="row" className="px-6 py-3 text-base">
+										<th scope="row" className="px-3 py-3 sm:table-cell hidden text-base">
 											Total
 										</th>
-										<td className="px-6 py-3"></td>
-										<td className="px-6 py-3"></td>
-										<td className="px-6 py-3">{result.points}</td>
+										<td className="px-3 py-3 sm:table-cell hidden"></td>
+										<td className="px-3 py-3 sm:table-cell hidden"></td>
+										<td className="px-3 py-3 sm:table-cell hidden text-center">{result.points}</td>
 									</tr>
 								</tfoot>
 							</table>
