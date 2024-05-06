@@ -8,6 +8,7 @@ export default async function getRoomsInfo(req, res) {
 		return res.status(200).send({ error: 'Not Found' });
 	}
 	try {
+		let quizzes = [];
 		const [room] = await db
 			.collection('rooms')
 			.aggregate([
@@ -38,6 +39,12 @@ export default async function getRoomsInfo(req, res) {
 				{ $limit: 1 },
 			])
 			.toArray();
+		if (room.quizzes) {
+			for (const quizId of room.quizzes) {
+				const quiz = await db.collection('quizzes').findOne({ id: quizId }, { projection: { _id: 0, questions: 0 } });
+				quizzes.push(quiz);
+			}
+		}
 		const results = await db
 			.collection('results')
 			.aggregate([
@@ -92,7 +99,7 @@ export default async function getRoomsInfo(req, res) {
 			])
 			.toArray();
 
-		return res.status(200).send({ results: results });
+		return res.status(200).send({ results: results, quizzes: quizzes, room: room });
 	} catch (error) {
 		console.error('Error:', error);
 		return res.status(500).send('Internal server error');
