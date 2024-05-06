@@ -1,6 +1,11 @@
+import { getSession } from 'next-auth/react';
 import db from '/lib/mongodb';
 
 export default async function getUserInfo(req, res) {
+	const session = await getSession({ req });
+	if (!session) {
+		return res.status(200).send({ users: 'none', totalPages: 0, search: '' });
+	}
 	try {
 		let page = req.query.page - 1 == -1 ? 0 : req.query.page - 1;
 		let search = req.query.search;
@@ -30,7 +35,7 @@ export default async function getUserInfo(req, res) {
 					_id: 0,
 					username: 1,
 					image: 1,
-					name: 1,
+					// name: 1,
 					statistics: 1,
 				},
 			})
