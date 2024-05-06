@@ -69,6 +69,33 @@ function Answers({ results }) {
 	);
 }
 
+function Quizzes({ quizzes }) {
+	const router = useRouter();
+
+	return (
+		<div className="relative overflow-x-auto w-full">
+			<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+				<thead className="sm:text-base text-sm text-gray-900 uppercase dark:text-gray-400">
+					<tr>
+						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1">
+							Title
+						</th>
+					</tr>
+				</thead>
+				<tbody className="w-full">
+					{quizzes?.map((quiz, index) => (
+						<tr key={'quizzes-' + index} className="sm:text-base text-sm cursor-pointer hover:bg-slate-100" onClick={() => router.push('/quiz/' + quiz.slug)}>
+							<th scope="row" className="sm:px-6 sm:py-4 px-3 py-2 font-medium text-gray-900 hidden sm:table-cell">
+								{quiz.title}
+							</th>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	);
+}
+
 export default function Rooms() {
 	const { data: session, status } = useSession();
 	const router = useRouter();
@@ -132,6 +159,8 @@ export default function Rooms() {
 							switch (currentPage) {
 								case 'results':
 									return <Answers results={room?.results} />;
+								case 'quizzes':
+									return <Quizzes quizzes={room?.quizzes} />;
 								default:
 									return null;
 							}
