@@ -8,6 +8,36 @@ export default async function getRoomsInfo(req, res) {
 		return res.status(200).send({ error: 'Not Found' });
 	}
 	try {
+		const [room] = await db
+			.collection('rooms')
+			.aggregate([
+				{ $match: { id: req.query.roomId } },
+				{
+					$lookup: {
+						from: 'users',
+						localField: 'creator',
+						foreignField: 'id',
+						as: 'user',
+					},
+				},
+				{ $unwind: '$user' },
+				{
+					$project: {
+						_id: 0,
+						id: 1,
+						title: 1,
+						comment: 1,
+						time: 1,
+						quizzes: 1,
+						'user.name': 1,
+						'user.username': 1,
+						'user.image': 1,
+						'user.id': 1,
+					},
+				},
+				{ $limit: 1 },
+			])
+			.toArray();
 		const results = await db
 			.collection('results')
 			.aggregate([
