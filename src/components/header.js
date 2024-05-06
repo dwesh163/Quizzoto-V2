@@ -8,12 +8,12 @@ export default function Header() {
 	const router = useRouter();
 
 	return (
-		<div className="absolute top-0 w-full z-30 bg-sky-600 bg-opacity-90 md:bg-opacity-90 transition duration-300 ease-in-out">
+		<div className="absolute top-0 w-full z-30 shadow-xl bg-sky-600 bg-opacity-90 transition duration-300 ease-in-out">
 			<div className="flex flex-col max-w-6xl px-2 mx-auto items-center justify-between md:flex-row md:px-6 lg:px-8">
 				<div className="flex items-center justify-between p-4 md:w-fit w-full">
-					<a href="/" className="text-lg font-semibold rounded-lg tracking-widest focus:outline-none focus:shadow-outline">
+					<button onClick={() => router.push('/')} className="text-lg font-semibold rounded-lg tracking-widest focus:outline-none focus:shadow-outline">
 						<h1 className="text-2xl tracking-tighter text-white md:text-3xl lg:text-4xl mt-0 md:mb-[4px]">QUIZZOTO</h1>
-					</a>
+					</button>
 					<button className="text-white cursor-pointer leading-none px-3 py-1 md:hidden outline-none focus:outline-none" type="button" aria-label="button" onClick={() => setNavbarOpen(!navbarOpen)}>
 						{navbarOpen ? (
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 384 512">
@@ -28,7 +28,6 @@ export default function Header() {
 						)}
 					</button>
 				</div>
-
 				<div className={'md:flex flex-grow items-center md:w-fit w-full ' + (navbarOpen ? ' flex' : ' hidden')}>
 					<nav className={'flex flex-col w-full'}>
 						<ul className="md:flex flex-grow justify-end flex-wrap items-center">
@@ -38,14 +37,15 @@ export default function Header() {
 								</button>
 							</li>
 							<li>
+								<button onClick={() => router.push('/quiz')} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
 									Quizzes
-								</a>
+								</button>
 							</li>
-							<li>
-								<a href="/user" className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
+							{/* <li>
+								<button onClick={() => router.push('/user')} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
 									Users
-								</a>
-							</li>
+								</button>
+							</li> */}
 							<li className="mb-[1rem] md:mb-0">
 								{session ? (
 									<button onClick={() => router.push('/user/' + session.user.username)} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
