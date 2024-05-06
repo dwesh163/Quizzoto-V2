@@ -59,6 +59,13 @@ export default async function getResults(req, res) {
 			])
 			.toArray();
 
+		if (result.roomId) {
+			const room = await db.collection('rooms').findOne({ id: result.roomId });
+			if (room.creator == session?.user?.id) {
+				return res.status(200).send(result);
+			}
+		}
+
 		if (result.visibility == 'private' && session?.user?.email != result?.user?.email) {
 			return res.status(404).json({ error: 'Not Found' });
 		}
