@@ -14,7 +14,7 @@ function Answers({ results }) {
 				<thead className="sm:text-base text-sm text-gray-900 uppercase dark:text-gray-400">
 					<tr>
 						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 sm:hidden table-cell">
-							results
+							Results
 						</th>
 						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1">
 							Quizz
@@ -32,7 +32,7 @@ function Answers({ results }) {
 				</thead>
 				<tbody className="w-full">
 					{results?.map((result, index) => (
-						<tr key={'results-' + index} className="sm:text-base text-sm cursor-pointer hover:bg-slate-100" onClick={() => router.push('/result/' + result.id)}>
+						<tr key={'answers-' + index} className="sm:text-base text-sm cursor-pointer hover:bg-slate-100" onClick={() => router.push('/result/' + result.id)}>
 							<th scope="row" className="sm:px-6 sm:py-4 px-3 py-2 font-medium text-gray-900 hidden sm:table-cell">
 								{result.quiz.title}
 							</th>
