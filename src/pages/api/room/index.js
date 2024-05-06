@@ -54,14 +54,17 @@ export default async function getRoomsInfo(req, res) {
 		if (req.method == 'POST') {
 			const user = await db.collection('users').findOne({ email: session.user.email });
 
+			const { title, comment } = JSON.parse(req.body);
+
 			const id = uuidv4();
 
 			let room = {
 				id: id,
 				creator: user.id,
 				time: Date.now(),
-				title: '',
-				comment: '',
+				title,
+				comment,
+				quizzes: [],
 			};
 
 			db.collection('rooms').insertOne(room);
