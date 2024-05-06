@@ -148,7 +148,9 @@ export default function Question() {
 			[parseInt(history.length > 1 ? history[history.length - 1] : '1') - 1]: answers,
 		}));
 
-		fetch('/api/result', { method: 'POST', body: JSON.stringify({ slug: quiz.slug, answers: globalAnswers }) })
+		const roomId = '';
+
+		fetch('/api/result', { method: 'POST', body: JSON.stringify({ slug: quiz.slug, answers: globalAnswers, roomId: roomId }) })
 			.then((response) => response.json())
 			.then((jsonData) => {
 				if (jsonData.id) {
