@@ -118,8 +118,8 @@ export default function Rooms() {
 				) : (
 					<div className="flex mt-20 md:bg-[#fcfcfc] bg-white flex-col max-w-6xl mx-auto items-center justify-between md:px-6 px-4 lg:px-8">
 						<div className="w-full flex h-12 select-none mb-4">
-							{pages.map((page) => (
-								<div className="w-1/3">
+							{pages.map((page, index) => (
+								<div key={'page-' + index} className="w-1/3">
 									<div key={'page-' + page} className="w-full h-full pb-1 flex cursor-pointer justify-center items-center hover:bg-gray-100" onClick={() => setCurrentPage(page)}>
 										{page.substring(0, 1).toUpperCase() + page.substring(1)}
 									</div>
