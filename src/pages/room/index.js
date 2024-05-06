@@ -25,16 +25,6 @@ export default function Results() {
 			});
 	}, []);
 
-	function createRoom(params) {
-		fetch('/api/room/', { method: 'POST' })
-			.then((response) => response.json())
-			.then((jsonData) => {
-				if (!jsonData.error) {
-					router.push('/room/' + jsonData.id);
-				}
-			});
-	}
-
 	return (
 		<>
 			<Head>
@@ -56,7 +46,7 @@ export default function Results() {
 					</div>
 				) : (
 					<div className="flex flex-col mt-20 md:bg-[#fcfcfc] bg-white max-w-6xl px-2 mx-auto items-center justify-between md:flex-col md:px-6 lg:px-8">
-						<button onClick={() => createRoom()}>CREATE ROOM</button>
+						<button onClick={() => router.push('/room/create')}>CREATE ROOM</button>
 						<div className="relative overflow-x-auto w-full">
 							<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 								<thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
@@ -70,7 +60,7 @@ export default function Results() {
 										<th scope="col" className="px-6 py-3">
 											Creator
 										</th>
-										<th scope="col" className="px-6 py-3">
+										<th scope="col" className="px-6 py-3 sm:flex hidden">
 											Time
 										</th>
 									</tr>
@@ -83,7 +73,7 @@ export default function Results() {
 											</th>
 											<td className="px-6 py-4">{room.comment}</td>
 											<td className="px-6 py-4">{room.user.username}</td>
-											<td className="px-6 py-4">{new Date(room.time).toLocaleString('fr-FR')}</td>
+											<td className="px-6 py-4 sm:flex hidden">{new Date(room.time).toLocaleString('fr-FR')}</td>
 										</tr>
 									))}
 								</tbody>
