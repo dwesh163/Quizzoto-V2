@@ -4,6 +4,7 @@ db.createCollection('users');
 db.createCollection('quizzes');
 db.createCollection('results');
 db.createCollection('rooms');
+db.createCollection('links');
 
 db.createUser({
 	user: process.env.MONGO_INITDB_USER_USERNAME,
