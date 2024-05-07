@@ -187,6 +187,12 @@ export default function Question() {
 		};
 	}, [router.events]);
 
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			setRoom(JSON.parse(localStorage.getItem('room')));
+		}
+	}, []);
+
 	return (
 		<>
 			<Head>
@@ -211,7 +217,7 @@ export default function Question() {
 						<p className="mt-4">Question not Found</p>
 					</div>
 				) : (
-					<div className="h-[calc(100vh-180px)] max-w-6xl mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
+					<div className="h-[calc(100vh-150px)] max-w-6xl mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						<div className="flex items-center justify-center w-full h-full sm:px-5 md:px-24">
 							<div className="relative w-full p-5 bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl ">
@@ -226,6 +232,7 @@ export default function Question() {
 								{quiz?.info?.length == router.query.questionId && <button onClick={() => summit()}>SUMMIT</button>}
 							</div>
 						</div>
+						<div className="w-full text-center">In room : {room?.title}</div>
 					</div>
 				)}
 			</main>
