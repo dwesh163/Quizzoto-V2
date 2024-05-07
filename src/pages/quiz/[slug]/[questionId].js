@@ -106,6 +106,7 @@ export default function Question() {
 	const [globalAnswers, setGlobalAnswers] = useState({});
 	const [flags, setflags] = useState();
 	const [history, setHistory] = useState([router.asPath]);
+	const [room, setRoom] = useState({});
 
 	function getQuiz() {
 		if (!router.query.slug) {
@@ -148,9 +149,9 @@ export default function Question() {
 			[parseInt(history.length > 1 ? history[history.length - 1] : '1') - 1]: answers,
 		}));
 
-		const roomId = '';
+		const { id } = JSON.parse(localStorage.getItem('room'));
 
-		fetch('/api/result', { method: 'POST', body: JSON.stringify({ slug: quiz.slug, answers: globalAnswers, roomId: roomId }) })
+		fetch('/api/result', { method: 'POST', body: JSON.stringify({ slug: quiz.slug, answers: globalAnswers, roomId: id }) })
 			.then((response) => response.json())
 			.then((jsonData) => {
 				if (jsonData.id) {
