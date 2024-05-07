@@ -56,14 +56,27 @@ export default async function getRoomsInfo(req, res) {
 			const user = await db.collection('users').findOne({ email: session.user.email });
 
 			const { title, comment, slug } = JSON.parse(req.body);
+			if (!title || !comment || !slug) {
+				return res.status(403).send({ error: 'Missing fields' });
+			}
 
-			if (await db.collection('links').findOne({ slug: slug })) {
+			const validSlug = slug.trim().replaceAll(' ', '-').toLowerCase();
+
+			if (/[^a-zA-Z0-9-]/.test(validSlug)) {
+				return res.status(403).send({ error: 'Invalid slug' });
+			}
+
+			if (validSlug.length < 3 || validSlug.length > 50) {
+				return res.status(403).send({ error: 'Slug must be between 3 and 50 characters' });
+			}
+
+			if (await db.collection('links').findOne({ slug: validSlug })) {
 				return res.status(403).send({ error: 'Slug already exists' });
 			}
 
 			const linkId = uuidv4();
 
-			await db.collection('links').insertOne({ id: linkId, slug, creatorId, used: 0 });
+			await db.collection('links').insertOne({ linkId: linkId, slug: validSlug, creator: session.user.id, used: 0 });
 
 			const id = uuidv4();
 
