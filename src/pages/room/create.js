@@ -56,7 +56,7 @@ export default function Results() {
 						</div>
 					</div>
 					<div className="w-full flex mt-3">
-						<div className="w-52 flex items-center">
+						<div className="w-[15rem] flex items-center">
 							<p className="w-full">{url}/r/</p>
 						</div>
 
