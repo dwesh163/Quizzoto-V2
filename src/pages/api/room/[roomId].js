@@ -23,6 +23,15 @@ export default async function getRoomsInfo(req, res) {
 				},
 				{ $unwind: '$user' },
 				{
+					$lookup: {
+						from: 'links',
+						localField: 'linkId',
+						foreignField: 'linkId',
+						as: 'link',
+					},
+				},
+				{ $unwind: '$link' },
+				{
 					$project: {
 						_id: 0,
 						id: 1,
@@ -34,11 +43,14 @@ export default async function getRoomsInfo(req, res) {
 						'user.username': 1,
 						'user.image': 1,
 						'user.id': 1,
+						'link.linkId': 1,
+						'link.slug': 1,
 					},
 				},
 				{ $limit: 1 },
 			])
 			.toArray();
+
 		if (room.quizzes) {
 			for (const quizId of room.quizzes) {
 				const quiz = await db.collection('quizzes').findOne({ id: quizId }, { projection: { _id: 0, questions: 0 } });
@@ -102,6 +114,6 @@ export default async function getRoomsInfo(req, res) {
 		return res.status(200).send({ results: results, quizzes: quizzes, room: room });
 	} catch (error) {
 		console.error('Error:', error);
-		return res.status(500).send('Internal server error');
+		return res.status(200).send({ error: 'Not Found' });
 	}
 }
