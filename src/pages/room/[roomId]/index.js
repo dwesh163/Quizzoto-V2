@@ -103,8 +103,15 @@ export default function Rooms() {
 	const [room, setRoom] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState('results');
+	const [url, setUrl] = useState('');
 
 	const pages = ['results', 'quizzes', 'stats'];
+
+	useEffect(() => {
+		if (window && router && room.room) {
+			setUrl(window.location.href.replace(router.asPath, '') + '/r/' + room.room.link.slug);
+		}
+	}, [router, room]);
 
 	useEffect(() => {
 		if (!router.query.roomId) {
@@ -144,6 +151,9 @@ export default function Rooms() {
 					</div>
 				) : (
 					<div className="flex mt-20 md:bg-[#fcfcfc] bg-white flex-col max-w-6xl mx-auto items-center justify-between md:px-6 px-4 lg:px-8">
+						<a target="_blank" href={url}>
+							{url}
+						</a>
 						<div className="w-full flex h-12 select-none mb-4">
 							{pages.map((page, index) => (
 								<div key={'page-' + index} className="w-1/3">
