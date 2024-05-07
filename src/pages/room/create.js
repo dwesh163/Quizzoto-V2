@@ -12,6 +12,7 @@ export default function Results() {
 	const [title, setTitle] = useState('');
 	const [comment, setComment] = useState('');
 	const [quizzes, setQuizzes] = useState([{ title: 'test' }]);
+	const [error, setError] = useState('');
 
 	function createRoom(params) {
 		fetch('/api/room/', { method: 'POST', body: JSON.stringify({ title: title, comment: comment }) })
@@ -19,6 +20,8 @@ export default function Results() {
 			.then((jsonData) => {
 				if (!jsonData.error) {
 					router.push('/room/' + jsonData.id);
+				} else {
+					setError(jsonData.error);
 				}
 			});
 	}
