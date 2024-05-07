@@ -19,9 +19,9 @@ export default async function Results(req, res) {
 			})
 			.toArray();
 
-		if (oldResults.length > 0) {
-			return res.status(403).json({ error: 'Wait 10 minutes between 2 answers to the same quiz' });
-		}
+		// if (oldResults.length > 0) {
+		// 	return res.status(403).json({ error: 'Wait 10 minutes between 2 answers to the same quiz' });
+		// }
 
 		let points = 0;
 		let results = [];
