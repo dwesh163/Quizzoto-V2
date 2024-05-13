@@ -53,7 +53,7 @@ export default function User() {
 				quizzes
 					?.map((quiz, index) => (
 						<div onClick={() => router.push('/quiz/' + quiz.slug)} key={index + '-quiz-list'} className="mb-5 w-full h-full cursor-pointer rounded overflow-hidden shadow-lg">
-							<img className="w-full" src={quiz.image} alt={quiz.title} />
+							<img className="w-full h-52 object-cover" src={quiz.image} alt={quiz.title} />
 							<div className="px-6 py-4">
 								<div className="flex justify-between mb-2">
 									<div className="font-bold text-xl">{quiz.title}</div>
