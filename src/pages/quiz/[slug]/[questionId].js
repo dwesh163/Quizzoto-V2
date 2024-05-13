@@ -144,14 +144,17 @@ export default function Question() {
 	}
 
 	function summit() {
+		let id = '';
 		setGlobalAnswers((prevGlobalAnswers) => ({
 			...prevGlobalAnswers,
 			[parseInt(history.length > 1 ? history[history.length - 1] : '1') - 1]: answers,
 		}));
 
-		const { id } = JSON.parse(localStorage.getItem('room'));
+		if (localStorage.getItem('room')) {
+			id = JSON.parse(localStorage.getItem('room')).id;
+		}
 
-		fetch('/api/result', { method: 'POST', body: JSON.stringify({ slug: quiz.slug, answers: globalAnswers, roomId: id }) })
+		fetch('/api/result', { method: 'POST', body: JSON.stringify({ slug: quiz.slug, answers: globalAnswers, roomId: id ? id : '' }) })
 			.then((response) => response.json())
 			.then((jsonData) => {
 				if (jsonData.id) {
