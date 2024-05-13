@@ -11,6 +11,7 @@ export default async function getUserInfo(req, res) {
 		let query = {};
 
 		const limit = req.query.limit;
+		const order = req.query.order ? req.query.order : 'rating';
 		const quizzesPerPage = 6;
 
 		if (search != undefined) {
@@ -21,8 +22,21 @@ export default async function getUserInfo(req, res) {
 
 		const totalquizzes = await db.collection('quizzes').countDocuments(query);
 
-		if (totalquizzes == 0) {
-			return res.status(200).send({ quizzes: 'none', totalPages: 0, search: search });
+		if (totalquizzes == 0 || limit == undefined) {
+			return res.status(200).send({ quizzes: 'none', search: search });
+		}
+
+		let sortOptions = {};
+		if (order === 'desc') {
+			sortOptions = { title: -1 };
+		} else if (order === 'asc') {
+			sortOptions = { title: 1 };
+		} else if (order === 'date') {
+			sortOptions = { date: -1 };
+		} else if (order === 'rating') {
+			sortOptions = { rating: -1 };
+		} else {
+			sortOptions = { _id: -1 };
 		}
 
 		const quizzes = await db
@@ -59,6 +73,7 @@ export default async function getUserInfo(req, res) {
 						date: 1,
 					},
 				},
+				{ $sort: sortOptions },
 			])
 			.limit(parseInt(limit * quizzesPerPage))
 			.toArray();

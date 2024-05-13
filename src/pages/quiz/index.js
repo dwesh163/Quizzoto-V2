@@ -12,16 +12,16 @@ export default function User() {
 
 	const [limit, setLimit] = useState(1);
 	const [serverSearch, setServerSearch] = useState('');
+	const [order, setOrder] = useState('rating');
 
 	function fetchData() {
 		if (serverSearch == search && search != '') {
 			return;
 		}
 
-		fetch(`/api/quiz/?limit=${limit}&search=${search}`)
+		fetch(`/api/quiz/?limit=${limit}&search=${search}&order=${order}`)
 			.then((response) => response.json())
 			.then((jsonData) => {
-				console.log(jsonData.quizzes);
 				setQuizzes(jsonData.quizzes);
 				setServerSearch(jsonData.search);
 				setTimeout(() => {
