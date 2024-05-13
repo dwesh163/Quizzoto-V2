@@ -233,7 +233,7 @@ export default function Question() {
 								{quiz?.info?.length == router.query.questionId && <button onClick={() => summit()}>SUMMIT</button>}
 							</div>
 						</div>
-						<div className="w-full text-center">In room : {room?.title}</div>
+						{room && <div className="w-full text-center">In room : {room?.title}</div>}
 					</div>
 				)}
 			</main>
