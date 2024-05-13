@@ -46,6 +46,7 @@ async function insertQuiz(quiz, session) {
 		type: quiz.type,
 		tags: quiz.tags.slice(0, 5),
 		rating: '0',
+		date: new Date(),
 	};
 
 	await db.collection('quizzes').insertOne(newQuiz);
