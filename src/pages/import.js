@@ -61,10 +61,12 @@ const DropZone = ({ data, dispatch }) => {
 
 	const uploadFiles = async () => {
 		let files = data.fileList;
+		console.log(files);
 		const formData = new FormData();
 		files.forEach((file) => formData.append('files', file));
 		setIsLoading(true);
 		setStatus('');
+		console.log(formData);
 		const response = await fetch('/api/quiz/import', {
 			method: 'POST',
 			body: formData,
