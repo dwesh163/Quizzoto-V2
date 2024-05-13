@@ -68,13 +68,87 @@ export default function Quiz() {
 										<p className="text-xs text-text tracking-widest">Questions</p>
 									</div>
 								</div>
-								<button onClick={() => router.push(quiz.slug + '/1')}>START</button>
+								<button onClick={() => router.push(quiz.slug + '/1')} className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none dark:focus:ring-sky-800">
+									START
+								</button>
 							</div>
 							<div className="md:w-[30rem] h-full flex flex-col gap-6">
 								<div onClick={() => router.push('/user/' + quiz.user.username)} className="flex flex-col items-center justify-center pt-6 sm:pt-0  w-full h-96 bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-xl md:shadow-xl cursor-pointer">
 									<img src={quiz.user.image} alt="Profile Picture" className="rounded-full border-4 bg-white border-white w-32" />
 									<h1 className="font-bold font-sans text-secondary mt-2">{quiz.user.name ? quiz.user.name : quiz.user.username}</h1>
 									<h2 className="text-text font-sans text-sm text-gray-500">{quiz.user.name ? '@' + quiz.user.username : ''}</h2>
+								</div>
+								<div className="flex flex-col h-full items-center pt-6 sm:pt-8 bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-xl md:shadow-xl w-full">
+									<div className="flex items-center justify-between mb-4 w-full px-6">
+										<h5 className="text-xl font-bold leading-none text-gray-900">Latest answers</h5>
+										<button onClick={() => router.push(router.asPath + '/history')} className="text-sm font-medium text-sky-600 hover:underline">
+											View all
+										</button>
+									</div>
+									<div className="flow-root">
+										<ul role="list" className="divide-y divide-gray-200">
+											<li className="py-3 sm:py-4">
+												<div className="flex items-center">
+													<div className="flex-shrink-0">
+														<img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image" />
+													</div>
+													<div className="flex-1 min-w-0 ms-4">
+														<p className="text-sm font-medium text-gray-900 truncate">Neil Sims</p>
+														<p className="text-sm text-gray-500 truncate">email@windster.com</p>
+													</div>
+													<div className="inline-flex items-center text-base font-semibold text-gray-900">$320</div>
+												</div>
+											</li>
+											<li className="py-3 sm:py-4">
+												<div className="flex items-center">
+													<div className="flex-shrink-0">
+														<img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image" />
+													</div>
+													<div className="flex-1 min-w-0 ms-4">
+														<p className="text-sm font-medium text-gray-900 truncate">Bonnie Green</p>
+														<p className="text-sm text-gray-500 truncate">email@windster.com</p>
+													</div>
+													<div className="inline-flex items-center text-base font-semibold text-gray-900">$3467</div>
+												</div>
+											</li>
+											<li className="py-3 sm:py-4">
+												<div className="flex items-center">
+													<div className="flex-shrink-0">
+														<img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-2.jpg" alt="Michael image" />
+													</div>
+													<div className="flex-1 min-w-0 ms-4">
+														<p className="text-sm font-medium text-gray-900 truncate">Michael Gough</p>
+														<p className="text-sm text-gray-500 truncate">email@windster.com</p>
+													</div>
+													<div className="inline-flex items-center text-base font-semibold text-gray-900">$67</div>
+												</div>
+											</li>
+											<li className="py-3 sm:py-4">
+												<div className="flex items-center">
+													<div className="flex-shrink-0">
+														<img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-4.jpg" alt="Lana image" />
+													</div>
+													<div className="flex-1 min-w-0 ms-4">
+														<p className="text-sm font-medium text-gray-900 truncate">Lana Byrd</p>
+														<p className="text-sm text-gray-500 truncate">email@windster.com</p>
+													</div>
+													<div className="inline-flex items-center text-base font-semibold text-gray-900">$367</div>
+												</div>
+											</li>
+											<li className="pt-3 pb-0 sm:pt-4">
+												<div className="flex items-center">
+													<div className="flex-shrink-0">
+														<img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Thomas image" />
+													</div>
+													<div className="flex-1 min-w-0 ms-4">
+														<p className="text-sm font-medium text-gray-900 truncate">Thomes Lean</p>
+														<p className="text-sm text-gray-500 truncate">email@windster.com</p>
+													</div>
+													<div className="inline-flex items-center text-base font-semibold text-gray-900">$2367</div>
+												</div>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
