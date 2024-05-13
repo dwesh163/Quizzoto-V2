@@ -54,6 +54,7 @@ export default async function getUserInfo(req, res) {
 						type: 1,
 						'user.username': 1,
 						'user.image': 1,
+						tags: 1,
 					},
 				},
 			])
