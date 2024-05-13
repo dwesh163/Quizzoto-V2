@@ -121,7 +121,7 @@ export default function User() {
 									<path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
 								</svg>
 							</div>
-							<input type="search" name="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 md:rounded-lg rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search quizzes" required value={search} onChange={handleSearchChange} />
+							<input type="search" name="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 md:rounded-lg rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="Search quizzes" required value={search} onChange={handleSearchChange} />
 							<button type="submit" onClick={() => fetchData()} className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 absolute end-2.5 bottom-2.5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2">
 								Search
 							</button>
