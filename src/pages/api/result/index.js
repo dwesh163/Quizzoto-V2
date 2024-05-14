@@ -33,7 +33,7 @@ export default async function Results(req, res) {
 			}
 			for (const answer of answers[index]) {
 				if (question.correct.includes(answer)) {
-					localPoints = localPoints + parseInt(question.point) / question.correct.length;
+					localPoints = Math.round(localPoints + parseInt(question.point) / question.correct.length);
 				}
 			}
 
