@@ -2,11 +2,9 @@ import { getSession } from 'next-auth/react';
 import db from '/lib/mongodb';
 
 export default async function getUserInfo(req, res) {
-	const session = await getSession({ req });
-	if (!session) {
-		return res.status(200).send({ quizzes: 'none', totalPages: 0, search: '' });
-	}
 	try {
+		const session = await getSession({ req });
+
 		let search = req.query.search;
 		let query = {};
 
@@ -14,10 +12,18 @@ export default async function getUserInfo(req, res) {
 		const order = req.query.order ? req.query.order : 'rating';
 		const quizzesPerPage = 6;
 
+		query.$or = [];
+
 		if (search != undefined) {
 			query = {
 				$or: [{ title: { $regex: search, $options: 'i' } }, { slug: { $regex: search, $options: 'i' } }],
 			};
+		}
+
+		if (!session) {
+			query.visibility = 'public';
+		} else {
+			query.$or.push({ visibility: 'public' }, { creator: session.user.id });
 		}
 
 		const totalquizzes = await db.collection('quizzes').countDocuments(query);
