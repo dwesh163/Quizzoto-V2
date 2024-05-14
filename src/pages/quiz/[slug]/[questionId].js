@@ -232,11 +232,23 @@ export default function Question() {
 					<div className="h-[calc(100vh-130px)] max-w-6xl mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						<div className="flex items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
-							<div className="relative w-full p-5 bg-white h-[28rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl ">
+							<div className="relative w-full p-5 bg-white h-[30rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl ">
 								<div className="flex justify-between mb-8">
-									<button onClick={() => router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) - 1))}>← Previous</button>
+									<button
+										className="w-24 text-left"
+										onClick={() => {
+											if (router.query.questionId > 1) {
+												router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) - 1));
+											}
+										}}>
+										{router.query.questionId > 1 && '← Previous'}
+									</button>
 									{question != 'end' && <span className="text-sm font-medium text-gray-700">{router.query.questionId + '/' + (quiz.info ? quiz.info.length : '0')}</span>}
-									{question != 'end' && <button onClick={() => router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>Next →</button>}
+									{question != 'end' && (
+										<button className="w-24 text-right" onClick={() => router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>
+											Next →
+										</button>
+									)}
 								</div>
 								{question != 'end' ? (
 									<>
