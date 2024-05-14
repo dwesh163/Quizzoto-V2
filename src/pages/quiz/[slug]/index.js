@@ -119,14 +119,14 @@ export default function Quiz() {
 									</div>
 									<p className="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-slate-400">{quiz.description}</p>
 								</div>
-								<div className="mt-12 gap-4 flex-col hidden">
+								<div className="mt-12 gap-4 flex-col">
 									<h5 className="text-xl font-bold text-slate-800">Best results</h5>
 
 									<BestResultsList results={results} />
 								</div>
 
 								{quiz.lastResult && (
-									<div className="mt-32 flex-col">
+									<div className="mt-12 flex-col">
 										<h5 className="text-xl font-bold text-slate-800">My results</h5>
 										<div className="flex mt-2 md:bg-[#fcfcfc] flex-col mx-auto items-center justify-between md:flex-row ">
 											<ResultsList resultId={quiz.lastResult} />
