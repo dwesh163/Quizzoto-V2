@@ -14,7 +14,7 @@ export const config = {
 const uploadMiddleware = upload.single('files');
 
 async function insertQuiz(quiz, session) {
-	if (!session.user.id) {
+	if (!session) {
 		return { code: 401, message: "You don't seem to be connected..." };
 	}
 
@@ -47,6 +47,7 @@ async function insertQuiz(quiz, session) {
 		tags: quiz.tags.slice(0, 5),
 		rating: '0',
 		date: new Date(),
+		visibility: quiz.visibility ? quiz.visibility : 'hidden',
 	};
 
 	await db.collection('quizzes').insertOne(newQuiz);
