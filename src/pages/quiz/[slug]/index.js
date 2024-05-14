@@ -7,23 +7,28 @@ import Menu from '@/components/menu';
 import ResultsList from '@/components/results';
 
 function BestResultsList({ results }) {
-	console.log(results);
 	return (
-		<ul className="divide-y divide-gray-200 w-full">
-			{results.map((result, index) => (
-				<li key={index + '-ResultsList'} className="px-2 py-2">
-					<div className="flex items-center space-x-4 rtl:space-x-reverse">
-						<div className="flex-shrink-0">
-							<img className="w-8 h-8 rounded-full" src={result.user.image} alt="User image" />
+		<div class="mt-2 w-full">
+			<section class="text-center lg:text-left w-full">
+				<div class="grid gap-3 grid-cols-5 md:grid-cols-5 xl:gap-x-3 w-full">
+					{results?.map((result, index) => (
+						<div class="mb-6 lg:mb-0">
+							<div class="relative block rounded-lg bg-white">
+								<div class="flex-row items-center lg:flex">
+									<div class="w-full shrink-0 grow-0 basis-auto lg:w-16 lg:pr-2">
+										<img src={result.user.image} alt="User image" class="mb-0 w-full rounded-md" />
+									</div>
+									<div class="w-full shrink-0 grow-0 basis-auto lg:w-7/12">
+										<h5 class="mb-0 sm:text-lg text-xs font-bold">{result.user.username}</h5>
+										<p class="mb-0 sm:text-base text-xs text-neutral-500 ">{result.points} Points</p>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div className="flex-1 min-w-0">
-							<p className="text-sm font-medium text-slate-800 truncate">{result.user.username}</p>
-						</div>
-						<div className="inline-flex items-center text-base font-semibold text-slate-800">{result.points}</div>
-					</div>
-				</li>
-			))}
-		</ul>
+					))}
+				</div>
+			</section>
+		</div>
 	);
 }
 
@@ -119,7 +124,7 @@ export default function Quiz() {
 									</div>
 									<p className="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-slate-400">{quiz.description}</p>
 								</div>
-								<div className="mt-12 gap-4 flex-col">
+								<div className="sm:mt-12 mt-6 gap-4 flex-col">
 									<h5 className="text-xl font-bold text-slate-800">Best results</h5>
 
 									<BestResultsList results={results} />
