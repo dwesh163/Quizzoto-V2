@@ -125,11 +125,11 @@ export default function Quiz() {
 									<BestResultsList results={results} />
 								</div>
 
-								{quiz.lastResult && (
+								{quiz.bestResult && (
 									<div className="mt-12 flex-col">
 										<h5 className="text-xl font-bold text-slate-800">My results</h5>
 										<div className="flex mt-2 md:bg-[#fcfcfc] flex-col mx-auto items-center justify-between md:flex-row ">
-											<ResultsList resultId={quiz.lastResult} />
+											<ResultsList resultId={quiz.bestResult} />
 										</div>
 									</div>
 								)}
