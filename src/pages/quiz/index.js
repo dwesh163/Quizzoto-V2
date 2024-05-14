@@ -52,24 +52,22 @@ export default function User() {
 					?.map((quiz, index) => (
 						<div onClick={() => router.push('/quiz/' + quiz.slug)} key={index + '-quiz-list'} className="mb-5 w-full h-full cursor-pointer rounded overflow-hidden shadow-lg">
 							<img className="w-full h-52 object-cover" src={quiz.image} alt={quiz.title} />
-							<div className="px-6 py-4">
+							<div className="sm:px-6 sm:py-4 px-4 py-3">
 								<div className="flex justify-between mb-2">
 									<div className="font-bold text-xl">{quiz.title}</div>
-									{quiz.rating != 0 && (
-										<div className="flex items-center">
-											{Array.from({ length: 5 }).map((_, ratingIndex) =>
-												ratingIndex + 1 > Math.round(quiz.rating) ? (
-													<svg key={ratingIndex + '-rating-' + index} className="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-														<path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-													</svg>
-												) : (
-													<svg key={ratingIndex + '-rating-' + index} className="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-														<path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-													</svg>
-												)
-											)}
-										</div>
-									)}
+									<div className="flex items-center">
+										{Array.from({ length: 5 }).map((_, ratingIndex) =>
+											ratingIndex + 1 > Math.round(quiz.rating) ? (
+												<svg key={ratingIndex + '-rating-' + index} className="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+													<path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+												</svg>
+											) : (
+												<svg key={ratingIndex + '-rating-' + index} className="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+													<path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+												</svg>
+											)
+										)}
+									</div>
 								</div>
 								<p className="text-gray-700 text-base overflow-hidden" style={{ display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3 }}>
 									{quiz.description}
@@ -122,7 +120,7 @@ export default function User() {
 								</svg>
 							</div>
 							<input type="search" name="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 md:rounded-lg rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="Search quizzes" required value={search} onChange={handleSearchChange} />
-							<button type="submit" onClick={() => fetchData()} className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 absolute end-2.5 bottom-2.5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2">
+							<button onClick={() => fetchData()} className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 absolute end-2.5 bottom-2.5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2">
 								Search
 							</button>
 						</div>
