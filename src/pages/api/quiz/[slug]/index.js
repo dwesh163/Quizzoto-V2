@@ -61,9 +61,17 @@ export default async function getQuizInfo(req, res) {
 					},
 				},
 				{
+					$group: {
+						_id: '$player',
+						points: { $first: '$points' },
+						visibility: { $first: '$visibility' },
+						user: { $first: '$user' },
+					},
+				},
+				{
 					$lookup: {
 						from: 'users',
-						localField: 'player',
+						localField: '_id',
 						foreignField: 'id',
 						as: 'user',
 					},
