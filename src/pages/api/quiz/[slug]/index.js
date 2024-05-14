@@ -3,7 +3,7 @@ import db from '/lib/mongodb';
 
 export default async function getQuizInfo(req, res) {
 	const session = await getSession({ req });
-	let lastResult = null;
+	let bestResult = null;
 	try {
 		let [quiz] = await db
 			.collection('quizzes')
@@ -97,13 +97,17 @@ export default async function getQuizInfo(req, res) {
 			.toArray();
 
 		if (session.user.id) {
-			lastResult = await db
+			bestResult = await db
 				.collection('results')
 				.find({ quiz: quiz.id, player: session.user.id }, { projection: { _id: 0, id: 1, points: 1 } }, { $sort: { points: -1 } })
 				.toArray();
+			if (bestResult.length > 0) {
+				bestResult.sort((a, b) => b.points - a.points);
+			}
+			console.log(bestResult[0]?.id);
 		}
 
-		quiz.lastResult = lastResult[lastResult.length - 1]?.id;
+		quiz.bestResult = bestResult[0]?.id;
 		delete quiz.id;
 
 		return res.status(200).send({ quiz, results });
