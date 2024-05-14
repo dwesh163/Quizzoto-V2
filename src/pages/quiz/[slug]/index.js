@@ -16,7 +16,7 @@ function BestResultsList({ results }) {
 							<div class="relative block rounded-lg bg-white">
 								<div class="flex-row items-center lg:flex">
 									<div class="w-full shrink-0 grow-0 basis-auto lg:w-16 lg:pr-2">
-										<img src={result.user.image} alt="User image" class="mb-0 w-full rounded-md" />
+										<img src={result.user.image} alt="User image" class="sm:mb-0 mb-2 w-full rounded-md" />
 									</div>
 									<div class="w-full shrink-0 grow-0 basis-auto lg:w-7/12">
 										<h5 class="mb-0 sm:text-lg text-xs font-bold">{result.user.username}</h5>
@@ -125,14 +125,14 @@ export default function Quiz() {
 									<p className="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-slate-400">{quiz.description}</p>
 								</div>
 								<div className="sm:mt-12 mt-6 gap-4 flex-col">
-									<h5 className="text-xl font-bold text-slate-800">Best results</h5>
+									<h5 className="text-lg font-bold text-slate-800">Best results</h5>
 
 									<BestResultsList results={results} />
 								</div>
 
 								{quiz.bestResult && (
-									<div className="mt-12 flex-col">
-										<h5 className="text-xl font-bold text-slate-800">My results</h5>
+									<div className="sm:mt-12 mt-0 flex-col">
+										<h5 className="text-lg font-bold text-slate-800">My results</h5>
 										<div className="flex mt-2 md:bg-[#fcfcfc] flex-col mx-auto items-center justify-between md:flex-row ">
 											<ResultsList resultId={quiz.bestResult} />
 										</div>
