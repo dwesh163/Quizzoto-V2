@@ -127,23 +127,31 @@ export default function Question() {
 	}
 
 	function getQuestion() {
-		if (!router.query.questionId) {
+		if (!router.query.questionId || router.query.questionId < 1) {
 			return;
 		}
 
 		fetch(`/api/quiz/` + router.query.slug + '/' + router.query.questionId)
 			.then((response) => response.json())
 			.then((jsonData) => {
-				if (jsonData != '404') {
-					setQuestion(jsonData);
+				if (router.query.questionId - 1 == quiz?.info?.length) {
+					setQuestion('end');
+					console.log('end');
 				} else {
-					setQuestion('404');
+					if (jsonData != '404') {
+						console.log(router.query.questionId);
+						console.log(quiz?.info?.length);
+
+						setQuestion(jsonData);
+					} else {
+						setQuestion('404');
+					}
 				}
 				setIsLoading(false);
 			});
 	}
 
-	function summit() {
+	function submit() {
 		let id = '';
 		setGlobalAnswers((prevGlobalAnswers) => ({
 			...prevGlobalAnswers,
@@ -227,14 +235,24 @@ export default function Question() {
 							<div className="relative w-full p-5 bg-white h-[28rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl ">
 								<div className="flex justify-between mb-8">
 									<button onClick={() => router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) - 1))}>← Previous</button>
-									<span className="text-sm font-medium text-gray-700">{router.query.questionId + '/' + (quiz.info ? quiz.info.length : '0')}</span>
-									<button onClick={() => router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>Next →</button>
+									{question != 'end' && <span className="text-sm font-medium text-gray-700">{router.query.questionId + '/' + (quiz.info ? quiz.info.length : '0')}</span>}
+									{question != 'end' && <button onClick={() => router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>Next →</button>}
 								</div>
-
-								<h3 class="text-3xl font-bold mb-8">{question.question}</h3>
-
-								<AnswersBox answers={answers} setAnswers={setAnswers} question={question} />
-								{quiz?.info?.length == router.query.questionId && <button onClick={() => summit()}>SUMMIT</button>}
+								{question != 'end' ? (
+									<>
+										<h3 className="text-3xl font-bold mb-8">{question.question}</h3>
+										<AnswersBox answers={answers} setAnswers={setAnswers} question={question} />
+									</>
+								) : (
+									<div className="flex justify-center flex-col h-[calc(100%-100px)] gap-4">
+										<p className="text-center">Are you sure you want to submit your answers ?</p>
+										<div className="flex justify-center">
+											<button className="text-white w-full sm:max-w-96 bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none" onClick={() => submit()}>
+												submit
+											</button>
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 						{room && <div className="w-full text-center">In room : {room?.title}</div>}
