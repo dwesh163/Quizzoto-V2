@@ -4,8 +4,9 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Menu from '@/components/menu';
+import ResultsList from '@/components/results';
 
-function ResultsList({ results }) {
+function BestResultsList({ results }) {
 	console.log(results);
 	return (
 		<ul className="divide-y divide-gray-200 w-full">
@@ -119,10 +120,19 @@ export default function Quiz() {
 									<p className="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-slate-400">{quiz.description}</p>
 								</div>
 								<div className="mt-12 gap-4 flex-col hidden">
-									<h5 class="text-xl font-bold text-slate-800">Best results</h5>
+									<h5 className="text-xl font-bold text-slate-800">Best results</h5>
 
-									<ResultsList results={results} />
+									<BestResultsList results={results} />
 								</div>
+
+								{quiz.lastResult && (
+									<div className="mt-32 flex-col">
+										<h5 className="text-xl font-bold text-slate-800">My results</h5>
+										<div className="flex mt-2 md:bg-[#fcfcfc] bg-white flex-col mx-auto items-center justify-between md:flex-row ">
+											<ResultsList resultId={quiz.lastResult} />
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
