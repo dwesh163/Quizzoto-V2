@@ -34,7 +34,7 @@ export default async function getUserInfo(req, res) {
 		} else if (order === 'date') {
 			sortOptions = { date: -1 };
 		} else if (order === 'rating') {
-			sortOptions = { rating: -1 };
+			sortOptions = { rating: -1, title: 1 };
 		} else {
 			sortOptions = { _id: -1 };
 		}
