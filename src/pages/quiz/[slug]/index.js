@@ -118,7 +118,7 @@ export default function Quiz() {
 									</div>
 									<p className="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-slate-400">{quiz.description}</p>
 								</div>
-								<div className="mt-12 gap-4 flex-col sm:flex hidden">
+								<div className="mt-12 gap-4 flex-col hidden">
 									<h5 class="text-xl font-bold text-slate-800">Best results</h5>
 
 									<ResultsList results={results} />
