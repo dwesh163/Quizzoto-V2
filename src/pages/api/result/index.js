@@ -55,7 +55,7 @@ export default async function Results(req, res) {
 			results,
 			roomId,
 			player: session ? session.user.id : 'Anonymus',
-			time: Date.now(),
+			date: new Date(),
 			visibility: session ? 'private' : 'hidden',
 		};
 
