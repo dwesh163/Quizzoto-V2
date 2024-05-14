@@ -12,18 +12,17 @@ export default async function getUserInfo(req, res) {
 		const order = req.query.order ? req.query.order : 'rating';
 		const quizzesPerPage = 6;
 
-		query.$or = [];
-
-		if (search != undefined) {
+		if (search !== undefined) {
 			query = {
-				$or: [{ title: { $regex: search, $options: 'i' } }, { slug: { $regex: search, $options: 'i' } }],
+				$and: [
+					{
+						$or: [{ visibility: 'public' }, { creator: session && session.user && session.user.id }],
+					},
+					{
+						$or: [{ title: { $regex: search, $options: 'i' } }, { slug: { $regex: search, $options: 'i' } }],
+					},
+				],
 			};
-		}
-
-		if (!session) {
-			query.visibility = 'public';
-		} else {
-			query.$or.push({ visibility: 'public' }, { creator: session.user.id });
 		}
 
 		const totalquizzes = await db.collection('quizzes').countDocuments(query);
