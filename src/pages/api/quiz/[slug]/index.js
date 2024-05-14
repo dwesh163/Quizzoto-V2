@@ -54,7 +54,7 @@ export default async function getQuizInfo(req, res) {
 				{
 					$match: {
 						quiz: quiz.id,
-						creator: { $ne: 'anaonymous' },
+						player: { $ne: 'Anonymus' },
 					},
 				},
 				{
