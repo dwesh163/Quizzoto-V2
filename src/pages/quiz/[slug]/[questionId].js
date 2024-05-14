@@ -255,7 +255,7 @@ export default function Question() {
 								</div>
 								{question != 'end' ? (
 									<>
-										<h3 className="text-3xl font-bold mb-8">{question.question}</h3>
+										<h3 className="sm:text-3xl text-xl font-bold mb-8">{question.question}</h3>
 										<AnswersBox answers={answers} setAnswers={setAnswers} question={question} />
 									</>
 								) : (
