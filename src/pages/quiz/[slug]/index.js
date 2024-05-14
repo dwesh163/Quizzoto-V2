@@ -75,7 +75,7 @@ export default function Quiz() {
 					<div className="h-[calc(100vh-130px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						<div className="flex flex-col justify-between items-center md:flex-row gap-6 h-full">
-							<div className="bg-white md:bg-card-texture h-full w-full bg-no-repeat bg-top p-5 ">
+							<div className="md:bg-card-texture h-full w-full bg-no-repeat bg-top p-5 ">
 								<div className="mx-auto grid grid-cols-1 w-full lg:gap-x-20 lg:grid-cols-2">
 									<div className="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0 sm:bg-none sm:row-start-2 sm:p-0 lg:row-start-1">
 										<h1 className="mt-1 text-lg font-semibold z-20 text-white sm:text-slate-900 md:text-2xl">{quiz.title}</h1>
@@ -128,7 +128,7 @@ export default function Quiz() {
 								{quiz.lastResult && (
 									<div className="mt-32 flex-col">
 										<h5 className="text-xl font-bold text-slate-800">My results</h5>
-										<div className="flex mt-2 md:bg-[#fcfcfc] bg-white flex-col mx-auto items-center justify-between md:flex-row ">
+										<div className="flex mt-2 md:bg-[#fcfcfc] flex-col mx-auto items-center justify-between md:flex-row ">
 											<ResultsList resultId={quiz.lastResult} />
 										</div>
 									</div>
