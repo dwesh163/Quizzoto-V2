@@ -12,7 +12,7 @@ export default function User() {
 
 	const [limit, setLimit] = useState(1);
 	const [serverSearch, setServerSearch] = useState('');
-	const [order, setOrder] = useState('rating');
+	const [order, setOrder] = useState('date');
 
 	function fetchData() {
 		if (serverSearch == search && search != '') {
