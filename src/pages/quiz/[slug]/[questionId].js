@@ -142,9 +142,6 @@ export default function Question() {
 					console.log('end');
 				} else {
 					if (jsonData != '404') {
-						console.log(router.query.questionId);
-						console.log(quiz?.info?.length);
-
 						setQuestion(jsonData);
 					} else {
 						setQuestion('404');
@@ -232,7 +229,7 @@ export default function Question() {
 						<p className="mt-4">Question not Found</p>
 					</div>
 				) : (
-					<div className="h-[calc(100vh-130px)] max-w-6xl mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
+					<div className="h-[calc(100vh-130px)] max-w-6xl mt-[5rem] pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						<div className="flex items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
 							<div className="relative w-full p-5 bg-white h-[30rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl ">
