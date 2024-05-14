@@ -74,7 +74,7 @@ export default function Quiz() {
 				) : (
 					<div className="h-[calc(100vh-130px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
-						<div className="flex flex-col justify-between items-center md:flex-row gap-6 h-full">
+						<div className="flex flex-col justify-between items-center md:flex-row gap-6 h-full bg-white md:bg-[#fcfcfc] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
 							<div className="md:bg-card-texture h-full w-full bg-no-repeat bg-top p-5 ">
 								<div className="mx-auto grid grid-cols-1 w-full lg:gap-x-20 lg:grid-cols-2">
 									<div className="relative p-3 col-start-1 row-start-1 flex flex-col-reverse rounded-lg bg-gradient-to-t from-black/75 via-black/0 sm:bg-none sm:row-start-2 sm:p-0 lg:row-start-1">
