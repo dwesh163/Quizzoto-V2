@@ -63,7 +63,7 @@ export default async function getQuizInfo(req, res) {
 				{
 					$group: {
 						_id: '$player',
-						points: { $first: '$points' },
+						points: { $max: '$points' },
 						visibility: { $first: '$visibility' },
 						user: { $first: '$user' },
 					},
