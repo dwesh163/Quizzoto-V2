@@ -73,7 +73,9 @@ export default function User() {
 										</div>
 									)}
 								</div>
-								<p className="text-gray-700 text-base">{quiz.description}</p>
+								<p className="text-gray-700 text-base overflow-hidden" style={{ display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3 }}>
+									{quiz.description}
+								</p>
 							</div>
 							<div className="px-6 pt-4 pb-2">
 								{quiz?.tags?.map((tag, index) => (
