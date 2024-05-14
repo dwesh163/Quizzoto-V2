@@ -1,7 +1,10 @@
+import { useRouter } from 'next/router';
+
 export default function Menu({ title }) {
+	const router = useRouter();
 	return (
 		<div className="flex justify-between">
-			<nav className="flex mb-4 md:ml-0 ml-5" aria-label="Breadcrumb">
+			<nav className="flex sm:mb-4 md:ml-0 ml-5" aria-label="Breadcrumb">
 				<ol className="inline-flex items-center space-x-1 md:space-x-3 rtl:space-x-reverse">
 					<li className="inline-flex items-center">
 						<a href="/" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
@@ -16,7 +19,7 @@ export default function Menu({ title }) {
 							<svg className="w-3 h-3 text-gray-400 mx-1 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
 								<path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
 							</svg>
-							<a href="/quiz" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2">
+							<a onClick={() => router.push('/quiz')} className="cursor-pointer ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2">
 								Quizzes
 							</a>
 						</div>
