@@ -1,0 +1,304 @@
+{
+    "slug": "kaamelott",
+    "title": "Kaamelott",
+    "description": "Testez vos connaissances sur la série télévisée Kaamelott ! Ce quiz vous invite à explorer l'univers drôle et médiéval de cette série culte. Répondez à une variété de questions pour découvrir si vous êtes un véritable chevalier de la Table Ronde !",
+    "image": "/uploads/kaamelott.jpg",
+    "info": {
+        "date": "JJ/MM/AAAA",
+        "timeLimit": "15 minutes",
+        "attempts": "1",
+        "points": "300"
+    },
+    "tags": [
+        "Kaamelott",
+        "humour"
+    ],
+    "type": "form",
+    "starter": {
+        "text": "Le quiz commence maintenant ! Bonne chance !",
+        "field": [
+            "nom",
+            "email",
+            "nom d'utilisateur"
+        ]
+    },
+    "creator": "dwesh163",
+    "questions": [
+        {
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_episode.jpg",
+            "type": "radios",
+            "answers": [
+                "Arthur",
+                "Perceval",
+                "Lancelot",
+                "Merlin"
+            ],
+            "correct": [
+                "Arthur"
+            ],
+            "point": 25,
+            "question": "Qui est le roi de Kaamelott ?"
+        },
+        {
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_episode.jpg",
+            "type": "radios",
+            "answers": [
+                "Dis donc tu ne manques pas de toupet !",
+                "Dis donc t’as une grosse patte !",
+                "Ça s’enflamme !",
+                "Oh mais quel souffle !"
+            ],
+            "correct": [
+                "Dis donc tu ne manques pas de toupet !"
+            ],
+            "point": 25,
+            "question": "Il marche sur la patte et le dragon fait :"
+        },
+        {
+            "type": "checkboxes",
+            "answers": [
+                "Bohort",
+                "Karadoc",
+                "Guenièvre",
+                "Leodagan"
+            ],
+            "correct": [
+                "Karadoc",
+                "Leodagan",
+                "Bohort"
+            ],
+            "point": 25,
+            "question": "Sélectionnez les chevaliers de la Table Ronde parmi les suivants.",
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_personnage.jpg"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "false"
+            ],
+            "point": 25,
+            "question": "Perceval est souvent accompagné de son écuyer Karadoc ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "textfield",
+            "answers": [],
+            "correct": [
+                "Alain Chabat"
+            ],
+            "point": 25,
+            "question": "Par quel acteur le duc d’Aquitaine est-il interprété ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "Venec",
+                "Père Blaise",
+                "Galessin",
+                "Roparzh"
+            ],
+            "correct": [
+                "Père Blaise"
+            ],
+            "point": 25,
+            "question": "Quel personnage est le secrétaire d'Arthur ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "checkboxes",
+            "answers": [
+                "Transmettre un message en Carmélide.",
+                "Assurer la relève d’un poste avancé.",
+                "Sauver les habitants d’un village assailli par les Burgondes.",
+                "Assurer la sécurité de la porte principal."
+            ],
+            "correct": [
+                "Assurer la sécurité de la porte principal.",
+                "Assurer la relève d’un poste avancé."
+            ],
+            "point": 25,
+            "question": "Quelle mission a-t-elle été confiée à Yvain et Gauvain ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_episode.jpg",
+            "type": "radios",
+            "answers": [
+                "Le Graal",
+                "Excalibur",
+                "La quête du roi Arthur",
+                "La bataille d'Alésia"
+            ],
+            "correct": [
+                "Le Graal"
+            ],
+            "point": 25,
+            "question": "Quel objet mythique la Table Ronde cherche-t-elle à trouver ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "false"
+            ],
+            "point": 25,
+            "question": "Leodagan est le père d'Arthur ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_episode.jpg",
+            "type": "radios",
+            "answers": [
+                "Alexandre Astier",
+                "Lionnel Astier",
+                "Jean-Christophe Hembert",
+                "Franck Pitiot"
+            ],
+            "correct": [
+                "Alexandre Astier"
+            ],
+            "point": 25,
+            "question": "Qui est le créateur et le principal interprète de la série Kaamelott ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "Karadoc",
+                "Bohort",
+                "Perceval",
+                "Léodagan"
+            ],
+            "correct": [
+                "Bohort"
+            ],
+            "point": 25,
+            "question": "Qui est le beau-frère du roi Arthur ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "Le sloubi",
+                "Le walala",
+                "Le Sirop",
+                "Le robobrol"
+            ],
+            "correct": [
+                "Le Sirop"
+            ],
+            "point": 25,
+            "question": "Dans quel jeu les valeurs sont-elles importantes ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "Il n’a pas de femme.",
+                "Il n’a pas fait ses classes militaires.",
+                "Il n’aime pas la reine.",
+                "ll a simulé une blessure pour échapper au combat"
+            ],
+            "correct": [
+                "Il n’a pas fait ses classes militaires."
+            ],
+            "point": 25,
+            "question": "Quel est l’aveu de Bohort ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_episode.jpg",
+            "type": "radios",
+            "answers": [
+                "Guenièvre",
+                "Séli",
+                "Dame du Lac",
+                "Mevanwi"
+            ],
+            "correct": [
+                "Guenièvre"
+            ],
+            "point": 25,
+            "question": "Qui est la reine de Kaamelott ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "Dagonet",
+                "Leodegrance",
+                "Perceval",
+                "Lancelot"
+            ],
+            "correct": [
+                "Dagonet"
+            ],
+            "point": 25,
+            "question": "Quel chevalier est connu pour ses histoires surréalistes ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_episode.jpg",
+            "type": "radios",
+            "answers": [
+                "La Dame du Lac",
+                "Léodagan",
+                "Yvain",
+                "Arthur"
+            ],
+            "correct": [
+                "La Dame du Lac"
+            ],
+            "point": 25,
+            "question": "Qui est l'entité mystérieuse qui guide Arthur ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "Mevanwi",
+                "Léodagan",
+                "Yvain",
+                "Bohort"
+            ],
+            "correct": [
+                "Mevanwi"
+            ],
+            "point": 25,
+            "question": "Qui est l'épouse de Karadoc ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "VI",
+                "IV",
+                "III",
+                "V"
+            ],
+            "correct": [
+                "VI"
+            ],
+            "point": 25,
+            "question": "Combien y a-t-il de livres de Kaamelott ?",
+            "credit": "Nom du photographe"
+        }
+    ]
+}

@@ -1,0 +1,212 @@
+{
+    "slug": "european-cities",
+    "title": "Les Grandes Villes d'Europe",
+    "description": "Testez vos connaissances sur les grandes villes d'Europe ! Ce quiz vous invite à explorer les trésors culturels et historiques des métropoles européennes. Répondez à une variété de questions pour découvrir si vous êtes un véritable expert en géographie européenne !",
+    "image": "/uploads/european-cities.jpg",
+    "info": {
+        "date": "JJ/MM/AAAA",
+        "timeLimit": "10 minutes",
+        "attempts": "1",
+        "points": "240"
+    },
+    "tags": [
+        "Europe",
+        "villes",
+        "géographie"
+    ],
+    "type": "form",
+    "starter": {
+        "text": "Le quiz commence maintenant ! Bonne chance !",
+        "field": [
+            "nom",
+            "email",
+            "nom d'utilisateur"
+        ]
+    },
+    "creator": "dwesh163",
+    "questions": [
+        {
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "radios",
+            "answers": [
+                "Paris",
+                "Londres",
+                "Rome",
+                "Berlin"
+            ],
+            "correct": [
+                "Paris"
+            ],
+            "point": 20,
+            "question": "Quelle ville est célèbre pour la Tour Eiffel ?"
+        },
+        {
+            "type": "checkboxes",
+            "answers": [
+                "Madrid",
+                "Barcelone",
+                "Valence",
+                "Séville"
+            ],
+            "correct": [
+                "Madrid",
+                "Barcelone"
+            ],
+            "point": 20,
+            "question": "Sélectionnez les deux villes espagnoles parmi les suivantes.",
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_ville.jpg"
+        },
+        {
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "true"
+            ],
+            "point": 20,
+            "question": "L'Acropole se trouve à Athènes ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "radios",
+            "answers": [
+                "Varsovie",
+                "Prague",
+                "Budapest",
+                "Vienne"
+            ],
+            "correct": [
+                "Prague"
+            ],
+            "point": 20,
+            "question": "Quelle ville est connue pour son magnifique château et son pont Charles ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "radios",
+            "answers": [
+                "Copenhague",
+                "Oslo",
+                "Stockholm",
+                "Helsinki"
+            ],
+            "correct": [
+                "Stockholm"
+            ],
+            "point": 20,
+            "question": "Quelle ville est la capitale de la Suède ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "false"
+            ],
+            "point": 20,
+            "question": "Le Colisée se trouve à Venise ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "radios",
+            "answers": [
+                "Bucarest",
+                "Sofia",
+                "Athènes",
+                "Belgrade"
+            ],
+            "correct": [
+                "Athènes"
+            ],
+            "point": 20,
+            "question": "Dans quelle ville se trouve l'ancien stade olympique Panathénaïque ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "radios",
+            "answers": [
+                "Dublin",
+                "Édimbourg",
+                "Reykjavik",
+                "Lisbonne"
+            ],
+            "correct": [
+                "Dublin"
+            ],
+            "point": 20,
+            "question": "Quelle ville est la capitale de l'Irlande ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "radios",
+            "answers": [
+                "Bruxelles",
+                "Amsterdam",
+                "Luxembourg",
+                "Genève"
+            ],
+            "correct": [
+                "Bruxelles"
+            ],
+            "point": 20,
+            "question": "Quelle ville est le siège de l'Union européenne ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "radios",
+            "answers": [
+                "Moscou",
+                "Saint-Pétersbourg",
+                "Kiev",
+                "Budapest"
+            ],
+            "correct": [
+                "Moscou"
+            ],
+            "point": 20,
+            "question": "Quelle ville est la capitale de la Russie ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "radios",
+            "answers": [
+                "Zurich",
+                "Francfort",
+                "Munich",
+                "Berlin"
+            ],
+            "correct": [
+                "Berlin"
+            ],
+            "point": 20,
+            "question": "Quelle ville était divisée par un mur jusqu'en 1989 ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ville.jpg",
+            "type": "radios",
+            "answers": [
+                "Vilnius",
+                "Tallinn",
+                "Riga",
+                "Helsinki"
+            ],
+            "correct": [
+                "Helsinki"
+            ],
+            "point": 20,
+            "question": "Quelle ville est la capitale de la Finlande ?",
+            "credit": "Nom du photographe"
+        }
+    ]
+}

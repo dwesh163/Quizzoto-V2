@@ -1,0 +1,161 @@
+{
+    "slug": "javascript",
+    "title": "Quiz sur JavaScript",
+    "description": "Testez vos connaissances sur JavaScript ! Ce quiz vous invite à explorer les concepts de base et avancés de ce langage de programmation essentiel pour le développement web. Répondez à une variété de questions pour découvrir si vous maîtrisez JavaScript !",
+    "image": "/uploads/javascript.jpg",
+    "info": {
+        "date": "JJ/MM/AAAA",
+        "timeLimit": "15 minutes",
+        "attempts": "1",
+        "points": "300"
+    },
+    "tags": [
+        "JavaScript",
+        "programmation",
+        "web"
+    ],
+    "type": "form",
+    "starter": {
+        "text": "Le quiz commence maintenant ! Bonne chance !",
+        "field": [
+            "nom",
+            "email",
+            "nom d'utilisateur"
+        ]
+    },
+    "creator": "dwesh163",
+    "questions": [
+        {
+            "type": "radios",
+            "answers": [
+                "Variable",
+                "Fonction",
+                "Tableau",
+                "Objet"
+            ],
+            "correct": [
+                "Variable"
+            ],
+            "point": 25,
+            "question": "En JavaScript, quel est le type de données pour stocker des valeurs ?"
+        },
+        {
+            "type": "checkboxes",
+            "answers": [
+                "String",
+                "Integer",
+                "Boolean",
+                "Array"
+            ],
+            "correct": [
+                "String",
+                "Integer",
+                "Boolean"
+            ],
+            "point": 25,
+            "question": "Quels sont les types de données primitifs en JavaScript ?"
+        },
+        {
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "true"
+            ],
+            "point": 25,
+            "question": "JavaScript est un langage de programmation côté client ?"
+        },
+        {
+            "type": "radios",
+            "answers": [
+                "if",
+                "for",
+                "when",
+                "while"
+            ],
+            "correct": [
+                "if"
+            ],
+            "point": 25,
+            "question": "Quelle instruction est utilisée pour effectuer une conditionnelle en JavaScript ?"
+        },
+        {
+            "type": "radios",
+            "answers": [
+                "querySelector",
+                "getElementById",
+                "getElementByClass",
+                "selectElement"
+            ],
+            "correct": [
+                "querySelector",
+                "getElementById"
+            ],
+            "point": 25,
+            "question": "Quelle méthode permet de sélectionner des éléments HTML en JavaScript ?"
+        },
+        {
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "true"
+            ],
+            "point": 25,
+            "question": "JavaScript peut être utilisé pour manipuler le DOM (Document Object Model) ?"
+        },
+        {
+            "type": "radios",
+            "answers": [
+                "null",
+                "undefined",
+                "NaN",
+                "void"
+            ],
+            "correct": [
+                "null",
+                "undefined"
+            ],
+            "point": 25,
+            "question": "Quelles valeurs représentent l'absence de valeur en JavaScript ?"
+        },
+        {
+            "type": "radios",
+            "answers": [
+                "const",
+                "let",
+                "var",
+                "final"
+            ],
+            "correct": [
+                "const",
+                "let",
+                "var"
+            ],
+            "point": 25,
+            "question": "Quels sont les mots-clés pour déclarer des variables en JavaScript ?"
+        },
+        {
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "true"
+            ],
+            "point": 25,
+            "question": "JavaScript peut être utilisé pour créer des animations sur une page web ?"
+        },
+        {
+            "type": "radios",
+            "answers": [
+                "parse",
+                "stringify",
+                "convert",
+                "serialize"
+            ],
+            "correct": [
+                "parse",
+                "stringify"
+            ],
+            "point": 25,
+            "question": "Quelles sont les méthodes pour convertir des objets JavaScript en chaîne JSON et vice versa ?"
+        }
+    ]
+}

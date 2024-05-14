@@ -1,0 +1,131 @@
+{
+    "slug": "quiz-animaux",
+    "title": "Quiz sur les Animaux",
+    "description": "Testez vos connaissances sur les animaux ! Ce quiz vous invite à explorer le monde fascinant de la faune. Avec une variété de questions sur les habitats, les comportements et les caractéristiques des animaux, découvrez si vous êtes un véritable expert en nature !",
+    "image": "/uploads/quiz-animaux.jpg",
+    "info": {
+        "date": "JJ/MM/AAAA",
+        "timeLimit": "10 minutes",
+        "attempts": "1",
+        "points": "220"
+    },
+    "tags": [
+        "animaux",
+        "nature"
+    ],
+    "type": "form",
+    "starter": {
+        "text": "Le quiz commence maintenant ! Bonne chance !",
+        "field": [
+            "nom",
+            "email",
+            "nom d'utilisateur"
+        ]
+    },
+    "creator": "dwesh163",
+    "questions": [
+        {
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_animal.jpg",
+            "type": "radios",
+            "answers": [
+                "Chien",
+                "Manchot",
+                "Poisson",
+                "Oiseau"
+            ],
+            "correct": [
+                "Chien"
+            ],
+            "point": 50,
+            "question": "Parmi les animaux suivants, lequel est un mammifère ?"
+        },
+        {
+            "type": "checkboxes",
+            "answers": [
+                "Poule",
+                "Tortue",
+                "Chat",
+                "Chien"
+            ],
+            "correct": [
+                "Poule",
+                "Tortue"
+            ],
+            "point": 50,
+            "question": "Sélectionnez les deux animaux qui pondent des œufs.",
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_animal.jpg"
+        },
+        {
+            "image": "/chemin/vers/image_animal.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "false"
+            ],
+            "point": 50,
+            "question": "Les pingouins peuvent voler ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_animal.jpg",
+            "type": "radios",
+            "answers": [
+                "Ours",
+                "Lion",
+                "Chat",
+                "Poisson clown"
+            ],
+            "correct": [
+                "Ours"
+            ],
+            "point": 50,
+            "question": "Parmi les animaux suivants, lequel hiberne-t-il pendant l'hiver ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_animal.jpg",
+            "type": "radios",
+            "answers": [
+                "Oiseau",
+                "Requin",
+                "Dauphin",
+                "Tortue"
+            ],
+            "correct": [
+                "Dauphin"
+            ],
+            "point": 50,
+            "question": "Quel animal est un mammifère marin ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_animal.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "true"
+            ],
+            "point": 50,
+            "question": "Les koalas sont originaires d'Australie ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_animal.jpg",
+            "type": "radios",
+            "answers": [
+                "Loup",
+                "Serpent",
+                "Araignée",
+                "Poisson"
+            ],
+            "correct": [
+                "Loup"
+            ],
+            "point": 50,
+            "question": "Quel animal est un prédateur terrestre ?",
+            "credit": "Nom du photographe"
+        }
+    ]
+}

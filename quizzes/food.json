@@ -1,0 +1,329 @@
+{
+    "slug": "food",
+    "title": "Quiz sur la Nourriture",
+    "description": "Testez vos connaissances sur la nourriture ! Ce quiz vous invite à explorer le monde délicieux de la gastronomie. Avec une variété de questions sur les plats, les ingrédients et les cuisines du monde, découvrez si vous êtes un véritable expert en cuisine !",
+    "image": "/uploads/food.jpg",
+    "info": {
+        "date": "JJ/MM/AAAA",
+        "timeLimit": "15 minutes",
+        "attempts": "1",
+        "points": "300"
+    },
+    "tags": [
+        "nourriture",
+        "gastronomie"
+    ],
+    "type": "form",
+    "starter": {
+        "text": "Le quiz commence maintenant ! Bonne chance !",
+        "field": [
+            "nom",
+            "email",
+            "nom d'utilisateur"
+        ]
+    },
+    "creator": "dwesh163",
+    "questions": [
+        {
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_plat.jpg",
+            "type": "radios",
+            "answers": [
+                "Pizza",
+                "Sushi",
+                "Hamburger",
+                "Salade César"
+            ],
+            "correct": [
+                "Salade César"
+            ],
+            "point": 20,
+            "question": "Parmi les plats suivants, lequel est une salade ?"
+        },
+        {
+            "type": "checkboxes",
+            "answers": [
+                "Pâtes",
+                "Sashimi",
+                "Ratatouille",
+                "Poulet rôti"
+            ],
+            "correct": [
+                "Pâtes",
+                "Ratatouille"
+            ],
+            "point": 20,
+            "question": "Sélectionnez les deux plats végétariens.",
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_plat.jpg"
+        },
+        {
+            "image": "/chemin/vers/image_ingredient.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "true"
+            ],
+            "point": 20,
+            "question": "La tomate est un fruit ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_cuisine.jpg",
+            "type": "radios",
+            "answers": [
+                "Italienne",
+                "Chinoise",
+                "Mexicaine",
+                "Indienne"
+            ],
+            "correct": [
+                "Mexicaine"
+            ],
+            "point": 20,
+            "question": "La cuisine de quel pays est célèbre pour les tacos et les enchiladas ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ingrédient.jpg",
+            "type": "radios",
+            "answers": [
+                "Pomme de terre",
+                "Brocoli",
+                "Carotte",
+                "Courgette"
+            ],
+            "correct": [
+                "Brocoli"
+            ],
+            "point": 20,
+            "question": "Quel légume est riche en vitamine C ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_plat.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "false"
+            ],
+            "point": 20,
+            "question": "Le gâteau au fromage est traditionnellement salé ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ingrédient.jpg",
+            "type": "radios",
+            "answers": [
+                "Riz",
+                "Quinoa",
+                "Blé",
+                "Orge"
+            ],
+            "correct": [
+                "Quinoa"
+            ],
+            "point": 20,
+            "question": "Quel aliment est considéré comme une protéine complète ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_cuisine.jpg",
+            "type": "radios",
+            "answers": [
+                "Japonaise",
+                "Vietnamienne",
+                "Thaïlandaise",
+                "Coréenne"
+            ],
+            "correct": [
+                "Vietnamienne"
+            ],
+            "point": 20,
+            "question": "La cuisine de quel pays est célèbre pour les rouleaux de printemps ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ingrédient.jpg",
+            "type": "radios",
+            "answers": [
+                "Amande",
+                "Noisette",
+                "Pistache",
+                "Cacahuète"
+            ],
+            "correct": [
+                "Pistache"
+            ],
+            "point": 20,
+            "question": "Quel fruit sec est souvent utilisé dans la pâtisserie ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_plat.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "true"
+            ],
+            "point": 20,
+            "question": "Le tiramisu est un dessert italien ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_cuisine.jpg",
+            "type": "radios",
+            "answers": [
+                "Française",
+                "Grecque",
+                "Espagnole",
+                "Portugaise"
+            ],
+            "correct": [
+                "Grecque"
+            ],
+            "point": 20,
+            "question": "La cuisine de quel pays est célèbre pour le tzatziki et la moussaka ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ingrédient.jpg",
+            "type": "radios",
+            "answers": [
+                "Cannelle",
+                "Muscade",
+                "Curcuma",
+                "Sauge"
+            ],
+            "correct": [
+                "Cannelle"
+            ],
+            "point": 20,
+            "question": "Quelle épice est souvent utilisée dans les desserts ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_plat.jpg",
+            "type": "radios",
+            "answers": [
+                "Pâtes carbonara",
+                "Paëlla",
+                "Pad thai",
+                "Poulet au curry"
+            ],
+            "correct": [
+                "Pâtes carbonara"
+            ],
+            "point": 20,
+            "question": "Quel plat italien est préparé avec des œufs, du fromage, du lard et du poivre noir ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ingrédient.jpg",
+            "type": "radios",
+            "answers": [
+                "Gingembre",
+                "Piment",
+                "Ail",
+                "Basilic"
+            ],
+            "correct": [
+                "Gingembre"
+            ],
+            "point": 20,
+            "question": "Quel ingrédient est commun dans la cuisine asiatique pour ajouter de la saveur ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_plat.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "false"
+            ],
+            "point": 20,
+            "question": "Le sushi est un plat traditionnel chinois ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_cuisine.jpg",
+            "type": "radios",
+            "answers": [
+                "Brésilienne",
+                "Argentine",
+                "Péruvienne",
+                "Chilienne"
+            ],
+            "correct": [
+                "Péruvienne"
+            ],
+            "point": 20,
+            "question": "La cuisine de quel pays est célèbre pour le ceviche ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ingrédient.jpg",
+            "type": "radios",
+            "answers": [
+                "Huile d'olive",
+                "Vinaigre balsamique",
+                "Sauce soja",
+                "Sauce Worcestershire"
+            ],
+            "correct": [
+                "Sauce soja"
+            ],
+            "point": 20,
+            "question": "Quel ingrédient est souvent utilisé comme assaisonnement dans la cuisine asiatique ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_plat.jpg",
+            "type": "radios",
+            "answers": [
+                "Gyros",
+                "Falafel",
+                "Couscous",
+                "Tacos"
+            ],
+            "correct": [
+                "Gyros"
+            ],
+            "point": 20,
+            "question": "Quel plat grec est composé de viande grillée et de pain pita ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_ingrédient.jpg",
+            "type": "radios",
+            "answers": [
+                "Sésame",
+                "Pavot",
+                "Lin",
+                "Chia"
+            ],
+            "correct": [
+                "Sésame"
+            ],
+            "point": 20,
+            "question": "Quel ingrédient est souvent utilisé dans la cuisine asiatique pour garnir les plats ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_plat.jpg",
+            "type": "radios",
+            "answers": [
+                "Sashimi",
+                "Tartare",
+                "Ceviche",
+                "Poke"
+            ],
+            "correct": [
+                "Tartare"
+            ],
+            "point": 20,
+            "question": "Quel plat est préparé avec de la viande ou du poisson cru finement coupé en dés ?",
+            "credit": "Nom du photographe"
+        }
+    ]
+}

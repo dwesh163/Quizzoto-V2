@@ -1,0 +1,181 @@
+{
+    "slug": "dune",
+    "title": "Quiz sur Dune",
+    "description": "Testez vos connaissances sur le livre 'Dune' de Frank Herbert ! Ce quiz vous invite à explorer l'univers épique et complexe de cette œuvre de science-fiction emblématique. Répondez à une variété de questions pour découvrir si vous êtes un véritable fan de Dune !",
+    "image": "/uploads/dune.jpg",
+    "visibility": "public",
+    "info": {
+        "date": "JJ/MM/AAAA",
+        "timeLimit": "20 minutes",
+        "attempts": "1",
+        "points": "400"
+    },
+    "tags": [
+        "Dune",
+        "Frank Herbert",
+        "science-fiction"
+    ],
+    "type": "form",
+    "starter": {
+        "text": "Le quiz commence maintenant ! Bonne chance !",
+        "field": [
+            "nom",
+            "email",
+            "nom d'utilisateur"
+        ]
+    },
+    "creator": "dwesh163",
+    "questions": [
+        {
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "Paul Atreides",
+                "Duncan Idaho",
+                "Baron Vladimir Harkonnen",
+                "Gurney Halleck"
+            ],
+            "correct": [
+                "Paul Atreides"
+            ],
+            "point": 30,
+            "question": "Quel est le nom du personnage principal de 'Dune' ?"
+        },
+        {
+            "type": "checkboxes",
+            "answers": [
+                "Arrakis",
+                "Tatooine",
+                "Caladan",
+                "Giedi Prime"
+            ],
+            "correct": [
+                "Arrakis",
+                "Caladan"
+            ],
+            "point": 30,
+            "question": "Sélectionnez les planètes importantes dans l'univers de 'Dune'.",
+            "credit": "Nom du photographe",
+            "image": "/chemin/vers/image_planete.jpg"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "true"
+            ],
+            "point": 30,
+            "question": "Paul Atreides est également connu sous le nom de Muad'Dib ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_planete.jpg",
+            "type": "radios",
+            "answers": [
+                "L'Épice",
+                "La Mélange",
+                "L'Élixir",
+                "Le Rationnel"
+            ],
+            "correct": [
+                "L'Épice"
+            ],
+            "point": 30,
+            "question": "Quel élément est essentiel à la navigation interstellaire dans l'univers de 'Dune' ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "Jessica",
+                "Chani",
+                "Irulan",
+                "Ghanima"
+            ],
+            "correct": [
+                "Jessica"
+            ],
+            "point": 30,
+            "question": "Qui est la mère de Paul Atreides ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_planete.jpg",
+            "type": "boolean",
+            "answers": [],
+            "correct": [
+                "true"
+            ],
+            "point": 30,
+            "question": "Arrakis est également appelée Dune ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "Duncan Idaho",
+                "Gurney Halleck",
+                "Thufir Hawat",
+                "Piter De Vries"
+            ],
+            "correct": [
+                "Duncan Idaho"
+            ],
+            "point": 30,
+            "question": "Quel personnage est le maître-espion des Atreides ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_planete.jpg",
+            "type": "radios",
+            "answers": [
+                "Sardaukar",
+                "Fremen",
+                "Bene Gesserit",
+                "Guildes des Navigateurs"
+            ],
+            "correct": [
+                "Fremen"
+            ],
+            "point": 30,
+            "question": "Quel groupe de personnes habite les déserts de Dune ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_personnage.jpg",
+            "type": "radios",
+            "answers": [
+                "Baron Vladimir Harkonnen",
+                "Stilgar",
+                "Thufir Hawat",
+                "Piter De Vries"
+            ],
+            "correct": [
+                "Baron Vladimir Harkonnen"
+            ],
+            "point": 30,
+            "question": "Qui est l'ennemi principal de la Maison Atreides ?",
+            "credit": "Nom du photographe"
+        },
+        {
+            "image": "/chemin/vers/image_planete.jpg",
+            "type": "radios",
+            "answers": [
+                "Caladan",
+                "Geidi Prime",
+                "Ix",
+                "Kaitain"
+            ],
+            "correct": [
+                "Kaitain"
+            ],
+            "point": 30,
+            "question": "Quelle planète est la capitale de l'Empire dans 'Dune' ?",
+            "credit": "Nom du photographe"
+        }
+    ]
+}
