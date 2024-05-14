@@ -97,10 +97,13 @@ export default async function getQuizInfo(req, res) {
 			.toArray();
 
 		if (session.user.id) {
-			lastResult = await db.collection('results').findOne({ quiz: quiz.id, player: session.user.id }, { projection: { _id: 0, id: 1 } }, { sort: { date: -1 } });
+			lastResult = await db
+				.collection('results')
+				.find({ quiz: quiz.id, player: session.user.id }, { projection: { _id: 0, id: 1, points: 1 } }, { $sort: { points: -1 } })
+				.toArray();
 		}
 
-		quiz.lastResult = lastResult?.id;
+		quiz.lastResult = lastResult[lastResult.length - 1]?.id;
 		delete quiz.id;
 
 		return res.status(200).send({ quiz, results });
