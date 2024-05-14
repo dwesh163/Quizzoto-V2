@@ -1,8 +1,11 @@
+import { getSession } from 'next-auth/react';
 import db from '/lib/mongodb';
 
 export default async function getQuizInfo(req, res) {
+	const session = await getSession({ req });
+	let lastResult = null;
 	try {
-		const [quiz] = await db
+		let [quiz] = await db
 			.collection('quizzes')
 			.aggregate([
 				{
@@ -85,6 +88,11 @@ export default async function getQuizInfo(req, res) {
 			.limit(5)
 			.toArray();
 
+		if (session.user.id) {
+			lastResult = await db.collection('results').findOne({ quiz: quiz.id, player: session.user.id }, { projection: { _id: 0, id: 1 } }, { sort: { date: -1 } });
+		}
+
+		quiz.lastResult = lastResult?.id;
 		delete quiz.id;
 
 		return res.status(200).send({ quiz, results });
