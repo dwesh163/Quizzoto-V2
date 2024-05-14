@@ -120,7 +120,7 @@ export default function Question() {
 			.then((response) => response.json())
 			.then((jsonData) => {
 				if (jsonData != '404') {
-					setQuiz(jsonData);
+					setQuiz(jsonData.quiz);
 					getQuestion();
 				} else {
 					setQuiz('404');
