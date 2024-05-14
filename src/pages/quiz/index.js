@@ -24,9 +24,7 @@ export default function User() {
 			.then((jsonData) => {
 				setQuizzes(jsonData.quizzes);
 				setServerSearch(jsonData.search);
-				setTimeout(() => {
-					setIsLoading(false);
-				}, 500);
+				setIsLoading(false);
 			});
 	}
 
