@@ -140,13 +140,67 @@ export default function Page() {
 												}}>
 												<option value="">Select</option>
 												<option value="textfield">Text Field</option>
+												<option value="boolean">Boolean</option>
 												<option value="radios">Radios</option>
 												<option value="checkboxes">Checkboxes</option>
 											</select>
 										</div>
+										{question.type === 'boolean' && (
+											<div>
+												{boolean.map((answer, answerIndex) => (
+													<div key={answerIndex} className="flex gap-2">
+														<input
+															className="border border-gray-300 rounded-md p-2 mb-2 w-full"
+															type="text"
+															placeholder={`Answer ${answerIndex + 1}`}
+															value={answer}
+															onChange={(event) => {
+																const newQuestions = [...quizzData.questions];
+																newQuestions[index].answers[answerIndex] = event.target.value;
+																setQuizzData((prevData) => ({
+																	...prevData,
+																	questions: newQuestions,
+																}));
+															}}
+														/>
+														{question.correct.includes(answer) ? (
+															<button
+																className="text-white focus:ring-1 focus:ring-green-300 font-medium rounded-lg text-sm mb-2 px-2.5 py-2 bg-green-500 hover:bg-green-600 focus:outline-none"
+																onClick={(event) => {
+																	const newQuestions = [...quizzData.questions];
+																	newQuestions[index].correct.push(answer);
+																	setQuizzData((prevData) => ({
+																		...prevData,
+																		questions: newQuestions,
+																	}));
+																}}>
+																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check w-7 h-7" viewBox="0 0 16 16">
+																	<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+																</svg>
+															</button>
+														) : (
+															<button
+																className="text-white focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm mb-2 px-2.5 py-2 bg-gray-400 hover:bg-gray-500 focus:outline-none"
+																onClick={(event) => {
+																	const newQuestions = [...quizzData.questions];
+																	newQuestions[index].correct = [answer];
+																	setQuizzData((prevData) => ({
+																		...prevData,
+																		questions: newQuestions,
+																	}));
+																}}>
+																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check w-7 h-7" viewBox="0 0 16 16">
+																	<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+																</svg>
+															</button>
+														)}
+													</div>
+												))}
+											</div>
+										)}
 										{question.type === 'textfield' && (
 											<input
-												className="border border-gray-300 rounded-md p-2 mb-2"
+												className="border border-gray-300 rounded-md p-2 mb-2 w-full"
 												type="text"
 												placeholder="Correct Answer"
 												value={question.correct.join(', ')}
@@ -166,7 +220,7 @@ export default function Page() {
 												{question.answers.map((answer, answerIndex) => (
 													<div key={answerIndex} className="flex gap-2">
 														<input
-															className="border border-gray-300 rounded-md p-2 mb-2"
+															className="border border-gray-300 rounded-md p-2 mb-2 w-full"
 															type="text"
 															placeholder={`Answer ${answerIndex + 1}`}
 															value={answer}
@@ -179,11 +233,45 @@ export default function Page() {
 																}));
 															}}
 														/>
+														{question.correct.includes(answerIndex) ? (
+															<button
+																className="text-white focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm mb-2 px-2.5 py-2 bg-gray-400 hover:bg-gray-500 focus:outline-none"
+																onClick={(event) => {
+																	const newQuestions = [...quizzData.questions];
+																	const correctIndex = newQuestions[index].correct.indexOf(answerIndex);
+																	if (correctIndex !== -1) {
+																		newQuestions[index].correct.splice(correctIndex, 1);
+																	}
+																	setQuizzData((prevData) => ({
+																		...prevData,
+																		questions: newQuestions,
+																	}));
+																}}>
+																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check w-7 h-7" viewBox="0 0 16 16">
+																	<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+																</svg>
+															</button>
+														) : (
+															<button
+																className="text-white focus:ring-1 focus:ring-green-300 font-medium rounded-lg text-sm mb-2 px-2.5 py-2 bg-green-500 hover:bg-green-600 focus:outline-none"
+																onClick={(event) => {
+																	const newQuestions = [...quizzData.questions];
+																	newQuestions[index].correct.push(answerIndex);
+																	setQuizzData((prevData) => ({
+																		...prevData,
+																		questions: newQuestions,
+																	}));
+																}}>
+																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check w-7 h-7" viewBox="0 0 16 16">
+																	<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+																</svg>
+															</button>
+														)}
 														<button
-															className="text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm mb-2 px-4 py-2 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none"
+															className="text-white focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm mb-2 px-4 py-2 bg-red-500 hover:bg-red-600 focus:outline-none"
 															onClick={(event) => {
 																const newQuestions = [...quizzData.questions];
-																newQuestions[index].answers.push('');
+																newQuestions[index].answers.splice(answerIndex, 1);
 																setQuizzData((prevData) => ({
 																	...prevData,
 																	questions: newQuestions,
@@ -196,19 +284,6 @@ export default function Page() {
 														</button>
 													</div>
 												))}
-
-												<button
-													className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none"
-													onClick={(event) => {
-														const newQuestions = [...quizzData.questions];
-														newQuestions[index].answers.push('');
-														setQuizzData((prevData) => ({
-															...prevData,
-															questions: newQuestions,
-														}));
-													}}>
-													+ Checkbox
-												</button>
 											</div>
 										)}
 
@@ -217,7 +292,7 @@ export default function Page() {
 												{question.answers.map((answer, answerIndex) => (
 													<div key={answerIndex} className="flex gap-2">
 														<input
-															className="border border-gray-300 rounded-md p-2 mb-2"
+															className="border border-gray-300 w-full rounded-md p-2 mb-2"
 															type="text"
 															placeholder={`Answer ${answerIndex + 1}`}
 															value={answer}
@@ -230,11 +305,43 @@ export default function Page() {
 																}));
 															}}
 														/>
+														{question.correct.includes(answer) ? (
+															<button
+																className="text-white focus:ring-1 focus:ring-green-300 font-medium rounded-lg text-sm mb-2 px-2.5 py-2 bg-green-500 hover:bg-green-600 focus:outline-none"
+																onClick={(event) => {
+																	const newQuestions = [...quizzData.questions];
+																	newQuestions[index].correct.push(answer);
+																	setQuizzData((prevData) => ({
+																		...prevData,
+																		questions: newQuestions,
+																	}));
+																}}>
+																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check w-7 h-7" viewBox="0 0 16 16">
+																	<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+																</svg>
+															</button>
+														) : (
+															<button
+																className="text-white focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm mb-2 px-2.5 py-2 bg-gray-400 hover:bg-gray-500 focus:outline-none"
+																onClick={(event) => {
+																	const newQuestions = [...quizzData.questions];
+																	newQuestions[index].correct = [answer];
+																	setQuizzData((prevData) => ({
+																		...prevData,
+																		questions: newQuestions,
+																	}));
+																}}>
+																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check w-7 h-7" viewBox="0 0 16 16">
+																	<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+																</svg>
+															</button>
+														)}
 														<button
-															className="text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none"
+															className="text-white focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm mb-2 px-4 py-2 bg-red-500 hover:bg-red-600 focus:outline-none"
 															onClick={(event) => {
 																const newQuestions = [...quizzData.questions];
-																newQuestions[index].answers.push('');
+																newQuestions[index].answers.splice(answerIndex, 1);
+
 																setQuizzData((prevData) => ({
 																	...prevData,
 																	questions: newQuestions,
@@ -247,23 +354,24 @@ export default function Page() {
 														</button>
 													</div>
 												))}
-
-												<button
-													className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none"
-													onClick={(event) => {
-														const newQuestions = [...quizzData.questions];
-														newQuestions[index].answers.push('');
-														setQuizzData((prevData) => ({
-															...prevData,
-															questions: newQuestions,
-														}));
-													}}>
-													+ Radio
-												</button>
+												{question.answers.length < 4 && (
+													<button
+														className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none"
+														onClick={(event) => {
+															const newQuestions = [...quizzData.questions];
+															newQuestions[index].answers.push('');
+															setQuizzData((prevData) => ({
+																...prevData,
+																questions: newQuestions,
+															}));
+														}}>
+														+ Radio
+													</button>
+												)}
 											</div>
 										)}
 
-										<div className="w-full flex justify-between mt-10 gap-3 items-center">
+										<div className="w-full flex justify-between mt-4 gap-3 items-center">
 											<div class="inline-flex sm:px-28 px-10 items-center justify-center w-full">
 												<hr class="w-full h-1 my-8 bg-gray-200 border-0 rounded" />
 												<div class="absolute px-4 -translate-x-1/2 bg-white left-1/2">
@@ -294,25 +402,6 @@ export default function Page() {
 												</div>
 											</div>
 										</div>
-
-										{quizzData.questions.length == index + 1 && (
-											<div>
-												<button
-													className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none"
-													onClick={(event) => {
-														const createQuizz = async () => {
-															fetch(`/api/setNewQuizz`, { method: 'POST', body: JSON.stringify(quizzData) }).then((result) => {
-																return router.push({
-																	pathname: `/quizz`,
-																});
-															});
-														};
-														createQuizz();
-													}}>
-													Create Quizz
-												</button>
-											</div>
-										)}
 									</div>
 								))}
 							</>
