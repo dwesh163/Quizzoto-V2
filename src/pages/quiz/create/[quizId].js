@@ -15,11 +15,30 @@ export default function Page() {
 	const boolean = ['true', 'false'];
 
 	const saveData = async () => {
-		console.log(quizzData);
 		let localData = JSON.parse(localStorage.getItem('quizzData'));
 		if (localData === null) {
 			localData = {};
 		}
+
+		const updatedQuestions = quizzData.questions.map((question) => {
+			if (question.type == 'checkboxes') {
+				const updatedQuestion = { ...question };
+
+				let correct = [];
+
+				updatedQuestion.correct.map((correctAnswer, index) => {
+					console.log(correctAnswer);
+				});
+
+				console.log(correct);
+				updatedQuestion.correct = correct;
+
+				return updatedQuestion;
+			} else {
+				return question;
+			}
+		});
+
 		localData[router.query.quizId] = quizzData;
 		localData[router.query.quizId].update = new Date();
 		localStorage.setItem('quizzData', JSON.stringify(localData));
@@ -32,9 +51,17 @@ export default function Page() {
 			if (question.type == 'checkboxes') {
 				const updatedQuestion = { ...question };
 
-				updatedQuestion.correct = updatedQuestion.correct.map((correctAnswer) => {
-					return updatedQuestion.answers[correctAnswer];
+				let correct = [];
+
+				updatedQuestion.correct.map((correctAnswer, index) => {
+					console.log(correctAnswer);
+					if (correctAnswer != -1 && correctAnswer != null && correctAnswer != undefined) {
+						correct.push(updatedQuestion.answers[correctAnswer]);
+					}
 				});
+
+				console.log(correct);
+				updatedQuestion.correct = correct;
 
 				return updatedQuestion;
 			} else {
@@ -81,7 +108,6 @@ export default function Page() {
 					quizzSlug: '',
 				});
 			} else {
-				console.log(JSON.parse(localStorage.getItem('quizzData')));
 				if (JSON.parse(localStorage.getItem('quizzData')) != null && JSON.parse(localStorage.getItem('quizzData'))[router.query.quizId] != null) {
 					if (data.update > JSON.parse(localStorage.getItem('quizzData'))[router.query.quizId].update) {
 						const updatedQuestions = data.questions.map((question) => {
@@ -105,6 +131,21 @@ export default function Page() {
 						setQuizzData(JSON.parse(localStorage.getItem('quizzData'))[router.query.quizId]);
 					}
 				} else {
+					const updatedQuestions = data.questions.map((question) => {
+						if (question.type == 'checkboxes') {
+							const updatedQuestion = { ...question };
+
+							updatedQuestion.correct = updatedQuestion.correct.map((correctAnswer) => {
+								return updatedQuestion.answers.indexOf(correctAnswer);
+							});
+
+							return updatedQuestion;
+						} else {
+							return question;
+						}
+					});
+
+					data.questions = updatedQuestions;
 					setQuizzData(data);
 				}
 			}
