@@ -14,12 +14,48 @@ export default function Page() {
 
 	const boolean = ['true', 'false'];
 
+	const saveData = async () => {
+		console.log(quizzData);
+		let localData = JSON.parse(localStorage.getItem('quizzData'));
+		if (localData === null) {
+			localData = {};
+		}
+		localData[router.query.quizId] = quizzData;
+		localData[router.query.quizId].update = new Date();
+		localStorage.setItem('quizzData', JSON.stringify(localData));
+	};
+
+	const publishData = async () => {
+		let newQuizzData = quizzData;
+
+		const updatedQuestions = quizzData.questions.map((question) => {
+			if (question.type == 'checkboxes') {
+				const updatedQuestion = { ...question };
+
+				updatedQuestion.correct = updatedQuestion.correct.map((correctAnswer) => {
+					return updatedQuestion.answers[correctAnswer];
+				});
+
+				return updatedQuestion;
+			} else {
+				return question;
+			}
+		});
+
+		newQuizzData.questions = updatedQuestions;
+
+		const response = await fetch(`/api/quiz/create/${router.query.quizId}`, {
+			method: 'POST',
+			body: JSON.stringify(newQuizzData),
+		});
+		const data = await response.json();
+	};
+
 	const getData = async () => {
 		if (status === 'authenticated') {
 			const response = await fetch(`/api/quiz/create/${router.query.quizId}`);
 			let data = await response.json();
 			if (data === 404) {
-				console.log('oui');
 				setQuizzData({
 					image: '',
 					title: '',
@@ -45,24 +81,32 @@ export default function Page() {
 					quizzSlug: '',
 				});
 			} else {
-				const updatedQuestions = data.questions.map((question) => {
-					if (question.type == 'checkboxes') {
-						const updatedQuestion = { ...question };
+				console.log(JSON.parse(localStorage.getItem('quizzData')));
+				if (JSON.parse(localStorage.getItem('quizzData')) != null && JSON.parse(localStorage.getItem('quizzData'))[router.query.quizId] != null) {
+					if (data.update > JSON.parse(localStorage.getItem('quizzData'))[router.query.quizId].update) {
+						const updatedQuestions = data.questions.map((question) => {
+							if (question.type == 'checkboxes') {
+								const updatedQuestion = { ...question };
 
-						updatedQuestion.correct = updatedQuestion.correct.map((correctAnswer) => {
-							return updatedQuestion.answers.indexOf(correctAnswer);
+								updatedQuestion.correct = updatedQuestion.correct.map((correctAnswer) => {
+									return updatedQuestion.answers.indexOf(correctAnswer);
+								});
+
+								return updatedQuestion;
+							} else {
+								return question;
+							}
 						});
 
-						console.log(updatedQuestion);
-						return updatedQuestion;
+						data.questions = updatedQuestions;
+
+						setQuizzData(data);
 					} else {
-						return question;
+						setQuizzData(JSON.parse(localStorage.getItem('quizzData'))[router.query.quizId]);
 					}
-				});
-
-				data.questions = updatedQuestions;
-
-				setQuizzData(data);
+				} else {
+					setQuizzData(data);
+				}
 			}
 			setLoading(false);
 		}
@@ -90,37 +134,13 @@ export default function Page() {
 										<button
 											className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg sm:text-sm text-xs sm:px-5 px-2 sm:py-2.5 py-2 me-2 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none"
 											onClick={(event) => {
-												const createQuizz = async () => {
-													fetch(`/api/setNewQuizz`, { method: 'POST', body: JSON.stringify(quizzData) }).then((result) => {
-														return router.push({
-															pathname: `/quizz`,
-														});
-													});
-												};
-												createQuizz();
+												publishData();
 											}}>
 											Publish
 										</button>
 										<button
-											disabled
 											onClick={(event) => {
-												const updatedQuestions = quiz.questions.map((question) => {
-													if (question.type === 'checkboxes') {
-														const updatedQuestion = { ...question };
-
-														updatedQuestion.correct = updatedQuestion.correct.map((correctAnswer) => {
-															return updatedQuestion.answers.indexOf(correctAnswer);
-														});
-
-														return updatedQuestion;
-													} else {
-														return question;
-													}
-												});
-
-												quiz.questions = updatedQuestions;
-
-												setQuizzData(quiz);
+												saveData();
 											}}
 											type="button"
 											className="text-white w-fit bg-gray-400 hover:bg-gray-500 focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm px-2.5 sm:py-2.5 py-2 me-2 focus:outline-none flex items-center gap-1">
