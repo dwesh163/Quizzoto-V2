@@ -96,18 +96,16 @@ export default async function getQuizInfo(req, res) {
 			.limit(3)
 			.toArray();
 
-		if (session.user.id) {
+		if (session) {
 			bestResult = await db
 				.collection('results')
 				.find({ quiz: quiz.id, player: session.user.id }, { projection: { _id: 0, id: 1, points: 1 } }, { $sort: { points: -1 } })
 				.toArray();
 			if (bestResult.length > 0) {
 				bestResult.sort((a, b) => b.points - a.points);
+				quiz.bestResult = bestResult[0]?.id;
 			}
-			console.log(bestResult[0]?.id);
 		}
-
-		quiz.bestResult = bestResult[0]?.id;
 
 		return res.status(200).send({ quiz, results });
 	} catch (error) {
