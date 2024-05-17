@@ -93,7 +93,7 @@ export default async function getQuizInfo(req, res) {
 				},
 				{ $sort: { points: -1 } },
 			])
-			.limit(5)
+			.limit(3)
 			.toArray();
 
 		if (session.user.id) {
