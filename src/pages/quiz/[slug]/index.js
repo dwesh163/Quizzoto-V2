@@ -8,19 +8,19 @@ import ResultsList from '@/components/results';
 
 function BestResultsList({ results }) {
 	return (
-		<div class="mt-2 w-full">
-			<section class="text-center lg:text-left w-full">
-				<div class="grid gap-3 grid-cols-5 md:grid-cols-5 xl:gap-x-3 w-full">
+		<div className="mt-2 w-full">
+			<section className="text-center lg:text-left w-full">
+				<div className="grid gap-3 grid-cols-5 md:grid-cols-5 xl:gap-x-3 w-full">
 					{results?.map((result, index) => (
-						<div class="mb-6 lg:mb-0">
-							<div class="relative block rounded-lg bg-white">
-								<div class="flex-row items-center lg:flex">
-									<div class="w-full shrink-0 grow-0 basis-auto lg:w-16 lg:pr-2">
-										<img src={result.user.image} alt="User image" class="sm:mb-0 mb-2 w-full rounded-md" />
+						<div className="mb-6 lg:mb-0">
+							<div className="relative block rounded-lg bg-white">
+								<div className="flex-row items-center lg:flex">
+									<div className="w-full shrink-0 grow-0 basis-auto lg:w-16 lg:pr-2">
+										<img src={result.user.image} alt="User image" className="sm:mb-0 mb-2 w-full rounded-md" />
 									</div>
-									<div class="w-full shrink-0 grow-0 basis-auto lg:w-7/12">
-										<h5 class="mb-0 sm:text-lg text-xs font-bold">{result.user.username}</h5>
-										<p class="mb-0 sm:text-base text-xs text-neutral-500 ">{result.points} Points</p>
+									<div className="w-full shrink-0 grow-0 basis-auto lg:w-7/12">
+										<h5 className="mb-0 sm:text-lg text-xs font-bold">{result.user.username}</h5>
+										<p className="mb-0 sm:text-base text-xs text-neutral-500 ">{result.points} Points</p>
 									</div>
 								</div>
 							</div>
@@ -40,6 +40,8 @@ export default function Quiz() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [results, setResults] = useState([]);
 
+	const show = false;
+
 	useEffect(() => {
 		if (!router.query.slug) {
 			return;
@@ -49,6 +51,7 @@ export default function Quiz() {
 			.then((jsonData) => {
 				if (jsonData != '404') {
 					setQuiz(jsonData.quiz);
+					console.log(jsonData.results);
 					setResults(jsonData.results);
 					setIsLoading(false);
 				} else {
@@ -117,20 +120,31 @@ export default function Quiz() {
 											<span>{quiz.info.points} Points</span>
 										</span>
 									</div>
-									<div className="mt-4 col-start-1 row-start-3 self-center sm:mt-0 sm:col-start-2 sm:row-start-2 sm:row-span-2 lg:mt-6 lg:col-start-1 lg:row-start-3 lg:row-end-4">
-										<button onClick={() => router.push(quiz.slug + '/1')} type="button" className="text-white w-full sm:w-fit bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none">
+									<div className="mt-4 self-center sm:mt-0 lg:mt-6 col-start-1 row-start-3 row-end-4 flex">
+										<button onClick={() => router.push(quiz.slug + '/1')} type="button" className="text-white w-full sm:w-fit bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none">
 											Start
 										</button>
+										{quiz?.user?.username == session?.user?.username && (
+											<button onClick={() => router.push('/quiz/create/' + quiz.id)} type="button" className="text-white w-fit bg-gray-400 hover:bg-gray-500 focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none flex items-center gap-1">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+													<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+													<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+												</svg>
+												<p className="hidden sm:flex">Edit</p>
+											</button>
+										)}
 									</div>
 									<p className="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-slate-400">{quiz.description}</p>
 								</div>
-								<div className="sm:mt-12 mt-6 gap-4 flex-col">
-									<h5 className="text-lg font-bold text-slate-800">Best results</h5>
+								{results.length != 0 && show && (
+									<div className="sm:mt-12 mt-6 gap-4 flex-col">
+										<h5 className="text-lg font-bold text-slate-800">Best results</h5>
 
-									<BestResultsList results={results} />
-								</div>
+										<BestResultsList results={results} />
+									</div>
+								)}
 
-								{quiz.bestResult && (
+								{quiz.bestResult && show && (
 									<div className="sm:mt-12 mt-0 flex-col">
 										<h5 className="text-lg font-bold text-slate-800">My results</h5>
 										<div className="flex mt-2 md:bg-[#fcfcfc] flex-col mx-auto items-center justify-between md:flex-row ">
