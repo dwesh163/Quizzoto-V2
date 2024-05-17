@@ -108,7 +108,6 @@ export default async function getQuizInfo(req, res) {
 		}
 
 		quiz.bestResult = bestResult[0]?.id;
-		delete quiz.id;
 
 		return res.status(200).send({ quiz, results });
 	} catch (error) {
