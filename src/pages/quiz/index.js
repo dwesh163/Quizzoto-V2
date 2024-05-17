@@ -51,7 +51,7 @@ export default function User() {
 				quizzes
 					?.map((quiz, index) => (
 						<div onClick={() => router.push('/quiz/' + quiz.slug)} key={index + '-quiz-list'} className="mb-5 w-full h-full cursor-pointer rounded overflow-hidden shadow-lg">
-							<img className="w-full h-52 object-cover" src={quiz.image} alt={quiz.title} />
+							<img className="w-full sm:h-48 h-52 object-cover" src={quiz.image} alt={quiz.title} />
 							<div className="sm:px-6 sm:py-4 px-4 py-3">
 								<div className="flex justify-between mb-2">
 									<div className="font-bold text-xl">{quiz.title}</div>
@@ -73,7 +73,7 @@ export default function User() {
 									{quiz.description}
 								</p>
 							</div>
-							<div className="px-6 pt-4 pb-2">
+							<div className="px-6 pt-4">
 								{quiz?.tags?.map((tag, index) => (
 									<span key={index + '-tag-list'} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
 										#{tag}
