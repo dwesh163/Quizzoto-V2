@@ -5,6 +5,17 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Menu from '@/components/menu';
 
+function shuffle(array) {
+	let currentIndex = array.length;
+
+	while (currentIndex != 0) {
+		let randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex--;
+
+		[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+	}
+}
+
 const AnswersBox = ({ answers, setAnswers, question }) => {
 	const color = 'bg-[#FFC50F]';
 	// const color = 'bg-sky-500 bg-opacity-30';
@@ -138,6 +149,7 @@ export default function Question() {
 					console.log('end');
 				} else {
 					if (jsonData != '404') {
+						shuffle(jsonData.answers);
 						setQuestion(jsonData);
 					} else {
 						setQuestion('404');
