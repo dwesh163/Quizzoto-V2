@@ -60,6 +60,7 @@ async function insertQuiz(quiz, session) {
 		type: quiz.type,
 		tags: quiz.tags.slice(0, 5),
 		rating: '0',
+		shuffle: quiz.shuffle ? quiz.shuffle : false,
 		date: new Date(),
 		update: new Date(),
 		visibility: quiz.visibility ? quiz.visibility : 'hidden',

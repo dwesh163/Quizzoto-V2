@@ -149,7 +149,9 @@ export default function Question() {
 					console.log('end');
 				} else {
 					if (jsonData != '404') {
-						shuffle(jsonData.answers);
+						if (jsonData.shuffle && quiz.shuffle) {
+							shuffle(jsonData.answers);
+						}
 						setQuestion(jsonData);
 					} else {
 						setQuestion('404');
