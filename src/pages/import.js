@@ -7,6 +7,7 @@ const DropZone = ({ data, dispatch }) => {
 	const [dropzoneBorder, setDropzoneBorder] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [status, setStatus] = useState('');
+	const [url, setUrl] = useState('');
 
 	const handleDragEnter = (e) => {
 		e.preventDefault();
@@ -61,12 +62,10 @@ const DropZone = ({ data, dispatch }) => {
 
 	const uploadFiles = async () => {
 		let files = data.fileList;
-		console.log(files);
 		const formData = new FormData();
 		files.forEach((file) => formData.append('files', file));
 		setIsLoading(true);
 		setStatus('');
-		console.log(formData);
 		const response = await fetch('/api/quiz/import', {
 			method: 'POST',
 			body: formData,
@@ -77,6 +76,7 @@ const DropZone = ({ data, dispatch }) => {
 			.then((data) => {
 				dispatch({ type: 'CLEAR_FILE_LIST' });
 				setStatus(data);
+				setUrl('/quiz/' + data.url);
 				setIsLoading(false);
 				if (response.ok) {
 					setTimeout(() => {
@@ -122,7 +122,16 @@ const DropZone = ({ data, dispatch }) => {
 							Upload
 						</button>
 					)}
-					{status != '' && data.fileList.length == 0 && <p className="text-xs sm:text-base md:mt-[60vh] mt-[45vh] absolute">{status.message}</p>}
+					{status != '' && data.fileList.length == 0 && (
+						<p className="text-xs sm:text-base md:mt-[60vh] mt-[45vh] absolute">
+							{status.message}{' '}
+							{status.code == 200 && (
+								<a className="font-medium text-blue-600 dark:text-blue-500 hover:underline" href={url}>
+									view quizz
+								</a>
+							)}
+						</p>
+					)}
 				</>
 			)}
 		</>
