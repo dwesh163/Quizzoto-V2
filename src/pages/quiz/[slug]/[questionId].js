@@ -67,23 +67,19 @@ const AnswersBox = ({ answers, setAnswers, question }) => {
 				</div>
 			);
 		case 'boolean':
-			const choices = [
-				{ value: 'true', text: 'Vrai' },
-				{ value: 'false', text: 'Faux' },
-			];
 			return (
 				<div className="flex flex-row gap-3" role="none">
-					{choices.map((choice, index) => (
+					{question.answers.map((answer, index) => (
 						<div
 							onClick={() => {
-								setAnswers([choice.value]);
+								setAnswers([answer]);
 							}}
 							key={index}
-							className={'border w-1/2 border-gray-200 rounded-md shadow-sm px-6 py-4 flex items-center justify-between cursor-pointer ' + (answers.includes(choice.value) ? color : '')}>
+							className={'border w-1/2 border-gray-200 rounded-md shadow-sm px-6 py-4 flex items-center justify-between cursor-pointer ' + (answers.includes(answer) ? color : '')}>
 							<span className="flex items-center">
 								<span className="text-sm leading-tight md:text-base md:leading-normal flex">
 									<span className="text-gray-900 font-medium" id="headlessui-label-2">
-										{choice.text}
+										{answer}
 									</span>
 								</span>
 							</span>
