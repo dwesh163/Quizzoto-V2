@@ -253,7 +253,7 @@ export default function Question() {
 										}}>
 										{router.query.questionId > 1 && '← Previous'}
 									</button>
-									{question != 'end' && <span className="text-sm font-medium text-gray-700">{router.query.questionId + '/' + (quiz.info ? quiz.info.length : '0')}</span>}
+									{question != 'end' && <span className="text-sm font-medium text-gray-700">{(router.query.questionId >= quiz?.info?.length ? quiz.info.length : router.query.questionId) + '/' + (quiz.info ? quiz.info.length : '0')}</span>}
 									{question != 'end' && (
 										<button className="w-24 text-right" onClick={() => router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>
 											Next →
