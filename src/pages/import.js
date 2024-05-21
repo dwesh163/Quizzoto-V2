@@ -3,11 +3,14 @@ import Header from '@/components/header';
 import { useSession } from 'next-auth/react';
 import { useReducer, useState } from 'react';
 
+import Alert from '@/components/alert';
+
 const DropZone = ({ data, dispatch }) => {
 	const [dropzoneBorder, setDropzoneBorder] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [status, setStatus] = useState('');
 	const [url, setUrl] = useState('');
+	const [alert, setAlert] = useState(null);
 
 	const handleDragEnter = (e) => {
 		e.preventDefault();
@@ -66,6 +69,7 @@ const DropZone = ({ data, dispatch }) => {
 		files.forEach((file) => formData.append('files', file));
 		setIsLoading(true);
 		setStatus('');
+		setAlert(null);
 		const response = await fetch('/api/quiz/import', {
 			method: 'POST',
 			body: formData,
@@ -77,20 +81,27 @@ const DropZone = ({ data, dispatch }) => {
 				dispatch({ type: 'CLEAR_FILE_LIST' });
 				setStatus(data);
 				setUrl('/quiz/' + data.url);
+				console.log(data);
 				setIsLoading(false);
+				setAlert({ type: data.code, message: data.message, linkText: data.code == 200 ? 'View quiz' : '', linkHref: data.code ? '/quiz/' + data.url : '#' });
+
 				if (response.ok) {
 					setTimeout(() => {
 						setStatus('');
+						setAlert(null);
 					}, 10000);
 				}
 			})
 			.catch((error) => {
 				console.error('Error parsing response:', error);
+				setAlert({ type: 'danger', message: 'Upload failed. Please try again.', linkText: '', linkHref: '#' });
 			});
 	};
 
 	return (
 		<>
+			{alert && <Alert id="alert" type={alert.type} message={alert.message} linkText={alert.linkText} linkHref={alert.linkHref} onClose={() => setAlert(null)} />}
+
 			{isLoading ? (
 				<div className="flex md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto items-center justify-center md:px-6 lg:px-8 h-[100vh]">
 					<svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin fill-sky-500 bg-opacity-90" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -121,16 +132,6 @@ const DropZone = ({ data, dispatch }) => {
 						<button onClick={uploadFiles} className="bg-indigo-600 hover:bg-blue-700 text-white font-bold py-2 px-4 absolute md:mt-[60vh] mt-[45vh] rounded">
 							Upload
 						</button>
-					)}
-					{status != '' && data.fileList.length == 0 && (
-						<p className="text-xs sm:text-base md:mt-[60vh] mt-[45vh] absolute">
-							{status.message}{' '}
-							{status.code == 200 && (
-								<a className="font-medium text-blue-600 dark:text-blue-500 hover:underline" href={url}>
-									view quizz
-								</a>
-							)}
-						</p>
 					)}
 				</>
 			)}
