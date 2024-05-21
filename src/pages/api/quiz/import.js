@@ -33,7 +33,6 @@ async function insertQuiz(quiz, session) {
 	quiz.info.points = 0;
 	quiz.info.length = quiz.questions.length;
 	quiz.questions.map((question, index) => {
-		console.log(parseInt(question.point));
 		if (parseInt(question.point) < 0 || question.point === '' || question.point === undefined) {
 			error = { code: 400, message: `You miss point in question ${index + 1}` };
 		} else {
@@ -44,8 +43,6 @@ async function insertQuiz(quiz, session) {
 	if (error.code) {
 		return error;
 	}
-
-	console.log(quiz.info.points);
 
 	if (existingSlug) {
 		return { code: 400, message: 'The slug must be unique...' };
@@ -69,7 +66,7 @@ async function insertQuiz(quiz, session) {
 	};
 
 	await db.collection('quizzes').insertOne(newQuiz);
-	return { code: 200, message: 'Import success' };
+	return { code: 200, message: 'Import success', url: quiz.slug };
 }
 
 export default async function handler(req, res) {
