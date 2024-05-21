@@ -82,8 +82,6 @@ export default async function getQuizInfo(req, res) {
 				update: new Date(),
 			};
 
-			console.log(newQuiz);
-
 			await db.collection('quizzes').updateOne({ id: req.query.quizId }, { $set: newQuiz });
 
 			return res.status(200).send({ message: 'Ok', slug: quiz.slug });
