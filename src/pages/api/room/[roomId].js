@@ -2,6 +2,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
 import db from '/lib/mongodb';
 
+var parser = require('ua-parser-js');
+
 export default async function getRoomsInfo(req, res) {
 	const session = await getServerSession(req, res, authOptions);
 	if (!session) {
@@ -40,6 +42,7 @@ export default async function getRoomsInfo(req, res) {
 						time: 1,
 						quizzes: 1,
 						'user.name': 1,
+						'user.email': 1,
 						'user.username': 1,
 						'user.image': 1,
 						'user.id': 1,
@@ -50,6 +53,10 @@ export default async function getRoomsInfo(req, res) {
 				{ $limit: 1 },
 			])
 			.toArray();
+
+		if (room.user.email != session.user.email) {
+			return res.status(200).send({ error: 'Not Found' });
+		}
 
 		if (room.quizzes) {
 			for (const quizId of room.quizzes) {
@@ -100,6 +107,8 @@ export default async function getRoomsInfo(req, res) {
 						roomId: 1,
 						id: 1,
 						visibility: 1,
+						userAgent: 1,
+						date: 1,
 						'user.name': 1,
 						'user.username': 1,
 						'user.image': 1,
@@ -111,7 +120,53 @@ export default async function getRoomsInfo(req, res) {
 			])
 			.toArray();
 
-		return res.status(200).send({ results: results, quizzes: quizzes, room: room });
+		let stats = {};
+
+		stats.numbers = [
+			{ number: results.length, title: 'People who answered', fluctuate: 10 },
+			{ number: 0, title: 'People who clicked', fluctuate: 10 },
+			{ number: 0, title: 'People who have just', fluctuate: 10 },
+		];
+		stats.answersByQuiz = {};
+		stats.userAgent = {};
+		stats.answersPerHour = {};
+		stats.answersPerPoint = {};
+
+		stats.numbers[1].number = await db.collection('links').findOne({ linkId: room.link.linkId }, { projection: { _id: 0, used: 1 } });
+		stats.numbers[1].number = stats.numbers[1].number.used;
+
+		results.forEach((result) => {
+			const quizId = result.quiz.id;
+			stats.answersByQuiz[quizId] = stats.answersByQuiz[quizId] ? stats.answersByQuiz[quizId] + 1 : 1;
+		});
+
+		results.forEach((result) => {
+			const userAgent = result.userAgent;
+			const ua = parser(userAgent);
+			stats.userAgent[ua.os.name] = stats.userAgent[ua.os.name] ? stats.userAgent[ua.os.name] + 1 : 1;
+		});
+
+		results.forEach((result) => {
+			const date = new Date(result.date);
+			const hour = date.getHours();
+			stats.answersPerHour[hour] = stats.answersPerHour[hour] ? stats.answersPerHour[hour] + 1 : 1;
+		});
+
+		results.forEach((result) => {
+			const points = result.points;
+			const pointRange = Math.floor(points / 100) * 100;
+			stats.answersPerPoint[pointRange] = stats.answersPerPoint[pointRange] ? stats.answersPerPoint[pointRange] + 1 : 1;
+		});
+
+		results.forEach((result) => {
+			const points = result.points;
+			const quiz = quizzes.find((quiz) => quiz.id == result.quiz.id);
+			if (points == quiz.info.points) {
+				stats.numbers[2].number++;
+			}
+		});
+
+		return res.status(200).send({ results: results, quizzes: quizzes, room: room, stats: stats });
 	} catch (error) {
 		console.error('Error:', error);
 		return res.status(200).send({ error: 'Not Found' });
