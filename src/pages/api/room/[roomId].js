@@ -125,10 +125,10 @@ export default async function getRoomsInfo(req, res) {
 		stats.numbers = [
 			{ number: results.length, title: 'People who answered', fluctuate: 10 },
 			{ number: 0, title: 'People who clicked', fluctuate: 10 },
-			{ number: 0, title: 'People who have just', fluctuate: 10 },
+			{ number: 0, title: 'People answered correctly', fluctuate: 10 },
 		];
 		stats.answersByQuiz = {};
-		stats.userAgent = {};
+		stats.userAgent = { Windows: 0, 'Mac OS': 0, Ubuntu: 0, Android: 0, iOS: 0, Other: 0 };
 		stats.answersPerHour = {};
 		stats.answersPerPoint = {};
 
@@ -143,7 +143,11 @@ export default async function getRoomsInfo(req, res) {
 		results.forEach((result) => {
 			const userAgent = result.userAgent;
 			const ua = parser(userAgent);
-			stats.userAgent[ua.os.name] = stats.userAgent[ua.os.name] ? stats.userAgent[ua.os.name] + 1 : 1;
+			if (stats.userAgent[ua.os.name] >= 0) {
+				stats.userAgent[ua.os.name] = stats.userAgent[ua.os.name] + 1;
+			} else {
+				stats.userAgent['Other'] = stats.userAgent['Other'] + 1;
+			}
 		});
 
 		results.forEach((result) => {
