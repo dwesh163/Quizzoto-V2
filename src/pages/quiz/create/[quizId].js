@@ -26,11 +26,8 @@ export default function Page() {
 
 				let correct = [];
 
-				updatedQuestion.correct.map((correctAnswer, index) => {
-					console.log(correctAnswer);
-				});
+				updatedQuestion.correct.map((correctAnswer, index) => {});
 
-				console.log(correct);
 				updatedQuestion.correct = correct;
 
 				return updatedQuestion;
@@ -54,13 +51,11 @@ export default function Page() {
 				let correct = [];
 
 				updatedQuestion.correct.map((correctAnswer, index) => {
-					console.log(correctAnswer);
 					if (correctAnswer != -1 && correctAnswer != null && correctAnswer != undefined) {
 						correct.push(updatedQuestion.answers[correctAnswer]);
 					}
 				});
 
-				console.log(correct);
 				updatedQuestion.correct = correct;
 
 				return updatedQuestion;
