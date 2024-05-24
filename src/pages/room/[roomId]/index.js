@@ -4,13 +4,15 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Menu from '@/components/menu';
+import Pie from '@/components/charts/pie';
+import Donut from '@/components/charts/donut';
 
 function Stats({ stats }) {
 	return (
 		<div className="w-full">
-			<div className="w-full flex mt-4 flex-wrap justify-between">
+			<div className="w-full flex mt-4 flex-wrap justify-between mb-4">
 				{stats.numbers.map((stat, index) => (
-					<div key={'number-' + index} class="w-[32%] flex bg-white rounded-lg shadow p-4 md:p-6">
+					<div key={'number-' + index} class="lg:w-[32%] w-full lg:mb-0 mb-4 flex bg-white rounded-lg shadow p-4 md:p-6">
 						<div class="flex justify-between w-full">
 							<div class="flex items-center">
 								<div class="w-12 h-12 rounded-lg bg-gray-100  flex items-center justify-center me-3">
@@ -34,6 +36,14 @@ function Stats({ stats }) {
 						</div>
 					</div>
 				))}
+			</div>
+			<div class="lg:w-[32%] w-full bg-white rounded-lg shadow p-4 md:p-6">
+				<div class="flex justify-between mb-3">
+					<div class="flex justify-center items-center">
+						<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">Website traffic</h5>
+					</div>
+				</div>
+				<Donut data={stats.userAgent} />
 			</div>
 		</div>
 	);
