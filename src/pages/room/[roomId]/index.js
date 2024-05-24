@@ -5,6 +5,40 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Menu from '@/components/menu';
 
+function Stats({ stats }) {
+	return (
+		<div className="w-full">
+			<div className="w-full flex mt-4 flex-wrap justify-between">
+				{stats.numbers.map((stat, index) => (
+					<div key={'number-' + index} class="w-[32%] flex bg-white rounded-lg shadow p-4 md:p-6">
+						<div class="flex justify-between w-full">
+							<div class="flex items-center">
+								<div class="w-12 h-12 rounded-lg bg-gray-100  flex items-center justify-center me-3">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000" class="bi bi-people" viewBox="0 0 16 16">
+										<path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
+									</svg>
+								</div>
+								<div>
+									<h5 class="leading-none text-2xl font-bold text-gray-900 pb-1">{stat.number}</h5>
+									<p class="text-sm font-normal text-gray-500 ">{stat.title}</p>
+								</div>
+							</div>
+							<div>
+								<span class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md">
+									<svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
+										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
+									</svg>
+									{stat.fluctuate}%
+								</span>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
+}
+
 function Answers({ results }) {
 	const router = useRouter();
 
@@ -171,6 +205,8 @@ export default function Rooms() {
 									return <Answers results={room?.results} />;
 								case 'quizzes':
 									return <Quizzes quizzes={room?.quizzes} />;
+								case 'stats':
+									return <Stats stats={room?.stats} />;
 								default:
 									return null;
 							}
