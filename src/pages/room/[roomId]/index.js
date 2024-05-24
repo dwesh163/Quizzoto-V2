@@ -154,15 +154,15 @@ export default function Rooms() {
 						<a target="_blank" href={url}>
 							{url}
 						</a>
-						<div className="w-full flex h-12 select-none mb-4">
-							{pages.map((page, index) => (
-								<div key={'page-' + index} className="w-1/3">
-									<div key={'page-' + page} className="w-full h-full pb-1 flex cursor-pointer justify-center items-center hover:bg-gray-100" onClick={() => setCurrentPage(page)}>
+
+						<div className="border-b border-gray-200 w-full">
+							<nav className="-mb-px flex gap-6 w-full" aria-label="Tabs">
+								{pages.map((page, index) => (
+									<a onClick={() => setCurrentPage(page)} key={'page-' + index} href="#" className={'shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ' + (currentPage == page ? 'border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600' : 'text-gray-500 hover:border-gray-300 hover:text-gray-700 border-transparent')}>
 										{page.substring(0, 1).toUpperCase() + page.substring(1)}
-									</div>
-									{currentPage == page && <div className="bg-sky-600 bg-opacity-90 w-full h-1 mt-[-0.25rem]"></div>}
-								</div>
-							))}
+									</a>
+								))}
+							</nav>
 						</div>
 
 						{(() => {
