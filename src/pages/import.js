@@ -81,7 +81,6 @@ const DropZone = ({ data, dispatch }) => {
 				dispatch({ type: 'CLEAR_FILE_LIST' });
 				setStatus(data);
 				setUrl('/quiz/' + data.url);
-				console.log(data);
 				setIsLoading(false);
 				setAlert({ type: data.code, message: data.message, linkText: data.code == 200 ? 'View quiz' : '', linkHref: data.code ? '/quiz/' + data.url : '#' });
 
@@ -89,7 +88,7 @@ const DropZone = ({ data, dispatch }) => {
 					setTimeout(() => {
 						setStatus('');
 						setAlert(null);
-					}, 10000);
+					}, 30000);
 				}
 			})
 			.catch((error) => {
