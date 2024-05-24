@@ -54,9 +54,9 @@ export default async function getRoomsInfo(req, res) {
 			])
 			.toArray();
 
-		if (room.user.email != session.user.email) {
-			return res.status(200).send({ error: 'Not Found' });
-		}
+		// if (room.user.email != session.user.email) {
+		// 	return res.status(200).send({ error: 'Not Found' });
+		// }
 
 		if (room.quizzes) {
 			for (const quizId of room.quizzes) {
@@ -197,8 +197,6 @@ export default async function getRoomsInfo(req, res) {
 		color = 0;
 		quizzes.forEach((quiz) => {
 			let points = [];
-
-			console.log(stats.answersPerPoint);
 
 			Object.keys(stats.answersPerPoint).forEach((point) => {
 				let numberResult = 0;
