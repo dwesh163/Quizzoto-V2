@@ -54,7 +54,7 @@ export default async function getRoomsInfo(req, res) {
 		if (req.method == 'POST') {
 			const user = await db.collection('users').findOne({ email: session.user.email });
 
-			const { title, comment, slug, quizzes } = JSON.parse(req.body);
+			const { title, comment, slug, instruction, quizzes } = JSON.parse(req.body);
 			if (!title || !comment || !slug || title.trim() == '' || comment.trim() == '' || slug.trim() == '') {
 				return res.status(403).send({ error: 'Missing fields' });
 			}
@@ -86,6 +86,7 @@ export default async function getRoomsInfo(req, res) {
 				time: Date.now(),
 				title,
 				comment,
+				instruction: instruction.slice(0, 101),
 				linkId,
 				quizzes: quizzes,
 			};
