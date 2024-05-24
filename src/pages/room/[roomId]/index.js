@@ -7,6 +7,7 @@ import Menu from '@/components/menu';
 import Pie from '@/components/charts/pie';
 import Donut from '@/components/charts/donut';
 import Area from '@/components/charts/area';
+import AnswersPerPoint from '@/components/charts/answersPerPoint';
 
 function Stats({ stats }) {
 	return (
@@ -62,8 +63,11 @@ function Stats({ stats }) {
 						</div>
 					</div>
 					<div id="area-chart"></div>
-					<Area data={stats.answersPerHourPerQuiz} answersPerHour={stats.answersPerHour} />
+					<Area data={stats.answersPerHourPerQuiz} answersPer={stats.answersPerHour} />
 				</div>
+			</div>
+			<div>
+				<Area data={stats.answersPerPointPerQuiz} answersPer={stats.answersPerPoint} />
 			</div>
 		</div>
 	);

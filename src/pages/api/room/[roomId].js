@@ -130,8 +130,9 @@ export default async function getRoomsInfo(req, res) {
 		stats.answersByQuiz = {};
 		stats.userAgent = { Windows: 0, 'Mac OS': 0, Ubuntu: 0, Android: 0, iOS: 0, Other: 0 };
 		stats.answersPerHour = { 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0, 18: 0, 19: 0, 20: 0 };
-		stats.answersPerPoint = {};
+		stats.answersPerPoint = { 0: 0, 50: 0, 100: 0, 150: 0, 200: 0, 250: 0, 300: 0, 350: 0, 400: 0, 450: 0, 500: 0, 550: 0, 600: 0, 650: 0, 700: 0, 750: 0, 800: 0, 850: 0, 900: 0, 950: 0, 1000: 1 };
 		stats.answersPerHourPerQuiz = [];
+		stats.answersPerPointPerQuiz = [];
 
 		stats.numbers[1].number = await db.collection('links').findOne({ linkId: room.link.linkId }, { projection: { _id: 0, used: 1 } });
 		stats.numbers[1].number = stats.numbers[1].number.used;
@@ -157,11 +158,10 @@ export default async function getRoomsInfo(req, res) {
 			stats.answersPerHour[hour] = stats.answersPerHour[hour] ? stats.answersPerHour[hour] + 1 : 1;
 		});
 
-		results.forEach((result) => {
-			const points = result.points;
-			const pointRange = Math.floor(points / 100) * 100;
-			stats.answersPerPoint[pointRange] = stats.answersPerPoint[pointRange] ? stats.answersPerPoint[pointRange] + 1 : 1;
-		});
+		// results.forEach((result) => {
+		// 	const points = result.points;
+		// 	const pointRange = Math.floor(points / 50) * 100;
+		// });
 
 		let color = 0;
 		const colors = ['#348888', '#22BABB', '#FA7F08', '#FF5F5D', '#FFB30D'];
@@ -188,6 +188,38 @@ export default async function getRoomsInfo(req, res) {
 			stats.answersPerHourPerQuiz.push({
 				name: quiz.title,
 				data: hours,
+				color: colors[color % 5],
+			});
+
+			color++;
+		});
+
+		color = 0;
+		quizzes.forEach((quiz) => {
+			let points = [];
+
+			console.log(stats.answersPerPoint);
+
+			Object.keys(stats.answersPerPoint).forEach((point) => {
+				let numberResult = 0;
+				results.forEach((result) => {
+					const points = result.points;
+					const resultPoint = Math.floor(points / 50) * 100;
+					if (result.quiz.id != quiz.id) {
+						return;
+					} else {
+						if (parseInt(resultPoint) == parseInt(point)) {
+							numberResult++;
+						}
+					}
+				});
+
+				points.push(numberResult);
+			});
+
+			stats.answersPerPointPerQuiz.push({
+				name: quiz.title,
+				data: points,
 				color: colors[color % 5],
 			});
 

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const Area = ({ data, answersPerHour }) => {
+const Area = ({ data, answersPer }) => {
 	const [options, setOptions] = useState({});
 	const [series, setSeries] = useState([]);
 
 	useEffect(() => {
-		const chartData = Object.entries(answersPerHour).map(([label, value]) => ({ x: label, y: value }));
+		const chartData = Object.entries(answersPer).map(([label, value]) => ({ x: label, y: value }));
 
 		setSeries(data);
 		setOptions({
