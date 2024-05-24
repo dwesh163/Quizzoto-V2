@@ -10,19 +10,6 @@ export default async function Results(req, res) {
 		const quiz = await db.collection('quizzes').findOne({ slug: slug });
 		const id = uuidv4();
 
-		const oldResults = await db
-			.collection('results')
-			.find({
-				quiz: quiz.id,
-				player: session ? session.user.id : '',
-				time: { $gt: Date.now() - 10 * 60000 },
-			})
-			.toArray();
-
-		// if (oldResults.length > 0) {
-		// 	return res.status(403).json({ error: 'Wait 10 minutes between 2 answers to the same quiz' });
-		// }
-
 		let points = 0;
 		let results = [];
 
