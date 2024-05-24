@@ -7,7 +7,6 @@ import Menu from '@/components/menu';
 import Pie from '@/components/charts/pie';
 import Donut from '@/components/charts/donut';
 import Area from '@/components/charts/area';
-import AnswersPerPoint from '@/components/charts/answersPerPoint';
 
 function Stats({ stats }) {
 	return (
