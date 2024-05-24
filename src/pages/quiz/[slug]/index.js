@@ -51,12 +51,14 @@ export default function Quiz() {
 			.then((jsonData) => {
 				if (jsonData != '404') {
 					setQuiz(jsonData.quiz);
-					console.log(jsonData.results);
 					setResults(jsonData.results);
 					setIsLoading(false);
 				} else {
 					setQuiz('404');
 				}
+			})
+			.catch((e) => {
+				setQuiz('404');
 			});
 	}, [router.query.slug]);
 
