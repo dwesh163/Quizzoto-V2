@@ -21,6 +21,6 @@ export default async function getQuestionInfo(req, res) {
 		return res.status(200).send(quiz.questions[questionId]);
 	} catch (error) {
 		console.error('Error:', error);
-		return res.status(500).send('Internal server error');
+		return res.status(500).send('404');
 	}
 }
