@@ -63,7 +63,7 @@ export default async function getRoomsInfo(req, res) {
 			const invalidCharacters = validSlug.match(/[^a-zA-Z0-9-]/g);
 
 			if (invalidCharacters) {
-				return res.status(403).send({ error: `Invalid characters: ${invalidCharacters.join(', ')}` });
+				return res.status(403).send({ error: `Invalid characters: ${invalidCharacters.slice(0, 8).join(', ')}` });
 			}
 
 			if (validSlug.length < 3 || validSlug.length > 50) {
