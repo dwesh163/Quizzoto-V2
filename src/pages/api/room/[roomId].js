@@ -129,8 +129,9 @@ export default async function getRoomsInfo(req, res) {
 		];
 		stats.answersByQuiz = {};
 		stats.userAgent = { Windows: 0, 'Mac OS': 0, Ubuntu: 0, Android: 0, iOS: 0, Other: 0 };
-		stats.answersPerHour = {};
+		stats.answersPerHour = { 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0, 18: 0, 19: 0, 20: 0 };
 		stats.answersPerPoint = {};
+		stats.answersPerHourPerQuiz = [];
 
 		stats.numbers[1].number = await db.collection('links').findOne({ linkId: room.link.linkId }, { projection: { _id: 0, used: 1 } });
 		stats.numbers[1].number = stats.numbers[1].number.used;
@@ -160,6 +161,37 @@ export default async function getRoomsInfo(req, res) {
 			const points = result.points;
 			const pointRange = Math.floor(points / 100) * 100;
 			stats.answersPerPoint[pointRange] = stats.answersPerPoint[pointRange] ? stats.answersPerPoint[pointRange] + 1 : 1;
+		});
+
+		let color = 0;
+		const colors = ['#348888', '#22BABB', '#FA7F08', '#FF5F5D', '#FFB30D'];
+		quizzes.forEach((quiz) => {
+			let hours = [];
+
+			Object.keys(stats.answersPerHour).forEach((hour) => {
+				let numberResult = 0;
+				results.forEach((result) => {
+					const date = new Date(result.date);
+					const resultHour = date.getHours();
+					if (result.quiz.id != quiz.id) {
+						return;
+					} else {
+						if (parseInt(resultHour) == parseInt(hour)) {
+							numberResult++;
+						}
+					}
+				});
+
+				hours.push(numberResult);
+			});
+
+			stats.answersPerHourPerQuiz.push({
+				name: quiz.title,
+				data: hours,
+				color: colors[color % 5],
+			});
+
+			color++;
 		});
 
 		results.forEach((result) => {

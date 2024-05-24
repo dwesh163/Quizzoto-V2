@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Menu from '@/components/menu';
 import Pie from '@/components/charts/pie';
 import Donut from '@/components/charts/donut';
+import Area from '@/components/charts/area';
 
 function Stats({ stats }) {
 	return (
@@ -37,13 +38,32 @@ function Stats({ stats }) {
 					</div>
 				))}
 			</div>
-			<div class="lg:w-[32%] w-full bg-white rounded-lg shadow p-4 md:p-6">
-				<div class="flex justify-between mb-3">
-					<div class="flex justify-center items-center">
-						<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">Website traffic</h5>
+			<div className="w-full flex justify-between gap-6">
+				<div class="lg:w-[32%] w-full bg-white rounded-lg shadow p-4 md:p-6">
+					<div class="flex justify-between mb-3">
+						<div class="flex justify-center items-center">
+							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">Website traffic</h5>
+						</div>
 					</div>
+					<Donut data={stats.userAgent} />
 				</div>
-				<Donut data={stats.userAgent} />
+
+				<div class="lg:w-[66%] bg-white rounded-lg shadow p-4 pb-0 md:p-6 md:pb-0">
+					<div class="flex justify-between">
+						<div>
+							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">Quizzes</h5>
+							<p class="text-base font-normal text-gray-500">answered this days</p>
+						</div>
+						<div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 text-center">
+							12%
+							<svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
+								<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
+							</svg>
+						</div>
+					</div>
+					<div id="area-chart"></div>
+					<Area data={stats.answersPerHourPerQuiz} answersPerHour={stats.answersPerHour} />
+				</div>
 			</div>
 		</div>
 	);
