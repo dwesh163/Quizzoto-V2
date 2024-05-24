@@ -41,6 +41,7 @@ export default async function Results(req, res) {
 			points,
 			results,
 			roomId,
+			userAgent: req.headers['user-agent'],
 			player: session ? session.user.id : 'Anonymus',
 			date: new Date(),
 			visibility: session ? 'private' : 'hidden',
