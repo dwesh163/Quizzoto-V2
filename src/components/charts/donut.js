@@ -12,7 +12,7 @@ const Donut = ({ data }) => {
 		console.log(chartData);
 		setSeries(chartData.map((entry) => entry.y));
 		setOptions({
-			colors: ['#1C64F2', '#16BDCA', '#FDBA8C', '#E74694'],
+			colors: ['#348888', '#22BABB', '#FA7F08', '#FF5F5D', '#FFB30D'],
 			chart: {
 				height: 320,
 				width: '100%',
