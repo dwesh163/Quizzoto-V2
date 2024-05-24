@@ -65,9 +65,9 @@ function Stats({ stats }) {
 					<Area data={stats.answersPerHourPerQuiz} answersPer={stats.answersPerHour} />
 				</div>
 			</div>
-			<div>
+			{/* <div>
 				<Area data={stats.answersPerPointPerQuiz} answersPer={stats.answersPerPoint} />
-			</div>
+			</div> */}
 		</div>
 	);
 }
