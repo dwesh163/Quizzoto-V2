@@ -38,7 +38,7 @@ function Stats({ stats }) {
 					</div>
 				))}
 			</div>
-			<div className="w-full flex justify-between gap-6">
+			<div className="w-full flex flex-col lg:flex-row justify-between gap-6">
 				<div class="lg:w-[32%] w-full bg-white rounded-lg shadow p-4 md:p-6">
 					<div class="flex justify-between mb-3">
 						<div class="flex justify-center items-center">
@@ -136,29 +136,102 @@ function Answers({ results }) {
 	);
 }
 
-function Quizzes({ quizzes }) {
+function Quizzes({ oldQuizzes }) {
+	const [limit, setLimit] = useState(10);
+	const [serverSearch, setServerSearch] = useState('');
+	const [order, setOrder] = useState('asc');
+	const [quizzes, setQuizzes] = useState([]);
+	const [selectedQuizzes, setSelectedQuizzes] = useState(oldQuizzes.map((quiz) => quiz.id));
+	const [search, setSearch] = useState('');
+	const [isLoading, setIsLoading] = useState(true);
+
 	const router = useRouter();
 
+	function fetchData() {
+		if (serverSearch === search && search !== '') {
+			return;
+		}
+
+		fetch(`/api/quiz/?limit=${limit}&search=${search}&order=${order}`)
+			.then((response) => response.json())
+			.then((jsonData) => {
+				setQuizzes(jsonData.quizzes);
+				setServerSearch(jsonData.search);
+				setIsLoading(false);
+			});
+	}
+
+	function updateQuiz(selectedQuizzes) {
+		fetch(`/api/room/${router.query.roomId}`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ quizzes: selectedQuizzes }),
+		})
+			.then((response) => response.json())
+			.then((jsonData) => {
+				console.log(jsonData);
+			});
+	}
+
+	useEffect(() => {
+		fetchData();
+	}, [limit]);
+
+	const handleSearchChange = (event) => {
+		setSearch(event.target.value);
+	};
+
+	const handleQuizClick = (quizId) => {
+		setSelectedQuizzes((prevSelectedQuizzes) => {
+			const updatedQuizzes = prevSelectedQuizzes.includes(quizId) ? prevSelectedQuizzes.filter((id) => id !== quizId) : [...prevSelectedQuizzes, quizId];
+
+			updateQuiz(updatedQuizzes);
+			return updatedQuizzes;
+		});
+	};
+
+	const filteredQuizzes = quizzes.filter((quiz) => quiz.title.toLowerCase().includes(search.toLowerCase()));
+
 	return (
-		<div className="relative overflow-x-auto w-full">
-			<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-				<thead className="sm:text-base text-sm text-gray-900 uppercase dark:text-gray-400">
-					<tr>
-						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1">
-							Title
-						</th>
-					</tr>
-				</thead>
-				<tbody className="w-full">
-					{quizzes?.map((quiz, index) => (
-						<tr key={'quizzes-' + index} className="sm:text-base text-sm cursor-pointer hover:bg-slate-100" onClick={() => router.push('/quiz/' + quiz.slug)}>
-							<th scope="row" className="sm:px-6 sm:py-4 px-3 py-2 font-medium text-gray-900 hidden sm:table-cell">
-								{quiz.title}
-							</th>
-						</tr>
-					))}
-				</tbody>
-			</table>
+		<div className="relative overflow-x-auto mt-2 w-full">
+			<div className="relative w-full mb-8 mt-2">
+				<input type="text" value={search} onChange={handleSearchChange} className="w-full px-4 py-2 focus:border-blue-500 peer h-10 bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 border focus:border-2 text-sm rounded-[7px] border-blue-gray-200" placeholder="Search quizzes..." style={{ WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' }} />
+			</div>
+
+			{!isLoading ? (
+				<div className="flex flex-col w-full space-y-5 overflow-x-auto h-[70vh]">
+					{selectedQuizzes.length > 0 && (
+						<>
+							{selectedQuizzes
+								.map((id) => quizzes.find((quiz) => quiz.id === id))
+								.map((quiz) => (
+									<div key={quiz.id} className={`cursor-pointer w-full text-sm border border-gray-600 bg-white shadow-sm rounded-lg pl-5 pr-4 py-3 flex items-center justify-between focus:outline-none transform transition-transform duration-300`} onClick={() => handleQuizClick(quiz.id)}>
+										<div className="flex items-center">
+											<span className="font-medium text-gray-700">{quiz.title}</span>
+										</div>
+									</div>
+								))}
+						</>
+					)}
+					{filteredQuizzes.length > 0 && (
+						<>
+							{filteredQuizzes
+								.filter((quiz) => !selectedQuizzes.includes(quiz.id))
+								.map((quiz) => (
+									<div key={quiz.id} className={`cursor-pointer w-full text-sm border border-gray-200 bg-white shadow-sm rounded-lg pl-5 pr-4 py-3 flex items-center justify-between focus:outline-none`} onClick={() => handleQuizClick(quiz.id)}>
+										<div className="flex items-center">
+											<span className="font-medium text-gray-700">{quiz.title}</span>
+										</div>
+									</div>
+								))}
+						</>
+					)}
+				</div>
+			) : (
+				<div className="flex justify-center items-center w-full h-[70vh]"></div>
+			)}
 		</div>
 	);
 }
@@ -195,7 +268,7 @@ export default function Rooms() {
 					setRoom('404');
 				}
 			});
-	}, [router.query.roomId]);
+	}, [router.query.roomId, currentPage]);
 
 	return (
 		<>
@@ -225,7 +298,7 @@ export default function Rooms() {
 						<div className="border-b border-gray-200 w-full">
 							<nav className="-mb-px flex gap-6 w-full" aria-label="Tabs">
 								{pages.map((page, index) => (
-									<a onClick={() => setCurrentPage(page)} key={'page-' + index} href="#" className={'shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ' + (currentPage == page ? 'border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600' : 'text-gray-500 hover:border-gray-300 hover:text-gray-700 border-transparent')}>
+									<a onClick={() => setCurrentPage(page)} key={'page-' + index} className={'cursor-pointer shrink-0 border-b-2 px-1 pb-4 text-sm font-medium ' + (currentPage == page ? 'border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600' : 'text-gray-500 hover:border-gray-300 hover:text-gray-700 border-transparent')}>
 										{page.substring(0, 1).toUpperCase() + page.substring(1)}
 									</a>
 								))}
@@ -237,7 +310,7 @@ export default function Rooms() {
 								case 'results':
 									return <Answers results={room?.results} />;
 								case 'quizzes':
-									return <Quizzes quizzes={room?.quizzes} />;
+									return <Quizzes oldQuizzes={room?.quizzes} />;
 								case 'stats':
 									return <Stats stats={room?.stats} />;
 								default:

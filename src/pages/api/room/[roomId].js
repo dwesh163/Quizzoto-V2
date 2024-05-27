@@ -11,7 +11,9 @@ export default async function getRoomsInfo(req, res) {
 	}
 
 	if (req.method == 'PATCH') {
-		console.log(req.body);
+		const { quizzes } = req.body;
+		await db.collection('rooms').updateOne({ id: req.query.roomId }, { $set: { quizzes: quizzes } });
+		res.status(200).send({ code: 200, message: 'ok' });
 	} else if (req.method == 'GET') {
 		try {
 			let quizzes = [];
@@ -68,6 +70,8 @@ export default async function getRoomsInfo(req, res) {
 					quizzes.push(quiz);
 				}
 			}
+
+			const allQuizzes = await db.collection('quizzes').find({}).toArray();
 			const results = await db
 				.collection('results')
 				.aggregate([
@@ -232,7 +236,7 @@ export default async function getRoomsInfo(req, res) {
 
 			results.forEach((result) => {
 				const points = result.points;
-				const quiz = quizzes.find((quiz) => quiz.id == result.quiz.id);
+				const quiz = allQuizzes.find((quiz) => quiz.id == result.quiz.id);
 				if (points == quiz.info.points) {
 					stats.numbers[2].number++;
 				}
