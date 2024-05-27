@@ -50,8 +50,7 @@ export default async function getRoomsInfo(req, res) {
 				.toArray();
 
 			return res.status(200).send(rooms);
-		}
-		if (req.method == 'POST') {
+		} else if (req.method == 'POST') {
 			const user = await db.collection('users').findOne({ email: session.user.email });
 
 			const { title, comment, slug, instruction, quizzes } = JSON.parse(req.body);
@@ -93,6 +92,8 @@ export default async function getRoomsInfo(req, res) {
 
 			db.collection('rooms').insertOne(room);
 			return res.status(200).send({ id: id });
+		} else {
+			return res.status(405).json({ error: 'Method not allowed' });
 		}
 	} catch (error) {
 		console.error('Error:', error);
