@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-export default function ResultsList({ resultId }) {
+export default function ResultsList({ resultId, isLoading, setIsLoading }) {
 	const [result, setResult] = useState({});
-	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		if (!resultId) {

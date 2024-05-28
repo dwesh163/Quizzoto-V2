@@ -11,6 +11,7 @@ export default function ResultsPage() {
 	const { data: session, status } = useSession();
 	const router = useRouter();
 	const [resultId, setResultId] = useState('');
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		if (router.query.resultId) {
@@ -27,8 +28,8 @@ export default function ResultsPage() {
 			<main>
 				<Header />
 				<div className="flex mt-20 md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-4 mx-auto items-center justify-between md:flex-row md:px-6 lg:px-8">
-					<Confetti />
-					<ResultsList resultId={resultId} />
+					{!isLoading && <Confetti />}
+					<ResultsList resultId={resultId} isLoading={isLoading} setIsLoading={setIsLoading} />
 				</div>
 			</main>
 		</>
