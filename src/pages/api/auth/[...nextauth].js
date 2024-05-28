@@ -36,6 +36,7 @@ export const authOptions = {
 					provider: account.provider,
 					lastLogin: new Date(),
 					firstLogin: existingUser ? existingUser.firstLogin : new Date(),
+					verified: true,
 				};
 
 				if (existingUser) {
