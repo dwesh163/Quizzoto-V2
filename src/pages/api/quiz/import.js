@@ -64,6 +64,7 @@ async function insertQuiz(quiz, session) {
 		date: new Date(),
 		update: new Date(),
 		visibility: quiz.visibility ? quiz.visibility : 'hidden',
+		starter: quiz.starter ? quiz.starter : null,
 	};
 
 	await db.collection('quizzes').insertOne(newQuiz);
