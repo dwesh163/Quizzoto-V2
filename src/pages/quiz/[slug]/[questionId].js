@@ -130,7 +130,7 @@ export default function Question() {
 				if (jsonData != '404') {
 					setQuiz(jsonData.quiz);
 					let starter = {};
-					if (jsonData.quiz.starter) {
+					if (jsonData?.quiz?.starter?.fields) {
 						jsonData.quiz.starter.fields.forEach((field) => {
 							starter[field] = '';
 						});
