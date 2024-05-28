@@ -262,8 +262,8 @@ export default function Question() {
 					<div className="sm:h-[calc(100vh-140px)] h-[calc(100vh-110px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						{quiz?.starter && (
-							<div className="flex items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
-								<div className="relative w-full p-5 bg-white h-[30rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
+							<div className="flex justify-center w-full h-full sm:px-5 md:px-24 gap-5">
+								<div className="relative w-full p-5 mt-32 min-h-[30rem] h-fit bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
 									<div>
 										<h3 className="sm:text-3xl text-xl font-bold mb-8">{quiz?.starter?.text}</h3>
 										{quiz?.starter?.fields.map((field, index) => (
@@ -280,14 +280,14 @@ export default function Question() {
 														type="text"
 														name="price"
 														id="price"
-														className="block w-full py-4 rounded-md border-0  pl-7 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+														className="block w-full py-4 rounded-md border-0 pl-7 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 														placeholder="Answers"
 													/>
 												</div>
 											</div>
 										))}
 									</div>
-									<div className="flex justify-center flex-col h-[calc(100%-100px)] gap-4">
+									<div className="flex justify-center flex-col mt-16 gap-4">
 										<div className="flex justify-center">
 											<button
 												className="text-white w-full sm:max-w-96 bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none"
@@ -319,8 +319,8 @@ export default function Question() {
 				) : (
 					<div className="sm:h-[calc(100vh-140px)] h-[calc(100vh-110px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
-						<div className="flex items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
-							<div className="relative w-full p-5 bg-white h-[30rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
+						<div className="flex justify-center w-full h-full sm:px-5 md:px-24 gap-5">
+							<div className="relative w-full p-5 bg-white mt-32 min-h-[30rem] h-fit md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
 								<div className="flex justify-between mb-8 h-6">
 									<button
 										className="w-24 text-left"
