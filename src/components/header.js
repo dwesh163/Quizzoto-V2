@@ -50,8 +50,8 @@ export default function Header() {
 							</li> */}
 							<li className="mb-[1rem] md:mb-0">
 								{session ? (
-									<button onClick={() => router.push('/user/' + session.user.username)} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
-										{session.user.name}
+									<button onClick={() => router.push('/user/' + session?.user?.username)} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
+										{session?.user?.name}
 									</button>
 								) : (
 									<>
