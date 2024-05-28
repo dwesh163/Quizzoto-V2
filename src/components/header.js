@@ -31,11 +31,13 @@ export default function Header() {
 				<div className={'md:flex flex-grow items-center md:w-fit w-full ' + (navbarOpen ? ' flex' : ' hidden')}>
 					<nav className={'flex flex-col w-full'}>
 						<ul className="md:flex flex-grow justify-end flex-wrap items-center">
-							<li>
-								<button onClick={() => router.push('/room')} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
-									Rooms
-								</button>
-							</li>
+							{session && (
+								<li>
+									<button onClick={() => router.push('/room')} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
+										Rooms
+									</button>
+								</li>
+							)}
 							<li>
 								<button onClick={() => router.push('/quiz')} className="font-medium text-white hover:text-zinc-300 px-5 py-3 flex items-center transition duration-150 ease-in-out">
 									Quizzes
