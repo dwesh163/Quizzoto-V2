@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Menu from '@/components/menu';
+import Confetti from '@/components/confetti';
 import ResultsList from '@/components/results';
 
 export default function ResultsPage() {
@@ -12,9 +13,7 @@ export default function ResultsPage() {
 	const [resultId, setResultId] = useState('');
 
 	useEffect(() => {
-		if (!router.query.resultId) {
-			return;
-		} else {
+		if (router.query.resultId) {
 			setResultId(router.query.resultId);
 		}
 	}, [router.query.resultId]);
@@ -28,7 +27,8 @@ export default function ResultsPage() {
 			<main>
 				<Header />
 				<div className="flex mt-20 md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-4 mx-auto items-center justify-between md:flex-row md:px-6 lg:px-8">
-					<ResultsList resultId={router.query.resultId} />
+					<Confetti />
+					<ResultsList resultId={resultId} />
 				</div>
 			</main>
 		</>
