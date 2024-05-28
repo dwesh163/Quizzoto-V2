@@ -135,7 +135,6 @@ export default function Question() {
 							starter[field] = '';
 						});
 						setStarter(starter);
-						console.log(starter);
 					}
 
 					getQuestion();
