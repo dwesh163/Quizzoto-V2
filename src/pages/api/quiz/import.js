@@ -38,6 +38,13 @@ async function insertQuiz(quiz, session) {
 		} else {
 			quiz.info.points += parseInt(question.point);
 		}
+
+		if (question.answers.length < 2) {
+			error = { code: 400, message: `You miss answers in question ${index + 1}` };
+		}
+		if (question.answers.length >= 9) {
+			error = { code: 400, message: `Too much answers in question ${index + 1}` };
+		}
 	});
 
 	if (error.code) {
