@@ -6,9 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 export default async function Results(req, res) {
 	const session = await getServerSession(req, res, authOptions);
 	if (req.method == 'POST') {
-		const { slug, answers, roomId } = JSON.parse(req.body);
+		const { slug, answers, roomId, starter } = JSON.parse(req.body);
 		const quiz = await db.collection('quizzes').findOne({ slug: slug });
 		const id = uuidv4();
+
+		console.log(starter);
 
 		let points = 0;
 		let results = [];
@@ -39,6 +41,29 @@ export default async function Results(req, res) {
 			});
 		});
 
+		const idUser = uuidv4();
+		let existingUser = {};
+
+		if (starter?.email && !session) {
+			existingUser = await db.collection('users').findOne({ email: starter.email });
+			if (!existingUser) {
+				const newUser = {
+					id: idUser,
+					name: starter?.name ? starter.name : null,
+					email: starter?.email ? starter.email : null,
+					username: starter?.username ? starter.username : null,
+					statistics: {
+						points: 0,
+						quizzes: 0,
+						stars: 0,
+					},
+					verified: false,
+				};
+
+				await db.collection('users').insertOne(newUser);
+			}
+		}
+
 		let returnObject = {
 			quiz: quiz.id,
 			id: id,
@@ -46,7 +71,7 @@ export default async function Results(req, res) {
 			results,
 			roomId,
 			userAgent: req.headers['user-agent'],
-			player: session ? session.user.id : 'Anonymus',
+			player: session ? session.user.id : starter.email ? (existingUser ? existingUser.id : idUser) : 'Anonymus',
 			date: new Date(),
 			visibility: session ? 'private' : 'hidden',
 		};

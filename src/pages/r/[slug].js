@@ -40,7 +40,7 @@ export default function Link({ quizzes, room, error }) {
 											key={index}
 											onClick={() => {
 												if (localStorage) {
-													router.push('/quiz/' + quiz.slug + '/1');
+													router.push('/quiz/' + quiz.slug + '/start');
 													localStorage.setItem('room', JSON.stringify(room));
 												}
 											}}

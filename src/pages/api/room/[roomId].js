@@ -120,6 +120,8 @@ export default async function getRoomsInfo(req, res) {
 							'user.name': 1,
 							'user.username': 1,
 							'user.image': 1,
+							'user.verified': 1,
+							'user.email': 1,
 							'quiz.title': 1,
 							'quiz.id': 1,
 							'quiz.description': 1,

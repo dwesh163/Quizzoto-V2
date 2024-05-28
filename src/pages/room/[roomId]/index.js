@@ -87,6 +87,9 @@ function Answers({ results }) {
 							Quizz
 						</th>
 						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell">
+							Email
+						</th>
+						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell">
 							Name
 						</th>
 						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell">
@@ -103,14 +106,15 @@ function Answers({ results }) {
 							<th scope="row" className="sm:px-6 sm:py-4 px-3 py-2 font-medium text-gray-900 hidden sm:table-cell">
 								{result.quiz.title}
 							</th>
+							<td className="sm:px-6 sm:py-4 px-3 py-2 hidden sm:table-cell">{result.user ? result.user.email : ''}</td>
 							<td className="sm:px-6 sm:py-4 px-3 py-2 hidden sm:table-cell">{result.user ? result.user.name : ''}</td>
 							<td className="sm:px-6 sm:py-4 px-3 py-2 hidden sm:table-cell">
 								<div className="flex items-center sm:space-x-4 space-x-1 rtl:space-x-reverse h-full cursor-pointer">
 									<div className="flex-shrink-0">
-										<img className="sm:w-8 sm:h-8 w-4 h-4 rounded-full" src={result.user ? result.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} />
+										<img className="sm:w-8 sm:h-8 w-4 h-4 rounded-full" src={result?.user?.image ? result.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} />
 									</div>
 									<div className="flex-1 min-w-0">
-										<p className="truncate">{result.user ? result.user.username : 'anonymous'}</p>
+										<p className="truncate">{result?.user?.username ? result.user.username : 'anonymous'}</p>
 									</div>
 								</div>
 							</td>
