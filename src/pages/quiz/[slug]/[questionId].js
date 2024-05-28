@@ -29,7 +29,7 @@ const AnswersBox = ({ answers, setAnswers, question }) => {
 			);
 		case 'checkboxes':
 			return (
-				<div className="flex flex-col gap-3" role="none">
+				<div className={'flex gap-3 ' + (question.answers.length > 4 ? 'flex-wrap justify-between' : 'flex-col')} role="none">
 					{question.answers.map((answer, index) => (
 						<div
 							key={index}
@@ -40,7 +40,7 @@ const AnswersBox = ({ answers, setAnswers, question }) => {
 									setAnswers([...answers, answer]);
 								}
 							}}
-							className={'border border-gray-200 rounded-md shadow-sm px-6 py-4 flex items-center justify-between cursor-pointer ' + (answers.includes(answer) ? color : '')}>
+							className={'border border-gray-200 rounded-md shadow-sm px-6 py-4 flex items-center justify-between cursor-pointer ' + (answers.includes(answer) ? color : '') + (question.answers.length > 4 ? ' w-[49%]' : ' w-full')}>
 							<span className="flex items-center">
 								<span className="text-sm leading-tight md:text-base md:leading-normal flex">
 									<span className="text-gray-900 font-medium" id="headlessui-label-2">
@@ -56,14 +56,14 @@ const AnswersBox = ({ answers, setAnswers, question }) => {
 			);
 		case 'radios':
 			return (
-				<div className="flex flex-col gap-3" role="none">
+				<div className={'flex gap-3 ' + (question.answers.length > 4 ? 'flex-wrap justify-between' : 'flex-col')} role="none">
 					{question.answers.map((answer, index) => (
 						<div
 							key={index}
 							onClick={() => {
 								setAnswers([answer]);
 							}}
-							className={'border border-gray-200 rounded-md shadow-sm px-6 py-4 flex items-center justify-between cursor-pointer ' + (answers.includes(answer) ? color : '')}>
+							className={'border border-gray-200 rounded-md shadow-sm px-6 py-4 flex items-center justify-between cursor-pointer ' + (answers.includes(answer) ? color : '') + (question.answers.length > 4 ? ' w-[49%]' : ' w-full')}>
 							<span className="flex items-center">
 								<span className="text-sm leading-tight md:text-base md:leading-normal flex">
 									<span className="text-gray-900 font-medium" id="headlessui-label-2">
