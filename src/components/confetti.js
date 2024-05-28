@@ -39,7 +39,6 @@ export default function Confetti() {
 
 	return (
 		<>
-			<button onClick={fire}>Fire!</button>
 			<ReactCanvasConfetti onInit={onInit} />
 		</>
 	);
