@@ -15,14 +15,18 @@ export default async function Results(req, res) {
 
 		quiz.questions.map((question, index) => {
 			let localPoints = 0;
+			let correct = 0;
 			if (!answers[index]) {
 				return;
 			}
 			for (const answer of answers[index]) {
 				if (question.correct.includes(answer)) {
-					localPoints = Math.round(localPoints + parseInt(question.point) / question.correct.length);
+					correct++;
 				}
 			}
+
+			correct = Math.round(correct / question.correct.length);
+			localPoints = correct * parseInt(question.point);
 
 			points = points + localPoints;
 
