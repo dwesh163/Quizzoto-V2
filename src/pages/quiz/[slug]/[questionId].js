@@ -135,6 +135,8 @@ export default function Question() {
 							starter[field] = '';
 						});
 						setStarter(starter);
+					} else {
+						router.push('/quiz/' + router.query.slug + '/1');
 					}
 
 					getQuestion();
@@ -258,7 +260,7 @@ export default function Question() {
 					<div className="flex md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto  justify-center md:px-6 lg:px-8 h-[100vh]">
 						<p className="mt-4">Quiz not Found</p>
 					</div>
-				) : router.query.questionId == 'start' ? (
+				) : router.query.questionId == 'start' && !isLoading ? (
 					<div className="sm:h-[calc(100vh-140px)] h-[calc(100vh-110px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						{quiz?.starter && (
