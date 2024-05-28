@@ -185,6 +185,7 @@ export default function Question() {
 
 		if (localStorage.getItem('room')) {
 			id = JSON.parse(localStorage.getItem('room')).id;
+			localStorage.removeItem('room');
 		}
 
 		fetch('/api/result', { method: 'POST', body: JSON.stringify({ slug: quiz.slug, answers: globalAnswers, roomId: id ? id : '', starter: starter ? starter : {} }) })
