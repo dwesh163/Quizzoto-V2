@@ -39,6 +39,7 @@ export default async function getQuizInfo(req, res) {
 						type: 1,
 						rating: 1,
 						date: 1,
+						starter: 1,
 						'user.name': 1,
 						'user.username': 1,
 						'user.image': 1,
