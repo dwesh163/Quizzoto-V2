@@ -246,7 +246,7 @@ export default function Question() {
 				{isLoading ? (
 					<div className="sm:h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
-						<div className="flex justify-center w-full h-full sm:px-5 md:px-24 gap-5">
+						<div className="flex sm:items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
 							<div className="flex mt-2 items-center justify-center relative w-full p-5 bg-white h-[30rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
 								<svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin fill-sky-500 bg-opacity-90" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
@@ -264,7 +264,7 @@ export default function Question() {
 					<div className="sm:h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						{quiz?.starter && (
-							<div className="flex justify-center w-full h-full sm:px-5 md:px-24 gap-5">
+							<div className="flex sm:items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
 								<div className="relative w-full p-5 mt-2 min-h-[30rem] h-fit bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
 									<div>
 										<h3 className="sm:text-3xl text-xl font-bold mb-8">{quiz?.starter?.text}</h3>
@@ -289,8 +289,8 @@ export default function Question() {
 											</div>
 										))}
 									</div>
-									<div className="flex justify-center flex-col mt-2 gap-4">
-										<div className="flex justify-center">
+									<div className="flex items-center justify-center flex-col mt-2 gap-4">
+										<div className="flex items-center justify-center">
 											<button
 												className="text-white w-full sm:max-w-96 bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none"
 												onClick={() => {
@@ -321,7 +321,7 @@ export default function Question() {
 				) : (
 					<div className="sm:h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
-						<div className="flex justify-center w-full h-full sm:px-5 md:px-24 gap-5">
+						<div className="flex sm:items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
 							<div className="relative w-full p-5 bg-white mt-2 min-h-[30rem] h-fit md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
 								<div className="flex justify-between mb-8 h-6">
 									<button
@@ -346,7 +346,7 @@ export default function Question() {
 										<AnswersBox answers={answers} setAnswers={setAnswers} question={question} />
 									</>
 								) : (
-									<div className="flex justify-center flex-col h-[calc(100%-100px)] gap-4">
+									<div className="flex items-center justify-center flex-col h-[calc(100%-100px)] gap-4">
 										<p className="text-center">Are you sure you want to submit your answers ?</p>
 										<div className="flex justify-center">
 											<button className="text-white w-full sm:max-w-96 bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none" onClick={() => submit()}>
