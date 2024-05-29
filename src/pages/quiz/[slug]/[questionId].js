@@ -24,7 +24,7 @@ const AnswersBox = ({ answers, setAnswers, question }) => {
 		case 'textfield':
 			return (
 				<div className="relative mt-2 rounded-md shadow-sm">
-					<input value={answers.join(', ')} onChange={(event) => setAnswers([event.target.value])} type="text" name="price" id="price" className="block w-full py-4 rounded-md border-0  pl-7 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Answers" />
+					<input value={answers.join(', ')} onChange={(event) => setAnswers([event.target.value])} type="text" name="price" id="price" className="block w-full py-4 rounded-md border-0 pl-7 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Answers" />
 				</div>
 			);
 		case 'checkboxes':
@@ -257,7 +257,7 @@ export default function Question() {
 						{room && <div className="w-full text-center">In room : {room?.title}</div>}
 					</div>
 				) : quiz === '404' ? (
-					<div className="flex md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto  justify-center md:px-6 lg:px-8 h-[100vh]">
+					<div className="flex md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto justify-center md:px-6 lg:px-8 h-[100vh]">
 						<p className="mt-4">Quiz not Found</p>
 					</div>
 				) : router.query.questionId == 'start' && !isLoading ? (
@@ -322,10 +322,25 @@ export default function Question() {
 					<div className="sm:h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						<div className="flex sm:items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
-							<div className="relative w-full p-5 bg-white mt-2 min-h-[30rem] h-fit md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
-								<div className="flex justify-between mb-8 h-6">
+							<div className="relative w-full flex flex-col justify-between p-5 bg-white mt-2 min-h-[30rem] h-fit md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
+								{question != 'end' ? (
+									<div>
+										<h3 className="sm:text-3xl text-xl font-bold mb-8">{question.question}</h3>
+										<AnswersBox answers={answers} setAnswers={setAnswers} question={question} />
+									</div>
+								) : (
+									<div className="flex items-center justify-center flex-col min-h-[25rem] gap-4">
+										<p className="text-center">Are you sure you want to submit your answers ?</p>
+										<div className="flex w-full justify-center">
+											<button className="text-white w-full sm:max-w-96 bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none" onClick={() => submit()}>
+												submit
+											</button>
+										</div>
+									</div>
+								)}
+								<div className="flex justify-between items-center mb-0 h-6">
 									<button
-										className="w-24 text-left"
+										className={'w-28 h-10 text-center text-white font-medium rounded-lg text-sm ' + (router.query.questionId > 1 ? 'bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none' : 'bg-white cursor-default')}
 										onClick={() => {
 											if (router.query.questionId > 1) {
 												router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) - 1));
@@ -335,26 +350,11 @@ export default function Question() {
 									</button>
 									{question != 'end' && <span className="text-sm font-medium text-gray-700">{(router.query.questionId >= quiz?.info?.length ? quiz.info.length : router.query.questionId) + '/' + (quiz.info ? quiz.info.length : '0')}</span>}
 									{question != 'end' && (
-										<button className="w-24 text-right" onClick={() => router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>
+										<button className="w-28 h-10 text-center text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none font-medium rounded-lg text-sm" onClick={() => router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>
 											Next →
 										</button>
 									)}
 								</div>
-								{question != 'end' ? (
-									<>
-										<h3 className="sm:text-3xl text-xl font-bold mb-8">{question.question}</h3>
-										<AnswersBox answers={answers} setAnswers={setAnswers} question={question} />
-									</>
-								) : (
-									<div className="flex items-center justify-center flex-col h-[calc(100%-100px)] gap-4">
-										<p className="text-center">Are you sure you want to submit your answers ?</p>
-										<div className="flex justify-center">
-											<button className="text-white w-full sm:max-w-96 bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none" onClick={() => submit()}>
-												submit
-											</button>
-										</div>
-									</div>
-								)}
 							</div>
 						</div>
 						{room && <div className="w-full text-center">In room : {room?.title}</div>}
