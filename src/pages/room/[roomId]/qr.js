@@ -6,14 +6,14 @@ export default function QR() {
 	const [room, setRoom] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState('results');
-	const [url, setUrl] = useState('www.google.com');
+	const [url, setUrl] = useState('');
 
 	const router = useRouter();
 	const { Canvas } = useQRCode();
 
 	useEffect(() => {
-		if (window && router && room.room) {
-			setUrl(window.location.href.replace(router.asPath, '') + '/r/' + room.room.link.slug);
+		if (window && router && room) {
+			setUrl(window.location.href.replace(router.asPath, '') + '/r/' + room.link.slug);
 		}
 	}, [router, room]);
 
@@ -43,20 +43,21 @@ export default function QR() {
 						<p className="text-3xl text-center">
 							Join the room <strong>{room.title}</strong>
 						</p>
-
-						<Canvas
-							text={url}
-							options={{
-								errorCorrectionLevel: 'M',
-								margin: 3,
-								scale: 4,
-								width: 200,
-								color: {
-									dark: '#0284c7',
-									light: '#fff',
-								},
-							}}
-						/>
+						{url != '' && (
+							<Canvas
+								text={url}
+								options={{
+									errorCorrectionLevel: 'M',
+									margin: 3,
+									scale: 4,
+									width: 200,
+									color: {
+										dark: '#0284c7',
+										light: '#fff',
+									},
+								}}
+							/>
+						)}
 					</div>
 				)}
 			</div>
