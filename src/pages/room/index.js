@@ -16,7 +16,8 @@ export default function Results() {
 		fetch('/api/room/')
 			.then((response) => response.json())
 			.then((jsonData) => {
-				if (jsonData.error != 'Not Found') {
+				console.log(jsonData);
+				if (jsonData.error != 'Not Found' && jsonData.error != 'unauthorized') {
 					setRoom(jsonData);
 					setIsLoading(false);
 				} else {
