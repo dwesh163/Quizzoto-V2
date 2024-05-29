@@ -258,7 +258,7 @@ export default function Question() {
 					</div>
 				) : quiz === '404' ? (
 					<div className="flex md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto justify-center md:px-6 lg:px-8 h-[100vh]">
-						<p className="mt-4">Quiz not Found</p>
+						<p className="mt-4 text-center">Quiz not Found</p>
 					</div>
 				) : router.query.questionId == 'start' && !isLoading ? (
 					<div className="sm:h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
@@ -312,7 +312,7 @@ export default function Question() {
 					<div className="sm:h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						<div className="flex items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
-							<div className="relative w-full p-5 bg-white h-[30rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
+							<div className="relative w-full flex justify-center items-center p-5 bg-white h-[30rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
 								<p className="mt-4">Question not Found</p>
 							</div>
 						</div>
