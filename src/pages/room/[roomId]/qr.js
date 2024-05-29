@@ -6,7 +6,7 @@ export default function QR() {
 	const [room, setRoom] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState('results');
-	const [url, setUrl] = useState('');
+	const [url, setUrl] = useState('www.google.com');
 
 	const router = useRouter();
 	const { Canvas } = useQRCode();
