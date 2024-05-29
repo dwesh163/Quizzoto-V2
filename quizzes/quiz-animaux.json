@@ -3,6 +3,7 @@
     "title": "Quiz sur les Animaux",
     "description": "Testez vos connaissances sur les animaux ! Ce quiz vous invite à explorer le monde fascinant de la faune. Avec une variété de questions sur les habitats, les comportements et les caractéristiques des animaux, découvrez si vous êtes un véritable expert en nature !",
     "image": "/uploads/quiz-animaux.jpg",
+    "visibility": "public",
     "info": {
         "date": "JJ/MM/AAAA",
         "timeLimit": "10 minutes",
@@ -16,10 +17,9 @@
     "type": "form",
     "starter": {
         "text": "Le quiz commence maintenant ! Bonne chance !",
-        "field": [
-            "nom",
-            "email",
-            "nom d'utilisateur"
+        "fields": [
+            "name",
+            "email"
         ]
     },
     "creator": "dwesh163",
@@ -60,7 +60,10 @@
         {
             "image": "/chemin/vers/image_animal.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "false"
             ],
@@ -103,7 +106,10 @@
         {
             "image": "/chemin/vers/image_animal.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "true"
             ],

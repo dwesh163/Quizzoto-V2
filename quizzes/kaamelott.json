@@ -3,6 +3,7 @@
     "title": "Kaamelott",
     "description": "Testez vos connaissances sur la série télévisée Kaamelott ! Ce quiz vous invite à explorer l'univers drôle et médiéval de cette série culte. Répondez à une variété de questions pour découvrir si vous êtes un véritable chevalier de la Table Ronde !",
     "image": "/uploads/kaamelott.jpg",
+    "visibility": "public",
     "info": {
         "date": "JJ/MM/AAAA",
         "timeLimit": "15 minutes",
@@ -16,10 +17,9 @@
     "type": "form",
     "starter": {
         "text": "Le quiz commence maintenant ! Bonne chance !",
-        "field": [
-            "nom",
-            "email",
-            "nom d'utilisateur"
+        "fields": [
+            "name",
+            "email"
         ]
     },
     "creator": "dwesh163",
@@ -77,23 +77,15 @@
         {
             "image": "/chemin/vers/image_personnage.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "false"
             ],
             "point": 25,
             "question": "Perceval est souvent accompagné de son écuyer Karadoc ?",
-            "credit": "Nom du photographe"
-        },
-        {
-            "image": "/chemin/vers/image_personnage.jpg",
-            "type": "textfield",
-            "answers": [],
-            "correct": [
-                "Alain Chabat"
-            ],
-            "point": 25,
-            "question": "Par quel acteur le duc d’Aquitaine est-il interprété ?",
             "credit": "Nom du photographe"
         },
         {
@@ -148,7 +140,10 @@
         {
             "image": "/chemin/vers/image_personnage.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "false"
             ],

@@ -3,6 +3,7 @@
     "title": "Quiz sur JavaScript",
     "description": "Testez vos connaissances sur JavaScript ! Ce quiz vous invite à explorer les concepts de base et avancés de ce langage de programmation essentiel pour le développement web. Répondez à une variété de questions pour découvrir si vous maîtrisez JavaScript !",
     "image": "/uploads/javascript.jpg",
+    "visibility": "public",
     "info": {
         "date": "JJ/MM/AAAA",
         "timeLimit": "15 minutes",
@@ -17,10 +18,9 @@
     "type": "form",
     "starter": {
         "text": "Le quiz commence maintenant ! Bonne chance !",
-        "field": [
-            "nom",
-            "email",
-            "nom d'utilisateur"
+        "fields": [
+            "name",
+            "email"
         ]
     },
     "creator": "dwesh163",
@@ -57,7 +57,10 @@
         },
         {
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "true"
             ],
@@ -95,7 +98,10 @@
         },
         {
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "true"
             ],
@@ -135,7 +141,10 @@
         },
         {
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "true"
             ],

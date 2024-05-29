@@ -3,6 +3,7 @@
     "title": "Quiz sur la Nourriture",
     "description": "Testez vos connaissances sur la nourriture ! Ce quiz vous invite à explorer le monde délicieux de la gastronomie. Avec une variété de questions sur les plats, les ingrédients et les cuisines du monde, découvrez si vous êtes un véritable expert en cuisine !",
     "image": "/uploads/food.jpg",
+    "visibility": "public",
     "info": {
         "date": "JJ/MM/AAAA",
         "timeLimit": "15 minutes",
@@ -16,10 +17,9 @@
     "type": "form",
     "starter": {
         "text": "Le quiz commence maintenant ! Bonne chance !",
-        "field": [
-            "nom",
-            "email",
-            "nom d'utilisateur"
+        "fields": [
+            "name",
+            "email"
         ]
     },
     "creator": "dwesh163",
@@ -60,7 +60,10 @@
         {
             "image": "/chemin/vers/image_ingredient.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "true"
             ],
@@ -103,7 +106,10 @@
         {
             "image": "/chemin/vers/image_plat.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "false"
             ],
@@ -162,7 +168,10 @@
         {
             "image": "/chemin/vers/image_plat.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "true"
             ],
@@ -237,7 +246,10 @@
         {
             "image": "/chemin/vers/image_plat.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "false"
             ],

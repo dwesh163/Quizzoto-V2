@@ -16,14 +16,6 @@
         "science-fiction"
     ],
     "type": "form",
-    "starter": {
-        "text": "Le quiz commence maintenant ! Bonne chance !",
-        "field": [
-            "nom",
-            "email",
-            "nom d'utilisateur"
-        ]
-    },
     "creator": "dwesh163",
     "questions": [
         {
@@ -62,7 +54,10 @@
         {
             "image": "/chemin/vers/image_personnage.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "true"
             ],
@@ -105,7 +100,10 @@
         {
             "image": "/chemin/vers/image_planete.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "true",
+                "false"
+            ],
             "correct": [
                 "true"
             ],

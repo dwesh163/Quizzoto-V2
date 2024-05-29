@@ -3,6 +3,7 @@
     "title": "Les Grandes Villes d'Europe",
     "description": "Testez vos connaissances sur les grandes villes d'Europe ! Ce quiz vous invite à explorer les trésors culturels et historiques des métropoles européennes. Répondez à une variété de questions pour découvrir si vous êtes un véritable expert en géographie européenne !",
     "image": "/uploads/european-cities.jpg",
+    "visibility": "public",
     "info": {
         "date": "JJ/MM/AAAA",
         "timeLimit": "10 minutes",
@@ -17,10 +18,9 @@
     "type": "form",
     "starter": {
         "text": "Le quiz commence maintenant ! Bonne chance !",
-        "field": [
-            "nom",
-            "email",
-            "nom d'utilisateur"
+        "fields": [
+            "name",
+            "email"
         ]
     },
     "creator": "dwesh163",
@@ -61,9 +61,12 @@
         {
             "image": "/chemin/vers/image_ville.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "vrai",
+                "faux"
+            ],
             "correct": [
-                "true"
+                "vrai"
             ],
             "point": 20,
             "question": "L'Acropole se trouve à Athènes ?",
@@ -104,9 +107,12 @@
         {
             "image": "/chemin/vers/image_ville.jpg",
             "type": "boolean",
-            "answers": [],
+            "answers": [
+                "vrai",
+                "faux"
+            ],
             "correct": [
-                "false"
+                "faux"
             ],
             "point": 20,
             "question": "Le Colisée se trouve à Venise ?",
