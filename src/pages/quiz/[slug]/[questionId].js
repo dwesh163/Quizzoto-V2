@@ -40,7 +40,7 @@ const AnswersBox = ({ answers, setAnswers, question }) => {
 									setAnswers([...answers, answer]);
 								}
 							}}
-							className={'border border-gray-200 rounded-md shadow-sm px-6 py-4 flex items-center justify-between cursor-pointer ' + (answers.includes(answer) ? color : '') + (question.answers.length > 4 ? ' w-[49%]' : ' w-full')}>
+							className={'border border-gray-200 rounded-md shadow-sm px-6 py-4 flex items-center justify-between cursor-pointer ' + (answers.includes(answer) ? color : '') + (question.answers.length > 4 ? ' sm:w-[49%] w-[43%]' : ' w-full')}>
 							<span className="flex items-center">
 								<span className="text-sm leading-tight md:text-base md:leading-normal flex">
 									<span className="text-gray-900 font-medium" id="headlessui-label-2">
