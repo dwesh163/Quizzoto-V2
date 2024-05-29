@@ -9,7 +9,7 @@ export default function Link({ quizzes, room, error }) {
 
 	useEffect(() => {
 		if (quizzes && router && localStorage && !error && quizzes.length == 1) {
-			router.push('/quiz/' + quizzes[0].slug + '/1');
+			router.push('/quiz/' + quizzes[0].slug + '/start');
 			localStorage.setItem('room', JSON.stringify(room));
 		}
 	}, [quizzes, router]);
