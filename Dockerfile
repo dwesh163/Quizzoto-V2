@@ -1,4 +1,4 @@
-FROM node:lts-slim AS base
+FROM node:lts-bullseye AS base
 
 # Install dependencies only when needed
 FROM base AS deps
