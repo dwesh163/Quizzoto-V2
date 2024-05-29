@@ -1,4 +1,4 @@
-FROM node:lts-bullseye AS base
+FROM node:22-alpine3.19 AS base
 
 # Install dependencies only when needed
 FROM base AS deps
