@@ -3,7 +3,7 @@
     "title": "Coding Club pour les filles — FR",
     "description": "Quizz pour le concours de la journée du SPS du 8 juin 2024.",
     "image": "https://www.epfl.ch/education/education-and-science-outreach/wp-content/uploads/2020/01/Visuel-Coding-Club-plusieurs-pictos.png",
-    "visibility": "public",
+    "visibility": "private",
     "shuffle": true,
     "info": {
         "date": "2024-06-08",
