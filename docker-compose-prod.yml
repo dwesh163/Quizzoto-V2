@@ -21,4 +21,6 @@ services:
         ports:
             - '80:80'
         working_dir: /app
+        volumes:
+            - ./quizzes:/app/quizzes
         tty: true
