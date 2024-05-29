@@ -9,7 +9,7 @@ export default function Results() {
 	const { data: session, status } = useSession();
 	const router = useRouter();
 
-	const [room, setRoom] = useState({});
+	const [room, setRoom] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
