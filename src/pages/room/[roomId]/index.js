@@ -74,7 +74,13 @@ function Stats({ stats }) {
 
 function Answers({ results }) {
 	const router = useRouter();
-	const [sortResults, setSortResults] = useState(results);
+
+	const [sortResults, setSortResults] = useState(
+		results.map((result) => ({
+			...result,
+			title: result.quiz.title,
+		}))
+	);
 	const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
 	const sortData = (key) => {
@@ -126,10 +132,10 @@ function Answers({ results }) {
 						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell cursor-pointer">
 							User
 						</th>
-						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 cursor-pointer" onClick={() => sortData('quiz.title')}>
+						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 cursor-pointer" onClick={() => sortData('title')}>
 							<div className="flex items-center gap-1">
 								<p>Quizz </p>
-								{renderSortArrow('quiz.title')}
+								{renderSortArrow('title')}
 							</div>
 						</th>
 						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 text-center cursor-pointer" onClick={() => sortData('points')}>
