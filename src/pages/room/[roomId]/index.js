@@ -74,64 +74,56 @@ function Stats({ stats }) {
 
 function Answers({ results }) {
 	const router = useRouter();
+	const [sortResults, sortSortResults] = useState(results);
 
 	return (
 		<div className="relative overflow-x-auto w-full">
 			<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 				<thead className="sm:text-base text-sm text-gray-900 uppercase dark:text-gray-400">
 					<tr>
-						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 sm:hidden table-cell">
-							Results
-						</th>
-						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1">
-							Quizz
-						</th>
-						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell">
-							Email
-						</th>
-						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell">
-							Name
-						</th>
 						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell">
 							User
 						</th>
 						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1">
-							Points
+							<div className="flex items-center gap-1 cursor-pointer">
+								<p>Quizz</p>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+									<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+								</svg>
+							</div>
+						</th>
+						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 text-center">
+							<div className="flex items-center gap-1 cursor-pointer justify-center">
+								<p>Points</p>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+									<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+								</svg>
+							</div>
 						</th>
 					</tr>
 				</thead>
 				<tbody className="w-full">
-					{results?.map((result, index) => (
-						<tr key={'answers-' + index} className="sm:text-base text-sm cursor-pointer hover:bg-slate-100" onClick={() => router.push('/result/' + result.id)}>
+					{sortResults?.map((result, index) => (
+						<tr key={'answers-' + index} className="sm:text-base text-sm cursor-pointer hover:bg-zinc-100 hover:bg-opacity-95 select-none" onClick={() => router.push('/result/' + result.id)}>
+							<th scope="row" className="sm:px-6 sm:py-4 px-3 py-2 font-medium text-gray-900 flex items-center leading-tight transition-all rounded-lg outline-none text-start">
+								<div class="grid mr-4 place-items-center">
+									<img alt="candice" src={result?.user?.image ? result.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} class="relative inline-block h-12 w-12 !rounded-full  object-cover object-center" />
+								</div>
+								{result?.user?.name && result?.user?.email ? (
+									<div>
+										<h6 class="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">{result?.user?.name}</h6>
+										<p class="block font-sans text-sm -mt-1.5 antialiased font-normal leading-normal text-gray-700">{result?.user?.email}</p>
+									</div>
+								) : (
+									<div>
+										<h6 class="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">Anonymous</h6>
+									</div>
+								)}
+							</th>
 							<th scope="row" className="sm:px-6 sm:py-4 px-3 py-2 font-medium text-gray-900 hidden sm:table-cell">
 								{result.quiz.title}
 							</th>
-							<td className="sm:px-6 sm:py-4 px-3 py-2 hidden sm:table-cell">{result.user ? result.user.email : ''}</td>
-							<td className="sm:px-6 sm:py-4 px-3 py-2 hidden sm:table-cell">{result.user ? result.user.name : ''}</td>
-							<td className="sm:px-6 sm:py-4 px-3 py-2 hidden sm:table-cell">
-								<div className="flex items-center sm:space-x-4 space-x-1 rtl:space-x-reverse h-full cursor-pointer">
-									<div className="flex-shrink-0">
-										<img className="sm:w-8 sm:h-8 w-4 h-4 rounded-full" src={result?.user?.image ? result.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} />
-									</div>
-									<div className="flex-1 min-w-0">
-										<p className="truncate">{result?.user?.username ? result.user.username : 'anonymous'}</p>
-									</div>
-								</div>
-							</td>
-							<td className="sm:px-6 sm:py-4 px-3 py-2 hidden sm:table-cell">{result.points}</td>
-							<td className="sm:hidden py-2 table-cell">
-								<div className="flex gap-2">
-									<div className="h-full flex items-center align-middle">
-										<img className="sm:w-8 sm:h-8 w-12 h-12 rounded-full" src={result.user ? result.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} />
-									</div>
-									<div className={'flex ' + (result?.user?.name ? 'flex-col' : 'items-center')}>
-										{result?.user?.name ? <p className="font-medium">{result?.user?.name}</p> : <></>}
-										<p className={!result?.user?.name ? 'font-medium' : 'text-gray-500'}>{result?.user ? result?.user?.username : 'anonymous'}</p>
-									</div>
-								</div>
-							</td>
-							<td className="sm:hidden py-2 table-cell"> {result.quiz.title}</td>
-							<td className="sm:hidden py-2 table-cell">{result.points}</td>
+							<td className="py-2 text-center">{result.points}</td>
 						</tr>
 					))}
 				</tbody>
