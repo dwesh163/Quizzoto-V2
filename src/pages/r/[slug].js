@@ -21,7 +21,7 @@ export default function Link({ quizzes, room, error }) {
 			</Head>
 			<main>
 				<Header />
-				<div className="flex md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto items-center justify-center md:px-6 lg:px-8 h-[80vh]">
+				<div className="flex md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto items-center justify-center md:px-6 lg:px-8 mt-32">
 					{error ? (
 						<p className="mt-4">{error}</p>
 					) : (
