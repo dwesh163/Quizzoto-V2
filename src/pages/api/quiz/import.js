@@ -26,6 +26,10 @@ async function insertQuiz(quiz, session) {
 		return { code: 400, message: 'Apparently not everything is here...' };
 	}
 
+	if (quiz.starter && !quiz.starter.fields) {
+		return { code: 400, message: 'The starter fields are missing...' };
+	}
+
 	const existingSlug = await db.collection('quizzes').findOne({ slug: quiz.slug });
 
 	let error = {};
