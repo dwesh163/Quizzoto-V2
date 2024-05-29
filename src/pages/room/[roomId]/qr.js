@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useQRCode } from 'next-qrcode';
 
 export default function QR() {
-	const [room, setRoom] = useState({});
+	const [room, setRoom] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState('results');
 	const [url, setUrl] = useState('');
