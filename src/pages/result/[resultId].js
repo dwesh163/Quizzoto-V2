@@ -29,19 +29,24 @@ export default function ResultsPage() {
 
 	useEffect(() => {
 		(async () => {
-			if (navigator.mediaCapabilities) {
-				const policy = await navigator.mediaCapabilities.decodingInfo({
-					type: 'file',
-					audio: { contentType: 'audio/mp3' },
-				});
-				if (policy && policy.supported && navigator.getAutoplayPolicy('mediaelement') === 'allowed') {
-					showResults();
+			try {
+				if (navigator.mediaCapabilities) {
+					const policy = await navigator.mediaCapabilities.decodingInfo({
+						type: 'file',
+						audio: { contentType: 'audio/mp3' },
+					});
+					if (policy && policy.supported && navigator.getAutoplayPolicy('mediaelement') === 'allowed') {
+						showResults();
+					} else {
+						setAudioPolicy(false);
+						setShowButton(true);
+					}
 				} else {
-					setAudioPolicy(false);
-					setShowButton(true);
+					setIsLoading(false);
 				}
-			} else {
-				setIsLoading(false);
+			} catch (error) {
+				setAudioPolicy(false);
+				setShowButton(true);
 			}
 		})();
 	}, []);
