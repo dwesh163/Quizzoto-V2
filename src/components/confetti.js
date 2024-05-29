@@ -22,7 +22,7 @@ export default function Confetti() {
 	};
 
 	const fire = () => {
-		Array.from({ length: 8 }).forEach((_, index) => {
+		Array.from({ length: 5 }).forEach((_, index) => {
 			setTimeout(() => {
 				instance.current({
 					...commonOptions,
