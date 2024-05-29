@@ -335,6 +335,13 @@ export default function Rooms() {
 							{url}
 						</a>
 
+						<button onClick={() => navigator.clipboard.writeText(url)} className="bg-sky-500 text-white px-4 py-2 rounded-lg mt-4">
+							COPY
+						</button>
+						<button onClick={() => router.push('/room/' + room.room.id + '/qr')} className="bg-sky-500 text-white px-4 py-2 rounded-lg mt-4">
+							Open QR
+						</button>
+
 						<div className="border-b border-gray-200 w-full">
 							<nav className="-mb-px flex gap-6 w-full" aria-label="Tabs">
 								{pages.map((page, index) => (
