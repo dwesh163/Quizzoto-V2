@@ -74,30 +74,68 @@ function Stats({ stats }) {
 
 function Answers({ results }) {
 	const router = useRouter();
-	const [sortResults, sortSortResults] = useState(results);
+	const [sortResults, setSortResults] = useState(results);
+	const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+
+	const sortData = (key) => {
+		let direction = 'asc';
+		if (sortConfig.key === key && sortConfig.direction === 'asc') {
+			direction = 'desc';
+		}
+
+		const sortedResults = [...sortResults].sort((a, b) => {
+			if (a[key] < b[key]) {
+				return direction === 'asc' ? -1 : 1;
+			}
+			if (a[key] > b[key]) {
+				return direction === 'asc' ? 1 : -1;
+			}
+			return 0;
+		});
+
+		setSortConfig({ key, direction });
+		setSortResults(sortedResults);
+	};
+
+	const renderSortArrow = (key) => {
+		if (sortConfig.key !== key)
+			return (
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+					<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+				</svg>
+			);
+		if (sortConfig.direction === 'asc') {
+			return (
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+					<path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+				</svg>
+			);
+		}
+		return (
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+				<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+			</svg>
+		);
+	};
 
 	return (
 		<div className="relative overflow-x-auto w-full">
 			<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-				<thead className="sm:text-base text-sm text-gray-900 uppercase dark:text-gray-400">
+				<thead className="sm:text-base text-sm text-gray-900 uppercase dark:text-gray-400 select-none">
 					<tr>
-						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell">
+						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell cursor-pointer">
 							User
 						</th>
-						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1">
-							<div className="flex items-center gap-1 cursor-pointer">
-								<p>Quizz</p>
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-									<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-								</svg>
+						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 cursor-pointer" onClick={() => sortData('quiz.title')}>
+							<div className="flex items-center gap-1">
+								<p>Quizz </p>
+								{renderSortArrow('quiz.title')}
 							</div>
 						</th>
-						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 text-center">
-							<div className="flex items-center gap-1 cursor-pointer justify-center">
-								<p>Points</p>
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-									<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-								</svg>
+						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 text-center cursor-pointer" onClick={() => sortData('points')}>
+							<div className="flex items-center gap-1 justify-center">
+								<p>Points </p>
+								{renderSortArrow('points')}
 							</div>
 						</th>
 					</tr>
@@ -106,17 +144,17 @@ function Answers({ results }) {
 					{sortResults?.map((result, index) => (
 						<tr key={'answers-' + index} className="sm:text-base text-sm cursor-pointer hover:bg-zinc-100 hover:bg-opacity-95 select-none" onClick={() => router.push('/result/' + result.id)}>
 							<th scope="row" className="sm:px-6 sm:py-4 px-3 py-2 font-medium text-gray-900 flex items-center leading-tight transition-all rounded-lg outline-none text-start">
-								<div class="grid mr-4 place-items-center">
-									<img alt="candice" src={result?.user?.image ? result.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} class="relative inline-block h-12 w-12 !rounded-full  object-cover object-center" />
+								<div className="grid mr-4 place-items-center">
+									<img alt="candice" src={result?.user?.image ? result.user.image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} className="relative inline-block h-12 w-12 !rounded-full object-cover object-center" />
 								</div>
 								{result?.user?.name && result?.user?.email ? (
 									<div>
-										<h6 class="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">{result?.user?.name}</h6>
-										<p class="block font-sans text-sm -mt-1.5 antialiased font-normal leading-normal text-gray-700">{result?.user?.email}</p>
+										<h6 className="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">{result?.user?.name}</h6>
+										<p className="block font-sans text-sm -mt-1.5 antialiased font-normal leading-normal text-gray-700">{result?.user?.email}</p>
 									</div>
 								) : (
 									<div>
-										<h6 class="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">Anonymous</h6>
+										<h6 className="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">Anonymous</h6>
 									</div>
 								)}
 							</th>
