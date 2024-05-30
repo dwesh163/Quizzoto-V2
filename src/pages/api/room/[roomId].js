@@ -12,11 +12,19 @@ export default async function getRoomsInfo(req, res) {
 
 	const room = await db.collection('rooms').findOne({ id: req.query.roomId });
 
+	if (!room) {
+		res.status(200).send({ error: 'Not Found' });
+	}
+
 	if (!room.share.authorized.includes(session.user.id) && room.creator != session.user.id) {
 		res.status(200).send({ error: 'Not Found' });
 	}
 
 	if (req.method == 'PATCH') {
+		if (session.user.id != room.creator) {
+			res.status(200).send({ code: 400, message: 'Bad Request' });
+		}
+
 		const { quizzes } = req.body;
 		const { title, comment, slug, instruction, ask, authorized } = req.body;
 		if (quizzes) {
@@ -77,10 +85,6 @@ export default async function getRoomsInfo(req, res) {
 					{ $limit: 1 },
 				])
 				.toArray();
-
-			if (room.share.authorized.includes(session.user.id) || room.creator == session.user.id) {
-				res.status(200).send({ error: 'Not Found' });
-			}
 
 			if (room.quizzes) {
 				for (const quizId of room.quizzes) {

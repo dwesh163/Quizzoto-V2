@@ -17,13 +17,13 @@ export default async function getRoomsInfo(req, res) {
 				.aggregate([
 					{
 						$match: {
-							creator: session.user.id,
+							$or: [{ creator: session.user.id }, { 'share.authorized': { $in: [session.user.id] } }],
 						},
 					},
 					{
 						$lookup: {
-							localField: 'creator',
 							from: 'users',
+							localField: 'creator',
 							foreignField: 'id',
 							as: 'user',
 						},
