@@ -21,7 +21,7 @@ export default async function getRoomsInfo(req, res) {
 	}
 
 	if (req.method == 'PATCH') {
-		if (session.user.id != room.creator) {
+		if (!(room.share.authorized.includes(session.user.id) || room.creator == session.user.id)) {
 			res.status(400).send({ code: 400, message: 'Bad Request' });
 		}
 
@@ -31,10 +31,6 @@ export default async function getRoomsInfo(req, res) {
 			await db.collection('rooms').updateOne({ id: req.query.roomId }, { $set: { quizzes: quizzes } });
 			res.status(200).send({ code: 200, message: 'ok' });
 		} else if (title && comment && slug && instruction && ask && authorized) {
-			if (!(room.share.authorized.includes(session.user.id) || room.creator == session.user.id)) {
-				res.status(400).send({ code: 400, message: 'Bad Request' });
-			}
-
 			await db.collection('rooms').updateOne({ id: req.query.roomId }, { $set: { title, comment, instruction, share: { ask: ask.map((user) => user.id), authorized: authorized.map((user) => user.id) } } });
 			res.status(200).send({ code: 200, message: 'ok' });
 		} else {
