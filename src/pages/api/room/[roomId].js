@@ -78,8 +78,8 @@ export default async function getRoomsInfo(req, res) {
 				])
 				.toArray();
 
-			if (room.user.email != session.user.email) {
-				return res.status(200).send({ error: 'Not Found' });
+			if (!room.share.authorized.includes(session.user.id) && room.creator != session.user.id) {
+				res.status(200).send({ error: 'Not Found' });
 			}
 
 			if (room.quizzes) {
