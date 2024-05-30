@@ -441,7 +441,7 @@ function Quizzes({ oldQuizzes }) {
 			</div>
 
 			{!isLoading ? (
-				<div className="flex flex-col w-full space-y-5 overflow-x-auto h-[70vh]">
+				<div className="flex flex-col w-full space-y-5 overflow-x-auto h-[70vh] select-none">
 					{selectedQuizzes.length > 0 && (
 						<>
 							{selectedQuizzes
