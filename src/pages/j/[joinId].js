@@ -16,8 +16,12 @@ export default function Link() {
 			.then((res) => res.json())
 			.then((data) => {
 				setInfo(data);
+				if (data.message == 'redirect') {
+					router.push('/room/' + info.redirect);
+				}
 			});
 	}, [router]);
+
 	return (
 		<>
 			<Head>
