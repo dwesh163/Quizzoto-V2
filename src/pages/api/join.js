@@ -21,7 +21,7 @@ export default async function getJoinLinks(req, res) {
 			let share = room.share || { ask: [], authorized: [] };
 
 			if (share.authorized.includes(session.user.id)) {
-				return res.status(400).send({ message: 'redirect', redirect: room.id });
+				return res.status(200).send({ message: 'redirect', redirect: room.id });
 			}
 
 			if (!share.ask.includes(session.user.id)) {
@@ -31,7 +31,7 @@ export default async function getJoinLinks(req, res) {
 
 				return res.status(200).send({ message: 'Your invitation has been sent' });
 			} else {
-				return res.status(400).send({ error: 'Invitation already sent' });
+				return res.status(200).send({ error: 'Invitation already sent' });
 			}
 		} catch (error) {
 			console.error(error);
