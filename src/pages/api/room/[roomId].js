@@ -10,10 +10,24 @@ export default async function getRoomsInfo(req, res) {
 		return res.status(200).send({ error: 'Not Found' });
 	}
 
+	const room = await db.collection('rooms').findOne({ id: req.query.roomId });
+
+	if (!room.share.authorized.includes(session.user.id) && room.creator != session.user.id) {
+		res.status(200).send({ error: 'Not Found' });
+	}
+
 	if (req.method == 'PATCH') {
 		const { quizzes } = req.body;
-		await db.collection('rooms').updateOne({ id: req.query.roomId }, { $set: { quizzes: quizzes } });
-		res.status(200).send({ code: 200, message: 'ok' });
+		const { title, comment, slug, instruction, ask, authorized } = req.body;
+		if (quizzes) {
+			await db.collection('rooms').updateOne({ id: req.query.roomId }, { $set: { quizzes: quizzes } });
+			res.status(200).send({ code: 200, message: 'ok' });
+		} else if (title && comment && slug && instruction && ask && authorized) {
+			await db.collection('rooms').updateOne({ id: req.query.roomId }, { $set: { title, comment, instruction, share: { ask: ask.map((user) => user.id), authorized: authorized.map((user) => user.id) } } });
+			res.status(200).send({ code: 200, message: 'ok' });
+		} else {
+			res.status(200).send({ code: 400, message: 'Bad Request' });
+		}
 	} else if (req.method == 'GET') {
 		try {
 			let quizzes = [];
@@ -45,8 +59,12 @@ export default async function getRoomsInfo(req, res) {
 							id: 1,
 							title: 1,
 							comment: 1,
+							instruction: 1,
 							time: 1,
 							quizzes: 1,
+							parameters: 1,
+							share: 1,
+							joinId: 1,
 							'user.name': 1,
 							'user.email': 1,
 							'user.username': 1,
@@ -168,11 +186,6 @@ export default async function getRoomsInfo(req, res) {
 				stats.answersPerHour[hour] = stats.answersPerHour[hour] ? stats.answersPerHour[hour] + 1 : 1;
 			});
 
-			// results.forEach((result) => {
-			// 	const points = result.points;
-			// 	const pointRange = Math.floor(points / 50) * 100;
-			// });
-
 			let color = 0;
 			const colors = ['#348888', '#22BABB', '#FA7F08', '#FF5F5D', '#FFB30D'];
 			quizzes.forEach((quiz) => {
@@ -244,7 +257,35 @@ export default async function getRoomsInfo(req, res) {
 				}
 			});
 
-			return res.status(200).send({ results: results, quizzes: quizzes, room: room, stats: stats });
+			let parameters = {
+				parameters: room.parameters,
+				share: room.share,
+				data: {
+					title: room.title,
+					comment: room.comment,
+					slug: room.link.slug,
+					instruction: room.instruction,
+					joinId: room.joinId,
+				},
+			};
+
+			parameters.share = JSON.parse(JSON.stringify(parameters.share));
+
+			parameters.share.ask = await Promise.all(
+				Object.keys(parameters.share.ask).map(async (userId) => {
+					const user = await db.collection('users').findOne({ id: parameters.share.ask[userId] });
+					return user;
+				})
+			);
+
+			parameters.share.authorized = await Promise.all(
+				Object.keys(parameters.share.authorized).map(async (userId) => {
+					const user = await db.collection('users').findOne({ id: parameters.share.authorized[userId] });
+					return user;
+				})
+			);
+
+			return res.status(200).send({ results, quizzes, room, stats, parameters });
 		} catch (error) {
 			console.error('Error:', error);
 			return res.status(200).send({ error: 'Not Found' });

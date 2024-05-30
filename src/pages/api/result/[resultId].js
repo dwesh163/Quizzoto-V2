@@ -61,7 +61,8 @@ export default async function getResults(req, res) {
 
 		if (result.roomId) {
 			const room = await db.collection('rooms').findOne({ id: result.roomId });
-			if (room?.creator == session?.user?.id) {
+
+			if (room.share.authorized.includes(session.user.id) || room.creator == session.user.id) {
 				return res.status(200).send(result);
 			}
 		}

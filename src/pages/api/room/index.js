@@ -79,6 +79,11 @@ export default async function getRoomsInfo(req, res) {
 
 			const id = uuidv4();
 
+			let joinId = uuidv4().replace(/-/g, '').slice(0, 8);
+			while (await db.collection('rooms').findOne({ joinId })) {
+				joinId = uuidv4().replace(/-/g, '').slice(0, 8);
+			}
+
 			let room = {
 				id: id,
 				creator: user.id,
@@ -88,6 +93,12 @@ export default async function getRoomsInfo(req, res) {
 				instruction: instruction.slice(0, 101),
 				linkId,
 				quizzes: quizzes,
+				parameters: {},
+				joinId,
+				share: {
+					ask: [],
+					authorized: [],
+				},
 			};
 
 			db.collection('rooms').insertOne(room);

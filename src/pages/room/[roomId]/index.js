@@ -3,10 +3,212 @@ import Header from '@/components/header';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Menu from '@/components/menu';
-import Pie from '@/components/charts/pie';
 import Donut from '@/components/charts/donut';
 import Area from '@/components/charts/area';
+
+function Settings({ parameters }) {
+	const router = useRouter();
+
+	const [title, setTitle] = useState(parameters.data.title);
+	const [comment, setComment] = useState(parameters.data.comment);
+	const [slug, setSlug] = useState(parameters.data.slug);
+	const [instruction, setInstruction] = useState(parameters.data.instruction);
+	const [error, setError] = useState('');
+
+	const [ask, setAsk] = useState(parameters.share.ask);
+	const [authorized, setAuthorized] = useState(parameters.share.authorized);
+	const [url, setUrl] = useState('');
+
+	useEffect(() => {
+		if (window && router) {
+			setUrl(window.location.href.replace(router.asPath, '') + '/j/' + parameters.data.joinId);
+		}
+	}, [router]);
+
+	useEffect(() => {
+		fetch('/api/room/' + router.query.roomId, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ title, comment, slug, instruction, ask, authorized }),
+		})
+			.then((response) => response.json())
+			.then((jsonData) => {
+				if (jsonData.id) {
+					router.push('/result/' + jsonData.id);
+				}
+			});
+	}, [title, comment, instruction, ask, authorized]);
+
+	return (
+		<div className="w-full">
+			<div className="w-full flex mt-4 flex-wrap justify-between mb-4">
+				<div class="bg-white w-[49%] rounded-lg shadow p-4 md:p-6">
+					<div class="flex justify-between mb-3">
+						<div class="flex justify-center items-center">
+							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">Room Info</h5>
+						</div>
+					</div>
+					<div className="flex w-full gap-5 pt-3 sm:flex-row flex-col">
+						<div className="relative w-full min-w-[200px] h-18">
+							<input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className={'peer w-full h-10 bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 ' + (error && title.trim() === '' ? 'focus:border-red-500 border-red-500' : 'focus:border-blue-500')} placeholder=" " />
+							<label className={"flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 " + (error && title.trim() === '' ? 'peer-focus:text-red-500 before:border-red-gray-200 peer-focus:before:!border-red-500 after:border-red-gray-200 peer-focus:after:!border-red-500' : 'peer-focus:text-blue-500 before:border-blue-gray-200 peer-focus:before:!border-blue-500 after:border-blue-gray-200 peer-focus:after:!border-blue-500')}>Room Title</label>
+							{error && title.trim() === '' && (
+								<p className="flex items-center gap-1 mt-1 font-sans text-sm antialiased font-normal leading-normal text-red-500">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ef4468" className="w-4 h-4 -mt-px">
+										<path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd"></path>
+									</svg>
+									Missing field
+								</p>
+							)}
+						</div>
+
+						<div className="relative w-full min-w-[200px] h-18">
+							<input type="text" value={slug} onChange={(e) => setSlug(e.target.value)} className={'peer w-full h-10 bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 ' + (error && (slug.trim() === '' || error != 'Missing fields') ? 'focus:border-red-500 border-red-500' : 'focus:border-blue-500')} placeholder=" " />
+							<label className={"flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 " + (error && (slug.trim() === '' || error != 'Missing fields') ? 'peer-focus:text-red-500 before:border-red-gray-200 peer-focus:before:!border-red-500 after:border-red-gray-200 peer-focus:after:!border-red-500' : 'peer-focus:text-blue-500 before:border-blue-gray-200 peer-focus:before:!border-blue-500 after:border-blue-gray-200 peer-focus:after:!border-blue-500')}>Room Slug</label>
+							{slug.trim() === '' && error == 'Missing fields' && (
+								<p className="flex items-center gap-1 mt-1 font-sans text-sm antialiased font-normal leading-normal text-red-500">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ef4468" className="w-4 h-4 -mt-px">
+										<path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd"></path>
+									</svg>
+									Missing field
+								</p>
+							)}
+							{error != 'Missing fields' && slug.trim() != '' && error && (
+								<p className="flex items-center gap-1 mt-1 font-sans text-sm antialiased font-normal leading-normal text-red-500">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ef4468" className="w-4 h-4 -mt-px">
+										<path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd"></path>
+									</svg>
+									{error}
+								</p>
+							)}
+						</div>
+					</div>
+
+					<div className="relative w-full h-18 mt-3">
+						<input type="text" value={comment} onChange={(e) => setComment(e.target.value)} className={'peer w-full h-10 bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 ' + (error && comment.trim() === '' ? 'focus:border-red-500 border-red-500' : 'focus:border-blue-500')} placeholder=" " />
+						<label className={"flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 " + (error && comment.trim() === '' ? 'peer-focus:text-red-500 before:border-red-gray-200 peer-focus:before:!border-red-500 after:border-red-gray-200 peer-focus:after:!border-red-500' : 'peer-focus:text-blue-500 before:border-blue-gray-200 peer-focus:before:!border-blue-500 after:border-blue-gray-200 peer-focus:after:!border-blue-500')}>Room Comment</label>
+						{error && comment.trim() === '' && (
+							<p className="flex items-center gap-1 mt-1 font-sans text-sm antialiased font-normal leading-normal text-red-500">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ef4468" className="w-4 h-4 -mt-px">
+									<path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd"></path>
+								</svg>
+								Missing field
+							</p>
+						)}
+					</div>
+
+					<div className="relative w-full min-w-[200px] h-18 mt-3">
+						<textarea value={instruction} onChange={(e) => setInstruction(e.target.value)} className={'peer w-full h-28 bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 ' + (error && instruction.trim() === '' ? 'focus:border-red-500 border-red-500' : 'focus:border-blue-500')} placeholder=" " maxLength={100} />
+						<label className={"flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 " + (error && instruction.trim() === '' ? 'peer-focus:text-red-500 before:border-red-gray-200 peer-focus:before:!border-red-500 after:border-red-gray-200 peer-focus:after:!border-red-500' : 'peer-focus:text-blue-500 before:border-blue-gray-200 peer-focus:before:!border-blue-500 after:border-blue-gray-200 peer-focus:after:!border-blue-500')}>Room instruction</label>
+						<div className="flex justify-between">
+							<div>
+								{error && instruction.trim() === '' && (
+									<p className="flex items-center gap-1 mt-1 font-sans text-sm antialiased font-normal leading-normal text-red-500">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ef4468" className="w-4 h-4 -mt-px">
+											<path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd"></path>
+										</svg>
+										Missing field
+									</p>
+								)}
+								{instruction.length > 100 && (
+									<p className="flex items-center gap-1 mt-1 font-sans text-sm antialiased font-normal leading-normal text-red-500">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ef4468" className="w-4 h-4 -mt-px">
+											<path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd"></path>
+										</svg>
+										Character limit reached
+									</p>
+								)}
+							</div>
+							<p className="text-gray-500">{instruction.length}/100</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="w-[49%] bg-white rounded-lg shadow p-4 md:p-6">
+					<div class="flex justify-between mb-3">
+						<div class="flex justify-between w-full items-center">
+							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">User</h5>
+							<p className="cursor-pointer select-none">Copy link</p>
+							<p>{url}</p>
+						</div>
+					</div>
+					<div>
+						<div className={ask.length > 0 ? 'mb-4' : ''}>
+							{ask.map((user, index) => (
+								<div key={'ask-' + index} className="sm:px-0 sm:py-2 px-3 py-2 w-full justify-between select-none font-medium text-gray-900 flex gap-4 items-center leading-tight transition-all rounded-lg outline-none text-start">
+									<div className="flex">
+										<div className="grid mr-2 place-items-center">
+											<img alt="" src={user.image ? user.image : 'https://upload.wikimedia.org/wikipedia/commons/divumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} className="relative inline-block h-12 w-12 !rounded-full object-cover object-center" />
+										</div>
+										{user.name && user.email ? (
+											<div>
+												<h6 className="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">{user.name}</h6>
+												<p className="block font-sans text-sm -mt-1.5 antialiased font-normal leading-normal text-gray-700 w-48 truncate">{user.email}</p>
+											</div>
+										) : (
+											<div>
+												<h6 className="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">Anonymous</h6>
+											</div>
+										)}
+									</div>
+
+									<div className="flex truncate">
+										<button onClick={() => setAsk(ask.filter((a) => a.id !== user.id))} className="flex gap-1 bg-red-300 text-red-600 text-sm font-medium me-2 pl-1.5 px-2.5 py-0.5 rounded cursor-pointer truncate">
+											<img src="/svg/wrong.svg" />
+											Refuse
+										</button>
+										<button
+											onClick={() => {
+												setAsk(ask.filter((a) => a.id !== user.id));
+												setAuthorized([...authorized, user]);
+											}}
+											className="flex gap-1 bg-green-300 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded cursor-pointer truncate">
+											<img src="/svg/correct.svg" />
+											Accept
+										</button>
+									</div>
+								</div>
+							))}
+						</div>
+						<div className="">
+							{authorized.map((user, index) => (
+								<div key={'authorized-' + index} className="sm:px-0 sm:py-2 px-3 py-2 w-full flex justify-between select-none font-medium text-gray-900 gap-4 items-center leading-tight transition-all rounded-lg outline-none text-start">
+									<div className="flex">
+										<div className="grid mr-2 place-items-center">
+											<img alt="" src={user.image ? user.image : 'https://upload.wikimedia.org/wikipedia/commons/divumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png'} className="relative inline-block h-12 w-12 !rounded-full object-cover object-center" />
+										</div>
+										{user.name && user.email ? (
+											<div>
+												<h6 className="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">{user.name}</h6>
+												<p className="block font-sans text-sm -mt-1.5 antialiased font-normal leading-normal text-gray-700 w-72 truncate">{user.email}</p>
+											</div>
+										) : (
+											<div>
+												<h6 className="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">Anonymous</h6>
+											</div>
+										)}
+									</div>
+
+									<div className="flex truncate">
+										<button onClick={() => setAuthorized(authorized.filter((a) => a.id !== user.id))} class="flex gap-1 bg-red-300 text-red-600 text-sm font-medium me-2 pl-1.5 px-2.5 py-0.5 rounded cursor-pointer truncate">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mt-0.5" viewBox="0 0 16 16">
+												<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+												<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+											</svg>
+											Remove
+										</button>
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
 
 function Stats({ stats }) {
 	return (
@@ -210,9 +412,7 @@ function Quizzes({ oldQuizzes }) {
 			body: JSON.stringify({ quizzes: selectedQuizzes }),
 		})
 			.then((response) => response.json())
-			.then((jsonData) => {
-				console.log(jsonData);
-			});
+			.then((jsonData) => {});
 	}
 
 	useEffect(() => {
@@ -285,7 +485,7 @@ export default function Rooms() {
 	const [currentPage, setCurrentPage] = useState('results');
 	const [url, setUrl] = useState('');
 
-	const pages = ['results', 'quizzes', 'stats'];
+	const pages = ['results', 'quizzes', 'stats', 'settings'];
 
 	useEffect(() => {
 		if (window && router && room.room) {
@@ -338,9 +538,9 @@ export default function Rooms() {
 						<button onClick={() => navigator.clipboard.writeText(url)} className="bg-sky-500 text-white px-4 py-2 rounded-lg mt-4">
 							COPY
 						</button>
-						<button onClick={() => router.push('/room/' + room.room.id + '/qr')} className="bg-sky-500 text-white px-4 py-2 rounded-lg mt-4">
+						<a href={'/room/' + room?.room?.id + '/qr'} target="_blank" className="bg-sky-500 text-white px-4 py-2 rounded-lg mt-4">
 							Open QR
-						</button>
+						</a>
 
 						<div className="border-b border-gray-200 w-full">
 							<nav className="-mb-px flex gap-6 w-full" aria-label="Tabs">
@@ -360,6 +560,8 @@ export default function Rooms() {
 									return <Quizzes oldQuizzes={room?.quizzes} />;
 								case 'stats':
 									return <Stats stats={room?.stats} />;
+								case 'settings':
+									return <Settings parameters={room?.parameters} />;
 								default:
 									return null;
 							}
