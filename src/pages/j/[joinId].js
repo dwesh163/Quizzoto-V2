@@ -12,7 +12,6 @@ export default function Link() {
 		if (!router.query.joinId) {
 			return;
 		}
-		console.log(router.query.joinId);
 		fetch(`/api/join`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ joinId: router.query.joinId }) })
 			.then((res) => res.json())
 			.then((data) => {
