@@ -485,7 +485,13 @@ export default function Rooms() {
 	const [currentPage, setCurrentPage] = useState('results');
 	const [url, setUrl] = useState('');
 
-	const pages = ['results', 'quizzes', 'stats', 'settings'];
+	const [pages, setPages] = useState(['results', 'quizzes', 'stats']);
+
+	useEffect(() => {
+		if (status === 'authenticated' && session && session.user && session.user.email === room?.room?.user?.email && !pages.includes('settings')) {
+			setPages((prevPages) => [...prevPages, 'settings']);
+		}
+	}, [status, room]);
 
 	useEffect(() => {
 		if (window && router && room.room) {
