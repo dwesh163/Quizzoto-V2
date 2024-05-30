@@ -17,7 +17,6 @@ export default function Link() {
 			.then((res) => res.json())
 			.then((data) => {
 				setInfo(data);
-				console.log(data);
 			});
 	}, [router]);
 	return (

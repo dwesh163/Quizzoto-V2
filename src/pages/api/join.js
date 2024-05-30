@@ -24,7 +24,7 @@ export default async function getJoinLinks(req, res) {
 
 				await db.collection('rooms').updateOne({ joinId }, { $set: { 'share.ask': share.ask } });
 
-				return res.status(200).send({ success: 'Your invitation has been sent' });
+				return res.status(200).send({ message: 'Your invitation has been sent' });
 			} else {
 				return res.status(400).send({ error: 'Invitation already sent' });
 			}
