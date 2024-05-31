@@ -390,6 +390,7 @@ function Quizzes({ oldQuizzes }) {
 	const router = useRouter();
 
 	function fetchData() {
+		console.log('fetching data');
 		if (serverSearch === search && search !== '') {
 			return;
 		}
@@ -397,13 +398,21 @@ function Quizzes({ oldQuizzes }) {
 		fetch(`/api/quiz/?limit=${limit}&search=${search}&order=${order}`)
 			.then((response) => response.json())
 			.then((jsonData) => {
+				console.log('fetching ok');
+
 				setQuizzes(jsonData.quizzes);
+				console.log('setQuizzes ok');
+
 				setServerSearch(jsonData.search);
+				console.log('setServerSearch ok');
+
 				setIsLoading(false);
+				console.log('setIsLoading ok');
 			});
 	}
 
 	function updateQuiz(selectedQuizzes) {
+		console.log('updating quizzes');
 		fetch(`/api/room/${router.query.roomId}`, {
 			method: 'PATCH',
 			headers: {
@@ -412,27 +421,38 @@ function Quizzes({ oldQuizzes }) {
 			body: JSON.stringify({ quizzes: selectedQuizzes }),
 		})
 			.then((response) => response.json())
-			.then((jsonData) => {});
+			.then((jsonData) => {
+				console.log('updating quizzes ok');
+			});
 	}
 
 	useEffect(() => {
+		console.log('useEffect Fetch data');
 		fetchData();
+		console.log('useEffect Fetch data ok');
 	}, [limit]);
 
 	const handleSearchChange = (event) => {
+		console.log('setSearch');
+
 		setSearch(event.target.value);
+		console.log('setSearch ok');
 	};
 
 	const handleQuizClick = (quizId) => {
+		console.log('quizz click');
 		setSelectedQuizzes((prevSelectedQuizzes) => {
 			const updatedQuizzes = prevSelectedQuizzes.includes(quizId) ? prevSelectedQuizzes.filter((id) => id !== quizId) : [...prevSelectedQuizzes, quizId];
 
 			updateQuiz(updatedQuizzes);
 			return updatedQuizzes;
 		});
+		console.log('quizz click ok');
 	};
 
 	const filteredQuizzes = quizzes.filter((quiz) => quiz.title.toLowerCase().includes(search.toLowerCase()));
+	console.log('filteredQuizzes ok');
+	console.log('filteredQuizzes', filteredQuizzes);
 
 	return (
 		<div className="relative overflow-x-auto mt-2 w-full">
@@ -442,7 +462,15 @@ function Quizzes({ oldQuizzes }) {
 
 			{!isLoading ? (
 				<div className="flex flex-col w-full space-y-5 overflow-x-auto h-[70vh] select-none">
-					{selectedQuizzes.length > 0 && (
+					{JSON.stringify(selectedQuizzes)}
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					{JSON.stringify(filteredQuizzes)}
+					{/* {selectedQuizzes.length > 0 && (
 						<>
 							{selectedQuizzes
 								.map((id) => quizzes.find((quiz) => quiz.id === id))
@@ -467,7 +495,7 @@ function Quizzes({ oldQuizzes }) {
 									</div>
 								))}
 						</>
-					)}
+					)} */}
 				</div>
 			) : (
 				<div className="flex justify-center items-center w-full h-[70vh]"></div>
