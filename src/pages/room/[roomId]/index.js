@@ -470,7 +470,9 @@ function Quizzes({ oldQuizzes }) {
 					<br />
 					<br />
 					{JSON.stringify(filteredQuizzes)}
-					{selectedQuizzes.length > 0 && (
+					{selectedQuizzes.length}
+					{filteredQuizzes.length}
+					{/* {selectedQuizzes.length > 0 && (
 						<>
 							{selectedQuizzes
 								?.map((id) => quizzes.find((quiz) => quiz.id === id))
@@ -495,7 +497,7 @@ function Quizzes({ oldQuizzes }) {
 									</div>
 								))}
 						</>
-					)}
+					)} */}
 				</div>
 			) : (
 				<div className="flex justify-center items-center w-full h-[70vh]"></div>
