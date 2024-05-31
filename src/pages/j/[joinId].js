@@ -31,8 +31,14 @@ export default function Link() {
 				<meta name="description" content="QuizzotoV2" />
 			</Head>
 			<main className="flex items-center justify-center h-screen">
-				{info?.message == 'sign in' ? <button onClick={() => signIn()}>Sign in</button> : <p>{info?.message}</p>}
-				<p>{info?.error}</p>
+				<p>{info?.message}</p>
+				{info?.error == 'Sign in' ? (
+					<button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => signIn()}>
+						Sign in
+					</button>
+				) : (
+					<p>{info?.error}</p>
+				)}
 			</main>
 		</>
 	);
