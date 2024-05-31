@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { data } from 'autoprefixer';
+import { signIn } from 'next-auth/react';
 
 export default function Link() {
 	const router = useRouter();
@@ -17,7 +18,7 @@ export default function Link() {
 			.then((data) => {
 				setInfo(data);
 				if (data.message == 'redirect') {
-					router.push('/room/' + info.redirect);
+					router.push('/room/' + data.redirect);
 				}
 			});
 	}, [router]);
@@ -30,7 +31,7 @@ export default function Link() {
 				<meta name="description" content="QuizzotoV2" />
 			</Head>
 			<main className="flex items-center justify-center h-screen">
-				<p>{info?.message}</p>
+				{info?.message == 'sign in' ? <button onClick={() => signIn()}>Sign in</button> : <p>{info?.message}</p>}
 				<p>{info?.error}</p>
 			</main>
 		</>
