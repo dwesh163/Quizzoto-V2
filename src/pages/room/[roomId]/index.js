@@ -470,11 +470,11 @@ function Quizzes({ oldQuizzes }) {
 					<br />
 					<br />
 					{JSON.stringify(filteredQuizzes)}
-					{/* {selectedQuizzes.length > 0 && (
+					{selectedQuizzes.length > 0 && (
 						<>
 							{selectedQuizzes
-								.map((id) => quizzes.find((quiz) => quiz.id === id))
-								.map((quiz) => (
+								?.map((id) => quizzes.find((quiz) => quiz.id === id))
+								?.map((quiz) => (
 									<div key={quiz.id} className={`cursor-pointer w-full text-sm border border-gray-600 bg-white shadow-sm rounded-lg pl-5 pr-4 py-3 flex items-center justify-between focus:outline-none transform transition-transform duration-300`} onClick={() => handleQuizClick(quiz.id)}>
 										<div className="flex items-center">
 											<span className="font-medium text-gray-700">{quiz.title}</span>
@@ -486,8 +486,8 @@ function Quizzes({ oldQuizzes }) {
 					{filteredQuizzes.length > 0 && (
 						<>
 							{filteredQuizzes
-								.filter((quiz) => !selectedQuizzes.includes(quiz.id))
-								.map((quiz) => (
+								?.filter((quiz) => !selectedQuizzes.includes(quiz.id))
+								?.map((quiz) => (
 									<div key={quiz.id} className={`cursor-pointer w-full text-sm border border-gray-200 bg-white shadow-sm rounded-lg pl-5 pr-4 py-3 flex items-center justify-between focus:outline-none`} onClick={() => handleQuizClick(quiz.id)}>
 										<div className="flex items-center">
 											<span className="font-medium text-gray-700">{quiz.title}</span>
@@ -495,7 +495,7 @@ function Quizzes({ oldQuizzes }) {
 									</div>
 								))}
 						</>
-					)} */}
+					)}
 				</div>
 			) : (
 				<div className="flex justify-center items-center w-full h-[70vh]"></div>
