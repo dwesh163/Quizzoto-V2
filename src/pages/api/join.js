@@ -21,7 +21,7 @@ export default async function getJoinLinks(req, res) {
 			let share = room.share || { ask: [], authorized: [] };
 
 			if (share.authorized.includes(session.user.id)) {
-				return res.status(200).send({ message: 'redirect', redirect: room.id });
+				return res.status(200).send({ message: '', redirect: room.id });
 			}
 
 			if (!share.ask.includes(session.user.id)) {
