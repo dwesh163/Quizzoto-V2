@@ -29,9 +29,9 @@ export default async function getJoinLinks(req, res) {
 
 				await db.collection('rooms').updateOne({ joinId }, { $set: { 'share.ask': share.ask } });
 
-				return res.status(200).send({ message: 'Your invitation has been sent' });
+				return res.status(200).send({ message: 'Wait for admin approval' });
 			} else {
-				return res.status(200).send({ error: 'Invitation already sent' });
+				return res.status(200).send({ error: 'Wait for admin approval' });
 			}
 		} catch (error) {
 			console.error(error);

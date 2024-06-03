@@ -130,8 +130,21 @@ function Settings({ parameters }) {
 					<div class="flex justify-between mb-3">
 						<div class="flex justify-between w-full items-center">
 							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">User</h5>
-							<p className="cursor-pointer select-none">Copy link</p>
-							<p>{url}</p>
+							<p
+								className="cursor-pointer select-none"
+								onClick={() => {
+									console.log(url);
+									navigator.clipboard
+										.writeText(url)
+										.then(() => {
+											console.log('URL copied to clipboard:', url);
+										})
+										.catch((error) => {
+											console.error('Failed to copy URL to clipboard:', error);
+										});
+								}}>
+								Copy invitation link
+							</p>
 						</div>
 					</div>
 					<div>
