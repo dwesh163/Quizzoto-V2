@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Header from '@/components/header';
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Donut from '@/components/charts/donut';
@@ -418,9 +418,7 @@ function Quizzes({ oldQuizzes }) {
 			.then((response) => response.json())
 			.then((jsonData) => {
 				setQuizzes(jsonData.quizzes);
-
 				setServerSearch(jsonData.search);
-
 				setIsLoading(false);
 			});
 	}
@@ -457,7 +455,6 @@ function Quizzes({ oldQuizzes }) {
 	};
 
 	const filteredQuizzes = quizzes.filter((quiz) => quiz.title.toLowerCase().includes(search.toLowerCase()));
-
 	return (
 		<div className="relative overflow-x-auto mt-2 w-full">
 			<div className="relative w-full mb-8 mt-2">
@@ -558,7 +555,14 @@ export default function Rooms() {
 						) : (
 							<>
 								<p className="mt-4">Rooms not Found</p>
-								<p>Try to signIn</p>
+								{!session && (
+									<span className="flex gap-1">
+										Try to{' '}
+										<p onClick={() => signIn()} className="cursor-pointer select-none text-blue-500 hover:underline">
+											sign in
+										</p>
+									</span>
+								)}
 							</>
 						)}
 					</div>
