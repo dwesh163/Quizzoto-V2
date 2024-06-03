@@ -11,6 +11,7 @@ export default function ResultsPage() {
 	const { data: session, status } = useSession();
 	const router = useRouter();
 	const [resultId, setResultId] = useState('');
+	const [result, setResult] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [isContentLoading, setIsContentLoading] = useState(true);
 	const [audioPolicy, setAudioPolicy] = useState(false);
@@ -24,8 +25,20 @@ export default function ResultsPage() {
 		}
 		setTimeout(() => {
 			setIsLoading(false);
+			if (result.points != result.info.points) {
+				audioRef.current.pause();
+			}
+			const result = getResults();
+			console.log(result);
 		}, 2035);
 	}
+
+	function getResults() {
+		console.log(result);
+		return result;
+	}
+
+	console.log('result', result);
 
 	useEffect(() => {
 		(async () => {
@@ -54,6 +67,15 @@ export default function ResultsPage() {
 	useEffect(() => {
 		if (router.query.resultId) {
 			setResultId(router.query.resultId);
+
+			fetch(`/api/result/` + router.query.resultId)
+				.then((response) => response.json())
+				.then((jsonData) => {
+					console.log(jsonData);
+					if (jsonData.error != 'Not Found') {
+						setResult(jsonData);
+					}
+				});
 		}
 	}, [router.query.resultId]);
 

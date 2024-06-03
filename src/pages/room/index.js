@@ -48,7 +48,6 @@ export default function Results() {
 					</div>
 				) : (
 					<div className="flex flex-col mt-20 md:bg-[#fcfcfc] bg-white max-w-6xl px-2 mx-auto items-center justify-between md:flex-col md:px-6 lg:px-8">
-						<button onClick={() => router.push('/room/create')}>CREATE ROOM</button>
 						<div className="relative overflow-x-auto w-full">
 							<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 								<thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
@@ -81,6 +80,9 @@ export default function Results() {
 								</tbody>
 							</table>
 						</div>
+						<button className="bg-sky-500 text-white px-4 py-2 rounded-lg mt-8" onClick={() => router.push('/room/create')}>
+							Create Room
+						</button>
 					</div>
 				)}
 			</main>
