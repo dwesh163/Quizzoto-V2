@@ -7,16 +7,27 @@ export default async function getUserInfo(req, res) {
 
 		let search = req.query.search;
 		let query = {};
+		let selectedQuizzes = [{ visibility: 'public' }, { creator: session && session.user && session.user.id }];
 
 		const limit = req.query.limit;
+		const roomId = req.query.roomId;
 		const order = req.query.order ? req.query.order : 'rating';
 		const quizzesPerPage = 6;
+
+		if (roomId) {
+			const room = await db.collection('rooms').findOne({ id: roomId });
+			if (room.share.authorized.includes(session.user.id) || room.creator == session.user.id) {
+				for (let i = 0; i < room.quizzes.length; i++) {
+					selectedQuizzes.push({ id: room.quizzes[i] });
+				}
+			}
+		}
 
 		if (search !== undefined) {
 			query = {
 				$and: [
 					{
-						$or: [{ visibility: 'public' }, { creator: session && session.user && session.user.id }],
+						$or: selectedQuizzes,
 					},
 					{
 						$or: [{ title: { $regex: search, $options: 'i' } }, { slug: { $regex: search, $options: 'i' } }],
