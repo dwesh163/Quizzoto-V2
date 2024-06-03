@@ -97,7 +97,7 @@ export default async function getRoomsInfo(req, res) {
 				joinId,
 				share: {
 					ask: [],
-					authorized: [],
+					authorized: [user.id],
 				},
 			};
 
