@@ -139,7 +139,6 @@ function Settings({ parameters }) {
 									navigator.clipboard
 										.writeText(url)
 										.then(() => {
-											console.log('URL copied to clipboard:', url);
 											element.innerText = 'Copied';
 											setTimeout(() => {
 												element.innerText = originalText;
@@ -411,7 +410,6 @@ function Quizzes({ oldQuizzes }) {
 	const router = useRouter();
 
 	function fetchData() {
-		console.log('fetching data');
 		if (serverSearch === search && search !== '') {
 			return;
 		}
@@ -419,21 +417,15 @@ function Quizzes({ oldQuizzes }) {
 		fetch(`/api/quiz/?limit=${limit}&search=${search}&order=${order}&roomId=${router.query.roomId}`)
 			.then((response) => response.json())
 			.then((jsonData) => {
-				console.log('fetching ok');
-
 				setQuizzes(jsonData.quizzes);
-				console.log('setQuizzes ok');
 
 				setServerSearch(jsonData.search);
-				console.log('setServerSearch ok');
 
 				setIsLoading(false);
-				console.log('setIsLoading ok');
 			});
 	}
 
 	function updateQuiz(selectedQuizzes) {
-		console.log('updating quizzes');
 		fetch(`/api/room/${router.query.roomId}`, {
 			method: 'PATCH',
 			headers: {
@@ -442,42 +434,29 @@ function Quizzes({ oldQuizzes }) {
 			body: JSON.stringify({ quizzes: selectedQuizzes }),
 		})
 			.then((response) => response.json())
-			.then((jsonData) => {
-				console.log('updating quizzes ok');
-			});
+			.then((jsonData) => {});
 	}
 
 	useEffect(() => {
-		console.log('useEffect Fetch data');
 		if (router.query.roomId) {
 			fetchData();
 		}
-		console.log('useEffect Fetch data ok');
 	}, [limit, router.query.roomId]);
 
 	const handleSearchChange = (event) => {
-		console.log('setSearch');
-
 		setSearch(event.target.value);
-		console.log('setSearch ok');
 	};
 
 	const handleQuizClick = (quizId) => {
-		console.log('quizz click');
 		setSelectedQuizzes((prevSelectedQuizzes) => {
 			const updatedQuizzes = prevSelectedQuizzes.includes(quizId) ? prevSelectedQuizzes.filter((id) => id !== quizId) : [...prevSelectedQuizzes, quizId];
 
 			updateQuiz(updatedQuizzes);
 			return updatedQuizzes;
 		});
-		console.log('quizz click ok');
 	};
 
 	const filteredQuizzes = quizzes.filter((quiz) => quiz.title.toLowerCase().includes(search.toLowerCase()));
-	console.log('filteredQuizzes ok');
-	console.log('filteredQuizzes', filteredQuizzes);
-
-	console.log('selectedQuizzes', selectedQuizzes);
 
 	return (
 		<div className="relative overflow-x-auto mt-2 w-full">
@@ -487,18 +466,6 @@ function Quizzes({ oldQuizzes }) {
 
 			{!isLoading ? (
 				<div className="flex flex-col w-full space-y-5 overflow-x-auto h-[70vh] select-none">
-					{JSON.stringify(selectedQuizzes)}
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					{JSON.stringify(filteredQuizzes)}
-					<br />
-					{selectedQuizzes.length}
-					<br />
-					{filteredQuizzes.length}
 					{selectedQuizzes.length > 0 && (
 						<>
 							{selectedQuizzes
@@ -612,7 +579,6 @@ export default function Rooms() {
 										navigator.clipboard
 											.writeText(url)
 											.then(() => {
-												console.log('URL copied to clipboard:', url);
 												element.innerText = 'Copied';
 												setTimeout(() => {
 													element.innerText = originalText;
