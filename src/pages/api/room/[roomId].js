@@ -289,6 +289,8 @@ export default async function getRoomsInfo(req, res) {
 				})
 			);
 
+			parameters.admin = room.user.id;
+
 			return res.status(200).send({ results, quizzes, room, stats, parameters });
 		} catch (error) {
 			console.error('Error:', error);
