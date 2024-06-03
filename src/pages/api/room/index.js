@@ -35,6 +35,19 @@ export default async function getRoomsInfo(req, res) {
 						},
 					},
 					{
+						$lookup: {
+							from: 'results',
+							let: { roomId: '$id' },
+							pipeline: [{ $match: { $expr: { $eq: ['$roomId', '$$roomId'] } } }, { $count: 'count' }],
+							as: 'resultsCount',
+						},
+					},
+					{
+						$addFields: {
+							resultsCount: { $arrayElemAt: ['$resultsCount.count', 0] },
+						},
+					},
+					{
 						$project: {
 							comment: 1,
 							creator: 1,
@@ -43,6 +56,7 @@ export default async function getRoomsInfo(req, res) {
 							title: 1,
 							'user.image': 1,
 							'user.username': 1,
+							resultsCount: { $ifNull: ['$resultsCount', 0] },
 							_id: 0,
 						},
 					},

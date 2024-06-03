@@ -59,8 +59,12 @@ export default function Results() {
 											Comment
 										</th>
 										<th scope="col" className="px-6 py-3">
+											Answers number
+										</th>
+										<th scope="col" className="px-6 py-3">
 											Creator
 										</th>
+
 										<th scope="col" className="px-6 py-3 sm:flex hidden">
 											Time
 										</th>
@@ -73,6 +77,7 @@ export default function Results() {
 												{room.title}
 											</th>
 											<td className="px-6 py-4">{room.comment}</td>
+											<td className="px-6 py-4">{room.resultsCount}</td>
 											<td className="px-6 py-4">{room.user.username}</td>
 											<td className="px-6 py-4 sm:flex hidden">{new Date(room.time).toLocaleString('fr-FR')}</td>
 										</tr>
