@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Header from '@/components/header';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -45,7 +45,7 @@ export default function User() {
 					</div>
 				) : (
 					<div className="flex mt-20 md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto items-center justify-between md:flex-row md:px-6 lg:px-8">
-						<div className="relative max-w-350px w-full bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-2xl md:w-96">
+						<div className="relative max-w-350px w-full bg-white bg-no-repeat bg-top">
 							<div className="flex flex-col items-center justify-center pt-6 sm:pt-8">
 								<img src={user.image} alt="Profile Picture" className="rounded-full border-4 bg-white border-white w-32" />
 								<h1 className="font-bold font-sans text-secondary mt-2">{user.name ? user.name : user.username}</h1>
@@ -69,6 +69,11 @@ export default function User() {
 						</div>
 					</div>
 				)}
+				<div className="flex flex-col max-w-6xl px-2 mx-auto items-center justify-between md:flex-row md:px-6 lg:px-8">
+					<button className="mt-6 px-4 py-2 bg-primary text-black rounded-md w-full text-center" onClick={() => signOut()}>
+						Sign out
+					</button>
+				</div>
 			</main>
 		</>
 	);
