@@ -54,6 +54,7 @@ export default async function getResults(req, res) {
 						'user.email': 1,
 						'quiz.title': 1,
 						'quiz.description': 1,
+						'quiz.info': 1,
 					},
 				},
 			])
