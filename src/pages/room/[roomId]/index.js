@@ -497,7 +497,7 @@ function Quizzes({ oldQuizzes }) {
 					{selectedQuizzes.length}
 					<br />
 					{filteredQuizzes.length}
-					{/* {selectedQuizzes.length > 0 && (
+					{selectedQuizzes.length > 0 && (
 						<>
 							{selectedQuizzes
 								?.map((id) => quizzes.find((quiz) => quiz.id === id))
@@ -509,7 +509,7 @@ function Quizzes({ oldQuizzes }) {
 									</div>
 								))}
 						</>
-					)} */}
+					)}
 					{filteredQuizzes.length > 0 && (
 						<>
 							{filteredQuizzes
