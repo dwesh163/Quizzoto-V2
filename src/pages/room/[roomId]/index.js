@@ -470,7 +470,9 @@ function Quizzes({ oldQuizzes }) {
 					<br />
 					<br />
 					{JSON.stringify(filteredQuizzes)}
+					<br />
 					{selectedQuizzes.length}
+					<br />
 					{filteredQuizzes.length}
 					{/* {selectedQuizzes.length > 0 && (
 						<>
