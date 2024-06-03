@@ -454,6 +454,8 @@ function Quizzes({ oldQuizzes }) {
 	console.log('filteredQuizzes ok');
 	console.log('filteredQuizzes', filteredQuizzes);
 
+	console.log('selectedQuizzes', selectedQuizzes);
+
 	return (
 		<div className="relative overflow-x-auto mt-2 w-full">
 			<div className="relative w-full mb-8 mt-2">
