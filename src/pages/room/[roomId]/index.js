@@ -416,7 +416,7 @@ function Quizzes({ oldQuizzes }) {
 			return;
 		}
 
-		fetch(`/api/quiz/?limit=${limit}&search=${search}&order=${order}`)
+		fetch(`/api/quiz/?limit=${limit}&search=${search}&order=${order}&roomId=${router.query.roomId}`)
 			.then((response) => response.json())
 			.then((jsonData) => {
 				console.log('fetching ok');
@@ -449,9 +449,11 @@ function Quizzes({ oldQuizzes }) {
 
 	useEffect(() => {
 		console.log('useEffect Fetch data');
-		fetchData();
+		if (router.query.roomId) {
+			fetchData();
+		}
 		console.log('useEffect Fetch data ok');
-	}, [limit]);
+	}, [limit, router.query.roomId]);
 
 	const handleSearchChange = (event) => {
 		console.log('setSearch');
