@@ -39,6 +39,7 @@ async function fetchQuiz(quizId) {
 					date: 1,
 					update: 1,
 					questions: 1,
+					visibility: 1,
 					'user.name': 1,
 					'user.username': 1,
 					'user.image': 1,
@@ -74,6 +75,12 @@ export default async function getQuizInfo(req, res) {
 
 			const data = JSON.parse(req.body);
 
+			if (data.visibility) {
+				console.log(data.visibility);
+				await db.collection('quizzes').updateOne({ id: req.query.quizId }, { $set: { visibility: data.visibility } });
+				return res.status(200).send({ message: 'Ok', slug: quiz.slug });
+			}
+
 			const newQuiz = {
 				title: data.title,
 				description: data.description,
@@ -85,6 +92,16 @@ export default async function getQuizInfo(req, res) {
 			await db.collection('quizzes').updateOne({ id: req.query.quizId }, { $set: newQuiz });
 
 			return res.status(200).send({ message: 'Ok', slug: quiz.slug });
+		} else if (req.method === 'DELETE') {
+			const [quiz] = await fetchQuiz(req.query.quizId);
+
+			if (!quiz || quiz.user.email !== session.user.email) {
+				return res.status(404).send('404');
+			}
+
+			await db.collection('quizzes').deleteOne({ id: req.query.quizId });
+
+			return res.status(200).send({ message: 'Ok' });
 		} else {
 			return res.status(405).send('Method not allowed');
 		}
