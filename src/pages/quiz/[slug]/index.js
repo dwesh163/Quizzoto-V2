@@ -65,7 +65,7 @@ export default function Quiz() {
 	return (
 		<>
 			<Head>
-				<title>QuizzotoV2</title>
+				<title>{quiz?.title ? quiz.title : 'Quiz'} - QuizZoto</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>

@@ -162,7 +162,7 @@ export default function Import() {
 	return (
 		<>
 			<Head>
-				<title>QuizzotoV2</title>
+				<title>Import - Quizzoto</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>

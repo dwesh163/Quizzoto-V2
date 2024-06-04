@@ -155,7 +155,7 @@ export default function Page() {
 	return (
 		<>
 			<Head>
-				<title>QuizzotoV2</title>
+				<title>Create - Quizzoto</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>

@@ -30,7 +30,7 @@ export default function User() {
 	return (
 		<>
 			<Head>
-				<title>QuizzotoV2</title>
+				<title>user - Quizoto</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>

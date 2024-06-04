@@ -16,7 +16,8 @@ export default function Link({ quizzes, room, error }) {
 	return (
 		<>
 			<Head>
-				<title>QuizzotoV2</title>
+				<title>Join - Quizzoto</title>
+				<meta name="description" content="Join the quiz on Quizzoto" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>

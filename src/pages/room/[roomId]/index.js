@@ -540,7 +540,8 @@ export default function Rooms() {
 	return (
 		<>
 			<Head>
-				<title>QuizzotoV2</title>
+				<title>{room?.room?.title ? room?.room?.title : 'Room'} - Quizzoto</title>
+
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>

@@ -19,7 +19,7 @@ export default function Home() {
 	return (
 		<>
 			<Head>
-				<title>QuizotoV2</title>
+				<title>Quizzoto</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>

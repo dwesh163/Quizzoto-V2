@@ -25,20 +25,21 @@ export default function ResultsPage() {
 		}
 		setTimeout(() => {
 			setIsLoading(false);
-			if (result.points != result.info.points) {
+			const results = getResults();
+
+			if (result.points !== result.info?.points) {
 				audioRef.current.pause();
 			}
-			const result = getResults();
-			console.log(result);
+			console.log('Results after showResults timeout:', results);
 		}, 2035);
 	}
 
 	function getResults() {
-		console.log(result);
+		console.log('Current result state:', result);
 		return result;
 	}
 
-	console.log('result', result);
+	console.log('Initial result state:', result);
 
 	useEffect(() => {
 		(async () => {
@@ -62,7 +63,7 @@ export default function ResultsPage() {
 				setShowButton(true);
 			}
 		})();
-	}, []);
+	}, [result]);
 
 	useEffect(() => {
 		if (router.query.resultId) {
@@ -71,8 +72,8 @@ export default function ResultsPage() {
 			fetch(`/api/result/` + router.query.resultId)
 				.then((response) => response.json())
 				.then((jsonData) => {
-					console.log(jsonData);
-					if (jsonData.error != 'Not Found') {
+					console.log('Fetched result data:', jsonData);
+					if (jsonData.error !== 'Not Found') {
 						setResult(jsonData);
 					}
 				});
@@ -82,7 +83,7 @@ export default function ResultsPage() {
 	return (
 		<>
 			<Head>
-				<title>QuizzotoV2</title>
+				<title>Results - Quizzoto</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>

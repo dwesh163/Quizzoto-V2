@@ -26,7 +26,7 @@ export default function Link() {
 	return (
 		<>
 			<Head>
-				<title>QuizzotoV2</title>
+				<title>Join - Quizzoto</title>
 				<link rel="icon" href="/favicon.ico" />
 				<meta name="description" content="QuizzotoV2" />
 			</Head>
