@@ -25,24 +25,26 @@ export default function Home() {
 			<main>
 				<Header />
 				<div className="max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
-					<div className="text-center py-16 md:py-24">
-						<h1 className="text-5xl px-5 md:text-7xl font-extrabold leading-tighter tracking-tighter mb-4 aos-init aos-animate" data-aos="zoom-y-out">
-							Create and play on <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-teal-400">QUIZZOTO</span>
-						</h1>
-						<div className="max-w-3xl px-5 mx-auto">
-							<p className="sm:text-xl text-xs text-gray-600 mb-8 aos-init aos-animate" data-aos="zoom-y-out" data-aos-delay="150">
-								Quizzoto is a website dedicated to the creation and participation in online quizzes.
-							</p>
-							<div className="max-w-xs mx-auto sm:max-w-none select-none flex justify-center aos-init aos-animate gap-4" data-aos="zoom-y-out" data-aos-delay="300">
-								<div>
-									<a onClick={() => router.push('/quiz')} className="btn cursor-pointer px-6 py-3 rounded-lg text-white bg-sky-500 hover:bg-sky-600 w-full mb-4 sm:w-auto sm:mb-0">
-										Start quizz
-									</a>
-								</div>
-								<div>
+					<div className="text-center flex items-center justify-center py-16 md:py-24 min-h-screen">
+						<div className="-mt-28">
+							<h1 className="text-5xl px-5 md:text-7xl font-extrabold leading-tighter tracking-tighter mb-4 aos-init aos-animate" data-aos="zoom-y-out">
+								Create and play on <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-teal-400">QUIZZOTO</span>
+							</h1>
+							<div className="max-w-3xl px-5 mx-auto">
+								<p className="sm:text-xl text-xs text-gray-600 mb-8 aos-init aos-animate" data-aos="zoom-y-out" data-aos-delay="150">
+									Quizzoto is a website dedicated to the creation and participation in online quizzes.
+								</p>
+								<div className="max-w-xs mx-auto sm:max-w-none select-none flex justify-center aos-init aos-animate gap-4" data-aos="zoom-y-out" data-aos-delay="300">
+									<div>
+										<a onClick={() => router.push('/quiz')} className="btn cursor-pointer px-6 py-3 rounded-lg text-white bg-sky-500 hover:bg-sky-600 w-full mb-4 sm:w-auto sm:mb-0">
+											Start quizz
+										</a>
+									</div>
+									{/* <div>
 									<a onClick={() => router.push('/what')} className="btn cursor-pointer px-6 py-3 rounded-lg text-white bg-gray-900 hover:bg-gray-800 w-full sm:w-auto sm:ml-4">
 										Learn more
 									</a>
+								</div> */}
 								</div>
 							</div>
 						</div>
