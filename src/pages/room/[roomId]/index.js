@@ -162,12 +162,12 @@ function Settings({ parameters }) {
 										</div>
 										{user.name && user.email ? (
 											<div>
-												<h6 className="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">{user.name}</h6>
-												<p className="block font-sans text-sm -mt-1.5 antialiased font-normal leading-normal text-gray-700 w-48 truncate">{user.email}</p>
+												<h6 className="block font-sans sm:text-base text-sm antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">{user.name}</h6>
+												<p className="block font-sans sm:text-sm text-xs -mt-1.5 antialiased font-normal leading-normal text-gray-700 sm:w-48 w-12 truncate">{user.email}</p>
 											</div>
 										) : (
 											<div>
-												<h6 className="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">Anonymous</h6>
+												<h6 className="block font-sans sm:text-base text-sm antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">Anonymous</h6>
 											</div>
 										)}
 									</div>
@@ -199,12 +199,12 @@ function Settings({ parameters }) {
 										</div>
 										{user.name && user.email ? (
 											<div>
-												<h6 className="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">{user.name}</h6>
-												<p className="block font-sans text-sm -mt-1.5 antialiased font-normal leading-normal text-gray-700 w-72 truncate">{user.email}</p>
+												<h6 className="block font-sans sm:text-base text-sm antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">{user.name}</h6>
+												<p className="block font-sans sm:text-sm text-xs -mt-1.5 antialiased font-normal leading-normal text-gray-700 sm:w-72 w-16 truncate">{user.email}</p>
 											</div>
 										) : (
 											<div>
-												<h6 className="block font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">Anonymous</h6>
+												<h6 className="block font-sans sm:text-base text-sm antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900 truncate">Anonymous</h6>
 											</div>
 										)}
 									</div>
