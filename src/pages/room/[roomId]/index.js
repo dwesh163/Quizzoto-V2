@@ -43,8 +43,8 @@ function Settings({ parameters }) {
 
 	return (
 		<div className="w-full">
-			<div className="w-full flex mt-4 flex-wrap justify-between mb-4">
-				<div class="bg-white w-[49%] rounded-lg shadow p-4 md:p-6">
+			<div className="w-full flex mt-4 sm:flex-row flex-col justify-between mb-4">
+				<div class="bg-white sm:w-[49%] w-full sm:rounded-lg sm:shadow p-4 md:p-6">
 					<div class="flex justify-between mb-3">
 						<div class="flex justify-center items-center">
 							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">Room Info</h5>
@@ -126,7 +126,7 @@ function Settings({ parameters }) {
 					</div>
 				</div>
 
-				<div class="w-[49%] bg-white rounded-lg shadow p-4 md:p-6">
+				<div class="bg-white sm:w-[49%] w-full sm:rounded-lg sm:shadow p-4 md:p-6">
 					<div class="flex justify-between mb-3">
 						<div class="flex justify-between w-full items-center">
 							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">User</h5>
@@ -570,12 +570,12 @@ export default function Rooms() {
 					<div className="flex mt-20 md:bg-[#fcfcfc] bg-white flex-col max-w-6xl mx-auto items-center justify-between md:px-6 px-4 lg:px-8">
 						<div className="flex justify-between w-full mt-4 mb-7">
 							<div>
-								<h3 className="text-3xl font-bold text-gray-900">Room {room?.room?.title}</h3>
-								<p className="text-gray-500">{room?.room?.comment}</p>
+								<h3 className="sm:text-3xl text-2xl font-bold text-gray-900">Room {room?.room?.title}</h3>
+								<p className="text-gray-500 sm:text-base text-sm">{room?.room?.comment}</p>
 							</div>
 							<div className="flex gap-2 items-center">
 								<p
-									className="cursor-pointer select-none bg-sky-500 hover:opacity-90 text-white px-4 py-2 rounded-lg h-10"
+									className="cursor-pointer select-none bg-sky-500 hover:opacity-90 text-white sm:text-base text-xs sm:px-4 sm:py-2 px-2 py-1 rounded-lg sm:h-10 h-6"
 									onClick={(e) => {
 										const element = e.target;
 										const originalText = element.innerText;
@@ -595,7 +595,7 @@ export default function Rooms() {
 									Copy link
 								</p>
 
-								<a href={'/room/' + room?.room?.id + '/qr'} target="_blank" className="cursor-pointer select-none bg-sky-500 hover:opacity-90 text-white px-4 py-2 rounded-lg h-10">
+								<a href={'/room/' + room?.room?.id + '/qr'} target="_blank" className="cursor-pointer select-none bg-sky-500 hover:opacity-90 text-white sm:text-base text-xs sm:px-4 sm:py-2 px-2 py-1 rounded-lg sm:h-10 h-6">
 									Open QR
 								</a>
 							</div>
