@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]';
 import db from '/lib/mongodb';
+import { authOptions } from '../../auth/[...nextauth]';
 
 var parser = require('ua-parser-js');
 
