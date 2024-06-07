@@ -44,10 +44,10 @@ function Settings({ parameters }) {
 	return (
 		<div className="w-full">
 			<div className="w-full flex mt-4 sm:flex-row flex-col justify-between mb-4">
-				<div class="bg-white sm:w-[49%] w-full sm:rounded-lg sm:shadow p-4 md:p-6">
-					<div class="flex justify-between mb-3">
-						<div class="flex justify-center items-center">
-							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">Room Info</h5>
+				<div className="bg-white sm:w-[49%] w-full sm:rounded-lg sm:shadow p-4 md:p-6">
+					<div className="flex justify-between mb-3">
+						<div className="flex justify-center items-center">
+							<h5 className="text-xl font-bold leading-none text-gray-900 pe-1">Room Info</h5>
 						</div>
 					</div>
 					<div className="flex w-full gap-5 pt-3 sm:flex-row flex-col">
@@ -126,10 +126,10 @@ function Settings({ parameters }) {
 					</div>
 				</div>
 
-				<div class="bg-white sm:w-[49%] w-full sm:rounded-lg sm:shadow p-4 md:p-6">
-					<div class="flex justify-between mb-3">
-						<div class="flex justify-between w-full items-center">
-							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">User</h5>
+				<div className="bg-white sm:w-[49%] w-full sm:rounded-lg sm:shadow p-4 md:p-6">
+					<div className="flex justify-between mb-3">
+						<div className="flex justify-between w-full items-center">
+							<h5 className="text-xl font-bold leading-none text-gray-900 pe-1">User</h5>
 							<p
 								className="cursor-pointer select-none text-blue-600 hover:underline"
 								onClick={(e) => {
@@ -211,8 +211,8 @@ function Settings({ parameters }) {
 
 									{parameters.admin !== user.id && (
 										<div className="flex truncate">
-											<button onClick={() => setAuthorized(authorized.filter((a) => a.id !== user.id))} class="flex gap-1 bg-red-300 text-red-600 text-sm font-medium me-2 pl-1.5 px-2.5 py-0.5 rounded cursor-pointer truncate">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mt-0.5" viewBox="0 0 16 16">
+											<button onClick={() => setAuthorized(authorized.filter((a) => a.id !== user.id))} className="flex gap-1 bg-red-300 text-red-600 text-sm font-medium me-2 pl-1.5 px-2.5 py-0.5 rounded cursor-pointer truncate">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="mt-0.5" viewBox="0 0 16 16">
 													<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
 													<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
 												</svg>
@@ -235,22 +235,22 @@ function Stats({ stats }) {
 		<div className="w-full">
 			<div className="w-full flex mt-4 flex-wrap justify-between mb-4">
 				{stats.numbers.map((stat, index) => (
-					<div key={'number-' + index} class="lg:w-[32%] w-full lg:mb-0 mb-4 flex bg-white rounded-lg shadow p-4 md:p-6">
-						<div class="flex justify-between w-full">
-							<div class="flex items-center">
-								<div class="w-12 h-12 rounded-lg bg-gray-100  flex items-center justify-center me-3">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000" class="bi bi-people" viewBox="0 0 16 16">
+					<div key={'number-' + index} className="lg:w-[32%] w-full lg:mb-0 mb-4 flex bg-white rounded-lg shadow p-4 md:p-6">
+						<div className="flex justify-between w-full">
+							<div className="flex items-center">
+								<div className="w-12 h-12 rounded-lg bg-gray-100  flex items-center justify-center me-3">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000" className="" viewBox="0 0 16 16">
 										<path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
 									</svg>
 								</div>
 								<div>
-									<h5 class="leading-none text-2xl font-bold text-gray-900 pb-1">{stat.number}</h5>
-									<p class="text-sm font-normal text-gray-500 ">{stat.title}</p>
+									<h5 className="leading-none text-2xl font-bold text-gray-900 pb-1">{stat.number}</h5>
+									<p className="text-sm font-normal text-gray-500 ">{stat.title}</p>
 								</div>
 							</div>
 							<div>
-								<span class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md">
-									<svg class="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
+								<span className="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md">
+									<svg className="w-2.5 h-2.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
 										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
 									</svg>
 									{stat.fluctuate}%
@@ -261,24 +261,24 @@ function Stats({ stats }) {
 				))}
 			</div>
 			<div className="w-full flex flex-col lg:flex-row justify-between gap-6">
-				<div class="lg:w-[32%] w-full bg-white rounded-lg shadow p-4 md:p-6">
-					<div class="flex justify-between mb-3">
-						<div class="flex justify-center items-center">
-							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">Website traffic</h5>
+				<div className="lg:w-[32%] w-full bg-white rounded-lg shadow p-4 md:p-6">
+					<div className="flex justify-between mb-3">
+						<div className="flex justify-center items-center">
+							<h5 className="text-xl font-bold leading-none text-gray-900 pe-1">Website traffic</h5>
 						</div>
 					</div>
 					<Donut data={stats.userAgent} />
 				</div>
 
-				<div class="lg:w-[66%] bg-white rounded-lg shadow p-4 pb-0 md:p-6 md:pb-0">
-					<div class="flex justify-between">
+				<div className="lg:w-[66%] bg-white rounded-lg shadow p-4 pb-0 md:p-6 md:pb-0">
+					<div className="flex justify-between">
 						<div>
-							<h5 class="text-xl font-bold leading-none text-gray-900 pe-1">Quizzes</h5>
-							<p class="text-base font-normal text-gray-500">answered this days</p>
+							<h5 className="text-xl font-bold leading-none text-gray-900 pe-1">Quizzes</h5>
+							<p className="text-base font-normal text-gray-500">answered this days</p>
 						</div>
-						<div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 text-center">
+						<div className="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 text-center">
 							12%
-							<svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
+							<svg className="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
 								<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
 							</svg>
 						</div>
@@ -287,9 +287,6 @@ function Stats({ stats }) {
 					<Area data={stats.answersPerHourPerQuiz} answersPer={stats.answersPerHour} />
 				</div>
 			</div>
-			{/* <div>
-				<Area data={stats.answersPerPointPerQuiz} answersPer={stats.answersPerPoint} />
-			</div> */}
 		</div>
 	);
 }
@@ -328,19 +325,19 @@ function Answers({ results }) {
 	const renderSortArrow = (key) => {
 		if (sortConfig.key !== key)
 			return (
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="" viewBox="0 0 16 16">
 					<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
 				</svg>
 			);
 		if (sortConfig.direction === 'asc') {
 			return (
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="" viewBox="0 0 16 16">
 					<path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
 				</svg>
 			);
 		}
 		return (
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="" viewBox="0 0 16 16">
 				<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
 			</svg>
 		);
@@ -351,10 +348,10 @@ function Answers({ results }) {
 			<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 				<thead className="sm:text-base text-sm text-gray-900 uppercase dark:text-gray-400 select-none">
 					<tr>
-						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 hidden sm:table-cell cursor-pointer">
+						<th scope="col" className="sm:px-6 px-3 sm:py-3 py-1 cursor-pointer">
 							User
 						</th>
-						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 cursor-pointer" onClick={() => sortData('title')}>
+						<th scope="col" className="sm:px-6 px-0 sm:py-3 py-1 hidden sm:table-cell cursor-pointer" onClick={() => sortData('title')}>
 							<div className="flex items-center gap-1">
 								<p>Quizz </p>
 								{renderSortArrow('title')}
@@ -507,6 +504,7 @@ export default function Rooms() {
 	const [url, setUrl] = useState('');
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [title, setTitle] = useState('Room - Quizzoto');
+	const [isCopied, setIsCopied] = useState(false);
 
 	const [pages, setPages] = useState(['results', 'quizzes', 'stats']);
 
@@ -561,44 +559,44 @@ export default function Rooms() {
 			<main>
 				<Header />
 				{isModalOpen && (
-					<div class="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center">
-						<div aria-hidden="true" class="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"></div>
+					<div className="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center">
+						<div aria-hidden="true" className="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"></div>
 
-						<div class="relative w-full cursor-pointer pointer-events-none transition my-auto p-4">
-							<div class="w-full py-2 bg-white cursor-default pointer-events-auto relative rounded-xl mx-auto max-w-sm">
-								<button tabindex="-1" type="button" class="absolute top-2 right-2 rtl:right-auto rtl:left-2" onClick={() => setIsModalOpen(false)}>
-									<svg title="Close" tabindex="-1" class="h-4 w-4 cursor-pointer text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-										<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+						<div className="relative w-full cursor-pointer pointer-events-none transition my-auto p-4">
+							<div className="w-full py-2 bg-white cursor-default pointer-events-auto relative rounded-xl mx-auto max-w-sm">
+								<button tabIndex="-1" type="button" className="absolute top-2 right-2 rtl:right-auto rtl:left-2" onClick={() => setIsModalOpen(false)}>
+									<svg title="Close" tabIndex="-1" className="h-4 w-4 cursor-pointer text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+										<path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path>
 									</svg>
-									<span class="sr-only">Close</span>
+									<span className="sr-only">Close</span>
 								</button>
 
-								<div class="space-y-2 p-2">
-									<div class="p-4 space-y-2 text-center">
-										<h2 class="text-xl font-bold tracking-tight" id="page-action.heading">
+								<div className="space-y-2 p-2">
+									<div className="p-4 space-y-2 text-center">
+										<h2 className="text-xl font-bold tracking-tight" id="page-action.heading">
 											Delete {room.room?.title}
 										</h2>
 
-										<p class="text-gray-500">Are you sure you would like to do this?</p>
+										<p className="text-gray-500">Are you sure you would like to do this?</p>
 									</div>
 								</div>
 
-								<div class="space-y-2">
-									<div aria-hidden="true" class="border-t px-2"></div>
+								<div className="space-y-2">
+									<div aria-hidden="true" className="border-t px-2"></div>
 
-									<div class="px-6 py-2">
-										<div class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(0,1fr))]">
-											<button type="button" class="inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-gray-800 bg-white border-gray-300 hover:bg-gray-50 focus:ring-primary-600 focus:text-primary-600 focus:bg-primary-50 focus:border-primary-600">
-												<span class="flex items-center gap-1">
-													<span class="" onClick={() => setIsModalOpen(false)}>
+									<div className="px-6 py-2">
+										<div className="grid gap-2 grid-cols-[repeat(auto-fit,minmax(0,1fr))]">
+											<button type="button" className="inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-gray-800 bg-white border-gray-300 hover:bg-gray-50 focus:ring-primary-600 focus:text-primary-600 focus:bg-primary-50 focus:border-primary-600">
+												<span className="flex items-center gap-1">
+													<span className="" onClick={() => setIsModalOpen(false)}>
 														Cancel
 													</span>
 												</span>
 											</button>
 
-											<button onClick={() => deleteQuiz()} type="submit" class="inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-red-600 hover:bg-red-500 focus:bg-red-700 focus:ring-offset-red-700">
-												<span class="flex items-center gap-1">
-													<span class="">Confirm</span>
+											<button onClick={() => deleteQuiz()} type="submit" className="inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-red-600 hover:bg-red-500 focus:bg-red-700 focus:ring-offset-red-700">
+												<span className="flex items-center gap-1">
+													<span className="">Confirm</span>
 												</span>
 											</button>
 										</div>
@@ -641,34 +639,37 @@ export default function Rooms() {
 								<button
 									className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg sm:text-sm text-xs sm:px-5 px-2 sm:py-2.5 py-2 me-2 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none flex items-center gap-1"
 									onClick={(e) => {
-										const element = e.target;
-										const originalInnerHTML = element.innerHTML;
-
 										navigator.clipboard
 											.writeText(url)
 											.then(() => {
-												element.innerHTML = `
-													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-														<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-													</svg>
-													<p className="sm:flex hidden text-sm">Copied</p>
-												`;
+												setIsCopied(true);
 												setTimeout(() => {
-													element.innerHTML = originalInnerHTML;
+													setIsCopied(false);
 												}, 3000);
 											})
 											.catch((error) => {
 												console.error('Failed to copy URL to clipboard:', error);
 											});
 									}}>
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
-										<path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
-									</svg>
-									<p className="sm:flex hidden text-sm">Copy URL</p>
+									{isCopied ? (
+										<>
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="" viewBox="0 0 16 16">
+												<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+											</svg>
+											<p className="sm:flex hidden text-sm">Copied</p>
+										</>
+									) : (
+										<>
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="" viewBox="0 0 16 16">
+												<path fillRule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+											</svg>
+											<p className="sm:flex hidden text-sm">Copy URL</p>
+										</>
+									)}
 								</button>
 
 								<button onClick={() => window.open(window.location.href + '/qr')} type="button" className="text-white w-fit bg-gray-400 hover:bg-gray-500 focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm px-2.5 sm:py-2.5 py-2 me-2 focus:outline-none flex items-center gap-1">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-qr-code" viewBox="0 0 16 16">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="" viewBox="0 0 16 16">
 										<path d="M2 2h2v2H2z" />
 										<path d="M6 0v6H0V0zM5 1H1v4h4zM4 12H2v2h2z" />
 										<path d="M6 10v6H0v-6zm-5 1v4h4v-4zm11-9h2v2h-2z" />
@@ -678,9 +679,9 @@ export default function Rooms() {
 									<p className="sm:flex hidden text-sm">Open QR</p>
 								</button>
 								<button onClick={() => window.open(url)} type="button" className="text-white w-fit bg-gray-400 hover:bg-gray-500 focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm px-2.5 sm:py-2.5 py-2 me-2 focus:outline-none flex items-center gap-1">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
-										<path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5" />
-										<path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z" />
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="" viewBox="0 0 16 16">
+										<path fillRule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5" />
+										<path fillRule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z" />
 									</svg>
 									<p className="sm:flex hidden text-sm">See room</p>
 								</button>
@@ -689,8 +690,8 @@ export default function Rooms() {
 										setIsModalOpen(true);
 									}}
 									type="button"
-									className="text-white w-fit bg-red-500 hover:bg-red-600 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 sm:py-2.5 py-2 me-2 focus:outline-none flex items-center gap-1">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+									className="text-white w-fit bg-red-500 hover:bg-red-600 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 sm:py-2.5 py-2 focus:outline-none flex items-center gap-1">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="" viewBox="0 0 16 16">
 										<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
 										<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
 									</svg>
@@ -710,7 +711,6 @@ export default function Rooms() {
 							<nav className="-mb-px">
 								<button
 									onClick={() => {
-										console.log(room.room);
 										const element = document.createElement('a');
 										element.setAttribute('href', '/api/room/' + router.query.roomId + '/download');
 										element.setAttribute('download', room.room.link.slug + '.svg');
@@ -720,7 +720,7 @@ export default function Rooms() {
 										document.body.removeChild(element);
 									}}
 									className="cursor-pointer shrink-0 border-b-2 px-1 pb-4 text-sm font-medium text-gray-500 hover:text-gray-700 border-transparent flex gap-1 justify-center">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mt-0.5" viewBox="0 0 16 16">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="mt-0.5" viewBox="0 0 16 16">
 										<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
 										<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
 									</svg>
