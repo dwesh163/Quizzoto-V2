@@ -258,17 +258,29 @@ const Starter = ({ starter, setStarter }) => {
 
 	return (
 		<div className="flex sm:items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
-			<div className="relative w-full p-5 pt-6 mt-2 min-h-[30rem] h-fit bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
-				<div>
+			<div className="relative flex flex-col justify-between w-full p-5 pt-6 mt-2 min-h-[30rem] h-fit bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
+				<div className="">
 					<h3 className="sm:text-3xl text-2xl font-bold text-gray-900">{starter.title}</h3>
 					<p className="text-gray-500 sm:text-base text-sm">{starter.subtitle}</p>
 					{starter.fields.map((field, index) => (
-						<div key={index} className="mt-4">
+						<div key={index} className="mt-4 relative">
 							<h3 className="sm:text-xl text-xl">{field.text}</h3>
 							<div className="relative w-full min-w-[200px] h-18 mt-2">
-								<input type="text" placeholder={field.text} value={field.value || ''} onChange={(event) => handleChange(field.type, event.target.value)} className={`peer w-full h-10 bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 ${error[field.type] ? 'focus:border-red-500 border-red-500' : 'focus:border-blue-500'}`} />
-								<label className={`flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content-[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content-[''] after:block after:flex-grow after:box-border after:h-1.5 after:mt-[6.5px] peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 ${error[field.type] ? 'peer-focus:text-red-500 before:border-red-gray-200 peer-focus:before:!border-red-500 after:border-red-gray-200 peer-focus:after:!border-red-500' : 'peer-focus:text-blue-500 before:border-blue-gray-200 peer-focus:before:!border-blue-500 after:border-blue-gray-200 peer-focus:after:!border-blue-500'}`}></label>
-								{error[field.type] && (
+								<input
+									type="text"
+									placeholder={field.text}
+									value={field.value || ''}
+									onChange={(event) => handleChange(field.type, event.target.value)}
+									className={`peer w-full h-10 pl-3 focus:pl-[0.68rem] bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 
+						${error[field.type] ? 'focus:border-red-500 border-red-500' : 'focus:border-blue-500'} 
+						${error[field.type] && !document.activeElement.classList.contains('border-red-500') ? 'border-red-500' : ''}`}
+								/>
+								<label
+									className={`absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] 
+						${error[field.type] ? 'text-red-500' : 'text-blue-gray-400'}`}
+									style={{ width: 'calc(100% - 6px)' }} // Adjust the width here
+								></label>
+								{error[field.type] && !document.activeElement.classList.contains('border-red-500') && (
 									<p className="flex items-center gap-1 mt-1 font-sans text-sm antialiased font-normal leading-normal text-red-500">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ef4468" className="w-4 h-4 -mt-px">
 											<path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd"></path>
@@ -280,7 +292,8 @@ const Starter = ({ starter, setStarter }) => {
 						</div>
 					))}
 				</div>
-				<div className="flex items-center w-full justify-center flex-col mt-16 gap-4">
+
+				<div className="flex items-center w-full relative justify-center flex-col  gap-4">
 					<div className="flex items-center w-full justify-center">
 						<div className="flex w-full justify-center">
 							<button className="text-white w-full sm:max-w-96 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 bg-sky-500 hover:bg-sky-600 focus:outline-none disabled:bg-gray-400" disabled={!isFormValid() || isLoading} onClick={handleStartClick}>
