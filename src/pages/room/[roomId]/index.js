@@ -505,6 +505,7 @@ export default function Rooms() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState('results');
 	const [url, setUrl] = useState('');
+	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [title, setTitle] = useState('Room - Quizzoto');
 
 	const [pages, setPages] = useState(['results', 'quizzes', 'stats']);
@@ -546,6 +547,54 @@ export default function Rooms() {
 			</Head>
 			<main>
 				<Header />
+				{isModalOpen && (
+					<div class="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center">
+						<div aria-hidden="true" class="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"></div>
+
+						<div class="relative w-full cursor-pointer pointer-events-none transition my-auto p-4">
+							<div class="w-full py-2 bg-white cursor-default pointer-events-auto relative rounded-xl mx-auto max-w-sm">
+								<button tabindex="-1" type="button" class="absolute top-2 right-2 rtl:right-auto rtl:left-2" onClick={() => setIsModalOpen(false)}>
+									<svg title="Close" tabindex="-1" class="h-4 w-4 cursor-pointer text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+										<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+									</svg>
+									<span class="sr-only">Close</span>
+								</button>
+
+								<div class="space-y-2 p-2">
+									<div class="p-4 space-y-2 text-center">
+										<h2 class="text-xl font-bold tracking-tight" id="page-action.heading">
+											Delete {room.room?.title}
+										</h2>
+
+										<p class="text-gray-500">Are you sure you would like to do this?</p>
+									</div>
+								</div>
+
+								<div class="space-y-2">
+									<div aria-hidden="true" class="border-t px-2"></div>
+
+									<div class="px-6 py-2">
+										<div class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(0,1fr))]">
+											<button type="button" class="inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2.25rem] px-4 text-sm text-gray-800 bg-white border-gray-300 hover:bg-gray-50 focus:ring-primary-600 focus:text-primary-600 focus:bg-primary-50 focus:border-primary-600">
+												<span class="flex items-center gap-1">
+													<span class="" onClick={() => setIsModalOpen(false)}>
+														Cancel
+													</span>
+												</span>
+											</button>
+
+											<button type="submit" class="inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-red-600 hover:bg-red-500 focus:bg-red-700 focus:ring-offset-red-700">
+												<span class="flex items-center gap-1">
+													<span class="">Confirm</span>
+												</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				)}
 				{isLoading ? (
 					<div className="flex md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto items-center justify-center md:px-6 lg:px-8 h-[100vh]">
 						{room != '404' ? (
@@ -574,9 +623,71 @@ export default function Rooms() {
 								<h3 className="sm:text-3xl text-2xl font-bold text-gray-900">Room {room?.room?.title}</h3>
 								<p className="text-gray-500 sm:text-base text-sm">{room?.room?.comment}</p>
 							</div>
-							<div className="flex gap-2 items-center">
-								<p
-									className="cursor-pointer select-none bg-sky-500 hover:opacity-90 text-white sm:text-base text-xs sm:px-4 sm:py-2 px-2 py-1 rounded-lg sm:h-10 h-6"
+
+							<div className="flex items-center">
+								<button
+									className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg sm:text-sm text-xs sm:px-5 px-2 sm:py-2.5 py-2 me-2 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none flex items-center gap-1"
+									onClick={(e) => {
+										const element = e.target;
+										const originalInnerHTML = element.innerHTML;
+
+										navigator.clipboard
+											.writeText(url)
+											.then(() => {
+												element.innerHTML = `
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+														<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+													</svg>
+													<p className="sm:flex hidden text-sm">Copied</p>
+												`;
+												setTimeout(() => {
+													element.innerHTML = originalInnerHTML;
+												}, 3000);
+											})
+											.catch((error) => {
+												console.error('Failed to copy URL to clipboard:', error);
+											});
+									}}>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+										<path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+									</svg>
+									<p className="sm:flex hidden text-sm">Copy URL</p>
+								</button>
+
+								<button onClick={() => window.open(window.location.href + '/qr')} type="button" className="text-white w-fit bg-gray-400 hover:bg-gray-500 focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm px-2.5 sm:py-2.5 py-2 me-2 focus:outline-none flex items-center gap-1">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-qr-code" viewBox="0 0 16 16">
+										<path d="M2 2h2v2H2z" />
+										<path d="M6 0v6H0V0zM5 1H1v4h4zM4 12H2v2h2z" />
+										<path d="M6 10v6H0v-6zm-5 1v4h4v-4zm11-9h2v2h-2z" />
+										<path d="M10 0v6h6V0zm5 1v4h-4V1zM8 1V0h1v2H8v2H7V1zm0 5V4h1v2zM6 8V7h1V6h1v2h1V7h5v1h-4v1H7V8zm0 0v1H2V8H1v1H0V7h3v1zm10 1h-1V7h1zm-1 0h-1v2h2v-1h-1zm-4 0h2v1h-1v1h-1zm2 3v-1h-1v1h-1v1H9v1h3v-2zm0 0h3v1h-2v1h-1zm-4-1v1h1v-2H7v1z" />
+										<path d="M7 12h1v3h4v1H7zm9 2v2h-3v-1h2v-1z" />
+									</svg>
+									<p className="sm:flex hidden text-sm">Open QR</p>
+								</button>
+								<button onClick={() => window.open(url)} type="button" className="text-white w-fit bg-gray-400 hover:bg-gray-500 focus:ring-1 focus:ring-gray-300 font-medium rounded-lg text-sm px-2.5 sm:py-2.5 py-2 me-2 focus:outline-none flex items-center gap-1">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+										<path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5" />
+										<path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z" />
+									</svg>
+									<p className="sm:flex hidden text-sm">See room</p>
+								</button>
+								<button
+									onClick={(event) => {
+										setIsModalOpen(true);
+									}}
+									type="button"
+									className="text-white w-fit bg-red-500 hover:bg-red-600 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 sm:py-2.5 py-2 me-2 focus:outline-none flex items-center gap-1">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+										<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+										<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+									</svg>
+									<p className="sm:flex hidden text-sm">Delete</p>
+								</button>
+							</div>
+
+							{/* <div className="flex gap-2 items-center">
+								<button
+									className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg sm:text-sm text-xs sm:px-5 px-2 sm:py-2.5 py-2 me-2 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none"
 									onClick={(e) => {
 										const element = e.target;
 										const originalText = element.innerText;
@@ -593,13 +704,24 @@ export default function Rooms() {
 												console.error('Failed to copy URL to clipboard:', error);
 											});
 									}}>
-									Copy link
-								</p>
+									Publish
+								</button>
 
-								<a href={'/room/' + room?.room?.id + '/qr'} target="_blank" className="cursor-pointer select-none bg-sky-500 hover:opacity-90 text-white sm:text-base text-xs sm:px-4 sm:py-2 px-2 py-1 rounded-lg sm:h-10 h-6">
-									Open QR
-								</a>
-							</div>
+								<button
+									onClick={(event) => {
+										setIsModalOpen(true);
+									}}
+									type="button"
+									className="text-white w-fit bg-red-500 hover:bg-red-600 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 sm:py-2.5 py-2 me-2 focus:outline-none flex items-center gap-1">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+										<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+										<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+									</svg>
+									<p className="sm:flex hidden text-sm">Delete</p>
+								</button>
+
+								<a className="cursor-pointer select-none bg-sky-500 hover:opacity-90 text-white sm:text-base text-xs sm:px-4 sm:py-2 px-2 py-1 rounded-lg sm:h-10 h-6">Open QR</a>
+							</div> */}
 						</div>
 
 						<div className="border-b border-gray-200 w-full">
