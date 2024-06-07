@@ -505,6 +505,7 @@ export default function Rooms() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState('results');
 	const [url, setUrl] = useState('');
+	const [title, setTitle] = useState('Room - Quizzoto');
 
 	const [pages, setPages] = useState(['results', 'quizzes', 'stats']);
 
@@ -529,7 +530,7 @@ export default function Rooms() {
 			.then((jsonData) => {
 				if (jsonData.error != 'Not Found') {
 					setRoom(jsonData);
-
+					setTitle(jsonData.room.title + ' - Quizzoto');
 					setIsLoading(false);
 				} else {
 					setRoom('404');
@@ -540,8 +541,7 @@ export default function Rooms() {
 	return (
 		<>
 			<Head>
-				<title>{room?.room?.title ? room?.room?.title : 'Room'} - Quizzoto</title>
-
+				<title>{title}</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
