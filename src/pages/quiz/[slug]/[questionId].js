@@ -125,7 +125,7 @@ const ResultsPage = ({ resultId }) => {
 					audio: { contentType: 'audio/mp3' },
 				})
 				.then((policy) => {
-					if (policy && policy.supported && navigator.getAutoplayPolicy('mediaelement') === 'allowed') {
+					if (policy && policy.supported) {
 						setAudioPolicy(true);
 					} else {
 						setShowButton(true);
