@@ -222,7 +222,10 @@ const Starter = ({ starter, setStarter }) => {
 		let hasError = false;
 
 		starter.fields.forEach((field) => {
-			if (field.type === 'email' && !validateEmail(field.value)) {
+			if (!field.value) {
+				newError[field.type] = 'Field is required';
+				hasError = true;
+			} else if (field.type === 'email' && !validateEmail(field.value)) {
 				newError[field.type] = 'Must be a valid email';
 				hasError = true;
 			}
@@ -247,6 +250,10 @@ const Starter = ({ starter, setStarter }) => {
 			return field;
 		});
 		setStarter(newStarter);
+	};
+
+	const isFormValid = () => {
+		return starter.fields.every((field) => field.value);
 	};
 
 	return (
@@ -276,7 +283,7 @@ const Starter = ({ starter, setStarter }) => {
 				<div className="flex items-center w-full justify-center flex-col mt-16 gap-4">
 					<div className="flex items-center w-full justify-center">
 						<div className="flex w-full justify-center">
-							<button className="text-white w-full sm:max-w-96 bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none" onClick={handleStartClick} disabled={isLoading}>
+							<button className="text-white w-full sm:max-w-96 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 bg-sky-500 hover:bg-sky-600 focus:outline-none disabled:bg-gray-400" disabled={!isFormValid() || isLoading} onClick={handleStartClick}>
 								{isLoading ? 'Loading...' : 'Start'}
 							</button>
 						</div>
