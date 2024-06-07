@@ -296,6 +296,14 @@ export default async function getRoomsInfo(req, res) {
 			console.error('Error:', error);
 			return res.status(200).send({ error: 'Not Found' });
 		}
+	} else if (req.method == 'DELETE') {
+		if (room.creator != session.user.id) {
+			return res.status(400).send({ code: 400, message: 'Bad Request' });
+		}
+		await db.collection('rooms').deleteOne({ id: room.id });
+		await db.collection('results').updateMany({ roomId: room.id }, { $set: { roomId: '' } });
+
+		return res.status(200).send({ code: 201, message: 'ok' });
 	} else {
 		return res.status(200).send({ error: 'Not Found' });
 	}
