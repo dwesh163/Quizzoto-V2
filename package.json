@@ -11,6 +11,7 @@
   "dependencies": {
     "apexcharts": "^3.49.1",
     "dotenv": "^16.4.5",
+    "json2csv": "^6.0.0-alpha.2",
     "mongodb": "^6.5.0",
     "multer": "^1.4.5-lts.1",
     "next": "14.2.3",
