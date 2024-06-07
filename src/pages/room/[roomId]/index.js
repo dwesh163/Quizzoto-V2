@@ -548,6 +548,10 @@ export default function Rooms() {
 		}
 	}
 
+	if (status == 'unauthenticated' && status !== 'loading') {
+		router.push('/auth/signin?callbackUrl=' + window.location.href);
+	}
+
 	return (
 		<>
 			<Head>
@@ -693,44 +697,6 @@ export default function Rooms() {
 									<p className="sm:flex hidden text-sm">Delete</p>
 								</button>
 							</div>
-
-							{/* <div className="flex gap-2 items-center">
-								<button
-									className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg sm:text-sm text-xs sm:px-5 px-2 sm:py-2.5 py-2 me-2 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none"
-									onClick={(e) => {
-										const element = e.target;
-										const originalText = element.innerText;
-
-										navigator.clipboard
-											.writeText(url)
-											.then(() => {
-												element.innerText = 'Copied';
-												setTimeout(() => {
-													element.innerText = originalText;
-												}, 3000);
-											})
-											.catch((error) => {
-												console.error('Failed to copy URL to clipboard:', error);
-											});
-									}}>
-									Publish
-								</button>
-
-								<button
-									onClick={(event) => {
-										setIsModalOpen(true);
-									}}
-									type="button"
-									className="text-white w-fit bg-red-500 hover:bg-red-600 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-2.5 sm:py-2.5 py-2 me-2 focus:outline-none flex items-center gap-1">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-										<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-										<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-									</svg>
-									<p className="sm:flex hidden text-sm">Delete</p>
-								</button>
-
-								<a className="cursor-pointer select-none bg-sky-500 hover:opacity-90 text-white sm:text-base text-xs sm:px-4 sm:py-2 px-2 py-1 rounded-lg sm:h-10 h-6">Open QR</a>
-							</div> */}
 						</div>
 
 						<div className="border-b border-gray-200 w-full flex">
