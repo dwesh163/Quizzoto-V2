@@ -109,6 +109,7 @@ export default async function getRoomsInfo(req, res) {
 				quizzes: quizzes,
 				parameters: {},
 				joinId,
+				timeout: 60000,
 				share: {
 					ask: [],
 					authorized: [user.id],

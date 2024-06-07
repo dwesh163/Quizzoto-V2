@@ -107,7 +107,7 @@ const AnswersBox = ({ answers, setAnswers, question }) => {
 	}
 };
 
-const ResultsPage = ({ resultId }) => {
+const ResultsPage = ({ resultId, room }) => {
 	const { data: session, status } = useSession();
 	const router = useRouter();
 	const [result, setResult] = useState(null);
@@ -116,28 +116,6 @@ const ResultsPage = ({ resultId }) => {
 	const [showButton, setShowButton] = useState(false);
 	const [isContentLoading, setIsContentLoading] = useState(true);
 	const audioRef = useRef();
-
-	// useEffect(() => {
-	// 	if (navigator.mediaCapabilities) {
-	// 		navigator.mediaCapabilities
-	// 			.decodingInfo({
-	// 				type: 'file',
-	// 				audio: { contentType: 'audio/mp3' },
-	// 			})
-	// 			.then((policy) => {
-	// 				if (policy && policy.supported) {
-	// 					setAudioPolicy(true);
-	// 				} else {
-	// 					setShowButton(true);
-	// 				}
-	// 			})
-	// 			.catch(() => {
-	// 				setShowButton(true);
-	// 			});
-	// 	} else {
-	// 		setShowButton(true);
-	// 	}
-	// }, []);
 
 	useEffect(() => {
 		if (resultId) {
@@ -151,6 +129,13 @@ const ResultsPage = ({ resultId }) => {
 		}
 	}, [resultId]);
 	const results = result && result.quiz?.info?.points === result.points;
+
+	useEffect(() => {
+		localStorage.removeItem('room');
+		setTimeout(() => {
+			router.push('/r/' + room.slug);
+		}, parseInt(room.timeout));
+	}, []);
 
 	function showResults() {
 		try {
@@ -294,8 +279,7 @@ const Starter = ({ starter, setStarter }) => {
 								<label
 									className={`absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] 
 						${error[field.type] ? 'text-red-500' : 'text-blue-gray-400'}`}
-									style={{ width: 'calc(100% - 6px)' }} // Adjust the width here
-								></label>
+									style={{ width: 'calc(100% - 6px)' }}></label>
 								{error[field.type] && !document.activeElement.classList.contains('border-red-500') && (
 									<p className="flex items-center gap-1 mt-1 font-sans text-sm antialiased font-normal leading-normal text-red-500">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ef4468" className="w-4 h-4 -mt-px">
@@ -418,8 +402,8 @@ export default function Question() {
 		}));
 
 		if (localStorage.getItem('room')) {
+			setRoom(JSON.parse(localStorage.getItem('room')));
 			id = JSON.parse(localStorage.getItem('room')).id;
-			localStorage.removeItem('room');
 		}
 
 		fetch('/api/result', { method: 'POST', body: JSON.stringify({ slug: quiz.slug, answers: globalAnswers, roomId: id ? id : '', starter: starter ? starter : {} }) })
@@ -492,7 +476,7 @@ export default function Question() {
 						<p className="mt-4 text-center">Quiz not Found</p>
 					</div>
 				) : router.query.questionId == 'result' ? (
-					<ResultsPage resultId={resultId} />
+					<ResultsPage resultId={resultId} room={JSON.parse(localStorage.getItem('room'))} />
 				) : router.query.questionId == 'start' && !isLoading ? (
 					<div className="h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
