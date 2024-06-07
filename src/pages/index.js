@@ -49,7 +49,7 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
-					<h3 className="px-5 text-3xl text-gray-800 font-bold text-center mb-2">Popular quizzes</h3>
+					{/* <h3 className="px-5 text-3xl text-gray-800 font-bold text-center mb-2">Popular quizzes</h3>
 					<div className="px-5 py-2 flex lg:flex-nowrap flex-wrap gap-4 lg:gap-2 overflow-scroll">
 						{quizzes.map((quiz) => (
 							<div onClick={() => router.push('/quiz/' + quiz.slug)} className="cursor-pointer grid grid-cols-1 w-full lg:w-1/3">
@@ -78,8 +78,8 @@ export default function Home() {
 									</div>
 								</div>
 							</div>
-						))}
-					</div>
+						))} 
+					</div>*/}
 				</div>
 			</main>
 		</>
