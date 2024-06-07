@@ -101,6 +101,30 @@ export default async function getQuizInfo(req, res) {
 
 			await db.collection('quizzes').deleteOne({ id: req.query.quizId });
 
+			const rooms = await db
+				.collection('rooms')
+				.aggregate([
+					{
+						$match: {
+							$or: [{ quizzes: { $in: [req.query.quizId] } }],
+						},
+					},
+					{
+						$project: {
+							id: 1,
+							quizzes: 1,
+							_id: 0,
+						},
+					},
+				])
+				.toArray();
+
+			for (const room of rooms) {
+				const newQuizzes = room.quizzes.filter((quiz) => quiz !== req.query.quizId);
+
+				await db.collection('rooms').updateOne({ id: room.id }, { $set: { quizzes: newQuizzes } });
+			}
+
 			return res.status(200).send({ message: 'Ok' });
 		} else {
 			return res.status(405).send('Method not allowed');
