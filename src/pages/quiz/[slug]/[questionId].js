@@ -117,27 +117,27 @@ const ResultsPage = ({ resultId }) => {
 	const [isContentLoading, setIsContentLoading] = useState(true);
 	const audioRef = useRef();
 
-	useEffect(() => {
-		if (navigator.mediaCapabilities) {
-			navigator.mediaCapabilities
-				.decodingInfo({
-					type: 'file',
-					audio: { contentType: 'audio/mp3' },
-				})
-				.then((policy) => {
-					if (policy && policy.supported) {
-						setAudioPolicy(true);
-					} else {
-						setShowButton(true);
-					}
-				})
-				.catch(() => {
-					setShowButton(true);
-				});
-		} else {
-			setShowButton(true);
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (navigator.mediaCapabilities) {
+	// 		navigator.mediaCapabilities
+	// 			.decodingInfo({
+	// 				type: 'file',
+	// 				audio: { contentType: 'audio/mp3' },
+	// 			})
+	// 			.then((policy) => {
+	// 				if (policy && policy.supported) {
+	// 					setAudioPolicy(true);
+	// 				} else {
+	// 					setShowButton(true);
+	// 				}
+	// 			})
+	// 			.catch(() => {
+	// 				setShowButton(true);
+	// 			});
+	// 	} else {
+	// 		setShowButton(true);
+	// 	}
+	// }, []);
 
 	useEffect(() => {
 		if (resultId) {
@@ -150,18 +150,21 @@ const ResultsPage = ({ resultId }) => {
 				});
 		}
 	}, [resultId]);
+	const results = result && result.quiz?.info?.points === result.points;
 
 	function showResults() {
-		setAudioPolicy(true);
-		if (audioRef.current) {
-			audioRef.current.play();
+		try {
+			setAudioPolicy(true);
+			if (audioRef.current) {
+				audioRef.current.play();
+			}
+			setTimeout(() => {
+				setIsLoading(false);
+			}, 2035);
+		} catch (error) {
+			showButton(true);
 		}
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 2035);
 	}
-
-	const results = result && result.quiz?.info?.points === result.points;
 
 	useEffect(() => {
 		if (results == null) {
@@ -189,7 +192,20 @@ const ResultsPage = ({ resultId }) => {
 			<div className="flex mt-20 md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-4 mx-auto items-center justify-between md:flex-row md:px-6 lg:px-8">
 				{!audioPolicy && showButton && (
 					<div className="w-full h-[calc(100vh-130px)] flex items-center justify-center">
-						<button onClick={showResults}>Show Results</button>
+						<button
+							onClick={() => {
+								if (results == null) {
+									return;
+								}
+
+								if (results == true) {
+									showResults();
+								} else {
+									setIsLoading(false);
+								}
+							}}>
+							Show Results
+						</button>
 					</div>
 				)}
 				{isLoading && (
