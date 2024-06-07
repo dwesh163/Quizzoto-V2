@@ -17,10 +17,17 @@
     ],
     "type": "form",
     "starter": {
-        "text": "Le quiz commence maintenant ! Bonne chance !",
+        "title": "Le quiz commence maintenant ! Bonne chance !",
+        "subtitle": "Entre ton prénom et ton adresse email pour t'inscrire au concours.",
         "fields": [
-            "name",
-            "email"
+            {
+                "type": "name",
+                "text": "Nom et prénom"
+            },
+            {
+                "type": "email",
+                "text": "Adresse email"
+            }
         ]
     },
     "creator": "dwesh163",

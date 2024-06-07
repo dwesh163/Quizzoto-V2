@@ -15,6 +15,20 @@
         "Frank Herbert",
         "science-fiction"
     ],
+    "starter": {
+        "title": "Le quiz commence maintenant ! Bonne chance !",
+        "subtitle": "Entre ton prénom et ton adresse email pour t'inscrire au concours.",
+        "fields": [
+            {
+                "type": "name",
+                "text": "Nom et prénom"
+            },
+            {
+                "type": "email",
+                "text": "Adresse email"
+            }
+        ]
+    },
     "type": "form",
     "creator": "dwesh163",
     "questions": [
