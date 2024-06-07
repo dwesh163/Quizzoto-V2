@@ -60,6 +60,13 @@ export default async function getResults(req, res) {
 			])
 			.toArray();
 
+		if (result.visibility != 'private') {
+			if (result?.user?.email) {
+				delete result.user.email;
+			}
+			return res.status(200).send(result);
+		}
+
 		if (result.roomId) {
 			const room = await db.collection('rooms').findOne({ id: result.roomId });
 
@@ -76,17 +83,7 @@ export default async function getResults(req, res) {
 			return res.status(404).json({ error: 'Not Found' });
 		}
 
-		if (result.visibility != 'private') {
-			if (result?.user?.email) {
-				delete result.user.email;
-			}
-
-			if (result?.roomId) {
-				delete result.roomId;
-			}
-		}
-
-		return res.status(200).send(result);
+		return res.status(404).json({ error: 'Not Found' });
 	} catch (error) {
 		console.error('Error:', error);
 		return res.status(500).send('Internal server error');

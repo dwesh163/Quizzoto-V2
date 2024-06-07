@@ -10,8 +10,6 @@ export default async function Results(req, res) {
 		const quiz = await db.collection('quizzes').findOne({ slug: slug });
 		const id = uuidv4();
 
-		console.log(starter);
-
 		let points = 0;
 		let results = [];
 
@@ -44,14 +42,18 @@ export default async function Results(req, res) {
 		const idUser = uuidv4();
 		let existingUser = {};
 
-		if (starter?.email && !session) {
-			existingUser = await db.collection('users').findOne({ email: starter.email });
+		const email = starter.fields.find((field) => field.type === 'email')?.value;
+		const name = starter.fields.find((field) => field.type === 'name')?.value;
+		const username = starter.fields.find((field) => field.type === 'username')?.value;
+
+		if (email && !session) {
+			existingUser = await db.collection('users').findOne({ email: email });
 			if (!existingUser) {
 				const newUser = {
 					id: idUser,
-					name: starter?.name ? starter.name : null,
-					email: starter?.email ? starter.email : null,
-					username: starter?.username ? starter.username : null,
+					name: name ? name : null,
+					email: email ? email : null,
+					username: username ? username : null,
 					statistics: {
 						points: 0,
 						quizzes: 0,
@@ -64,6 +66,8 @@ export default async function Results(req, res) {
 			}
 		}
 
+		const userId = session != null ? session.user.id : email ? (existingUser ? existingUser.id : idUser) : 'Anonymus';
+
 		let returnObject = {
 			quiz: quiz.id,
 			id: id,
@@ -71,7 +75,7 @@ export default async function Results(req, res) {
 			results,
 			roomId,
 			userAgent: req.headers['user-agent'],
-			player: session ? session.user.id : starter.email ? (existingUser ? existingUser.id : idUser) : 'Anonymus',
+			player: userId,
 			date: new Date(),
 			visibility: session ? 'private' : 'hidden',
 		};
