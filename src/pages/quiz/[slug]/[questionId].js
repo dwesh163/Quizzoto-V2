@@ -207,6 +207,86 @@ const ResultsPage = ({ resultId }) => {
 	);
 };
 
+const Starter = ({ starter, setStarter }) => {
+	const [error, setError] = useState({});
+	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter();
+
+	const validateEmail = (email) => {
+		const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return re.test(String(email).toLowerCase());
+	};
+
+	const handleStartClick = () => {
+		const newError = {};
+		let hasError = false;
+
+		starter.fields.forEach((field) => {
+			if (field.type === 'email' && !validateEmail(field.value)) {
+				newError[field.type] = 'Must be a valid email';
+				hasError = true;
+			}
+		});
+
+		setError(newError);
+
+		if (!hasError) {
+			setIsLoading(true);
+			setTimeout(() => {
+				router.push('/quiz/' + router.query.slug + '/1');
+			}, 1000);
+		}
+	};
+
+	const handleChange = (fieldType, value) => {
+		const newStarter = { ...starter };
+		newStarter.fields = newStarter.fields.map((field) => {
+			if (field.type === fieldType) {
+				return { ...field, value };
+			}
+			return field;
+		});
+		setStarter(newStarter);
+	};
+
+	return (
+		<div className="flex sm:items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
+			<div className="relative w-full p-5 pt-6 mt-2 min-h-[30rem] h-fit bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
+				<div>
+					<h3 className="sm:text-3xl text-2xl font-bold text-gray-900">{starter.title}</h3>
+					<p className="text-gray-500 sm:text-base text-sm">{starter.subtitle}</p>
+					{starter.fields.map((field, index) => (
+						<div key={index} className="mt-4">
+							<h3 className="sm:text-xl text-xl">{field.text}</h3>
+							<div className="relative w-full min-w-[200px] h-18 mt-2">
+								<input type="text" placeholder={field.text} value={field.value || ''} onChange={(event) => handleChange(field.type, event.target.value)} className={`peer w-full h-10 bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 ${error[field.type] ? 'focus:border-red-500 border-red-500' : 'focus:border-blue-500'}`} />
+								<label className={`flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content-[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content-[''] after:block after:flex-grow after:box-border after:h-1.5 after:mt-[6.5px] peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 ${error[field.type] ? 'peer-focus:text-red-500 before:border-red-gray-200 peer-focus:before:!border-red-500 after:border-red-gray-200 peer-focus:after:!border-red-500' : 'peer-focus:text-blue-500 before:border-blue-gray-200 peer-focus:before:!border-blue-500 after:border-blue-gray-200 peer-focus:after:!border-blue-500'}`}></label>
+								{error[field.type] && (
+									<p className="flex items-center gap-1 mt-1 font-sans text-sm antialiased font-normal leading-normal text-red-500">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ef4468" className="w-4 h-4 -mt-px">
+											<path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd"></path>
+										</svg>
+										{error[field.type]}
+									</p>
+								)}
+							</div>
+						</div>
+					))}
+				</div>
+				<div className="flex items-center w-full justify-center flex-col mt-16 gap-4">
+					<div className="flex items-center w-full justify-center">
+						<div className="flex w-full justify-center">
+							<button className="text-white w-full sm:max-w-96 bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none" onClick={handleStartClick} disabled={isLoading}>
+								{isLoading ? 'Loading...' : 'Start'}
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+
 export default function Question() {
 	const { data: session, status } = useSession();
 	const router = useRouter();
@@ -221,10 +301,10 @@ export default function Question() {
 	const [room, setRoom] = useState({});
 	const [starter, setStarter] = useState({});
 	const [resultId, setResultId] = useState();
-	const [resultLoading, setResultLoading] = useState(true);
+	const [title, setTitle] = useState('Quiz - Quizzoto');
 
 	function getQuiz() {
-		if (!router.query.slug) {
+		if (!router.query.slug || status === 'loading') {
 			return;
 		}
 
@@ -234,15 +314,27 @@ export default function Question() {
 				if (jsonData != '404') {
 					setQuiz(jsonData.quiz);
 					let starter = {};
-					if (jsonData?.quiz?.starter?.fields) {
-						jsonData.quiz.starter.fields.forEach((field) => {
-							starter[field] = '';
-						});
-						setStarter(starter);
-					} else {
-						router.push('/quiz/' + router.query.slug + '/1');
-					}
+					starter.fields =
+						jsonData?.quiz?.starter?.fields?.map((field) => {
+							let value = '';
+							switch (field.type) {
+								case 'email':
+									value = session?.user?.email || '';
+									break;
+								case 'name':
+									value = session?.user?.name || '';
+									break;
+								default:
+									value = '';
+							}
+							return { ...field, value };
+						}) || [];
 
+					starter.title = jsonData?.quiz?.starter?.title || '';
+					starter.subtitle = jsonData?.quiz?.starter?.subtitle || '';
+
+					setStarter(starter);
+					setTitle(jsonData.quiz.title + ' - Quizzoto');
 					getQuestion();
 				} else {
 					setQuiz('404');
@@ -304,7 +396,7 @@ export default function Question() {
 			});
 	}
 
-	useEffect(() => getQuiz(), [router.query.slug]);
+	useEffect(() => getQuiz(), [router.query.slug, status]);
 	useEffect(() => {
 		if (!router.query.questionId || router.query.questionId < 1) {
 			return;
@@ -341,13 +433,13 @@ export default function Question() {
 	return (
 		<>
 			<Head>
-				<title>{quiz?.title ? quiz.title : 'Quiz'} - QuizZoto</title>
+				<title>{title}</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
 				<Header />
 				{isLoading ? (
-					<div className="sm:h-[calc(100vh-180px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
+					<div className="h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						<div className="flex sm:items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
 							<div className="flex mt-2 items-center justify-center relative w-full p-5 bg-white h-[30rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
@@ -357,7 +449,7 @@ export default function Question() {
 								</svg>
 							</div>
 						</div>
-						{room && <div className="w-full text-center">In room : {room?.title}</div>}
+						{room && <div className="w-full text-center b-0">In room : {room?.title}</div>}
 					</div>
 				) : quiz === '404' ? (
 					<div className="flex md:bg-[#fcfcfc] bg-white flex-col max-w-6xl px-2 mx-auto justify-center md:px-6 lg:px-8 h-[100vh]">
@@ -366,65 +458,23 @@ export default function Question() {
 				) : router.query.questionId == 'result' ? (
 					<ResultsPage resultId={resultId} />
 				) : router.query.questionId == 'start' && !isLoading ? (
-					<div className="sm:h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
+					<div className="h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
-						{quiz?.starter && (
-							<div className="flex sm:items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
-								<div className="relative w-full p-5 mt-2 min-h-[30rem] h-fit bg-white md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
-									<div>
-										<h3 className="sm:text-3xl text-xl font-bold mb-8">{quiz?.starter?.text}</h3>
-										{quiz?.starter?.fields.map((field, index) => (
-											<div key={index}>
-												<h3 className="sm:text-2xl text-xl">{field}</h3>
-												<div className="relative mt-2 rounded-md shadow-sm">
-													<input
-														value={starter[field]}
-														onChange={(event) => {
-															const newStarter = { ...starter };
-															newStarter[field] = event.target.value;
-															setStarter(newStarter);
-														}}
-														type="text"
-														name="price"
-														id="price"
-														className="block w-full py-4 rounded-md border-0 pl-7 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-														placeholder="Answers"
-													/>
-												</div>
-											</div>
-										))}
-									</div>
-									<div className="flex items-center justify-center flex-col mt-2 gap-4">
-										<div className="flex items-center justify-center">
-											<button
-												className="text-white w-full sm:max-w-96 bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none"
-												onClick={() => {
-													setIsLoading(true);
-													setTimeout(() => {
-														router.push('/quiz/' + router.query.slug + '/1');
-													}, 1000);
-												}}>
-												Start
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						)}
-						{room && <div className="w-full text-center">In room : {room?.title}</div>}
+						{quiz?.starter && <Starter starter={starter} setStarter={setStarter} />}
+						{room && <div className="w-full text-center b-0">In room : {room?.title}</div>}
 					</div>
 				) : question === '404' ? (
-					<div className="sm:h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
+					<div className="h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						<div className="flex items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
 							<div className="relative w-full flex justify-center items-center p-5 bg-white h-[30rem] md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
 								<p className="mt-4">Question not Found</p>
 							</div>
 						</div>
-						{room && <div className="w-full text-center">In room : {room?.title}</div>}
+						{room && <div className="w-full text-center absolute b-0">In room : {room?.title}</div>}
 					</div>
 				) : (
-					<div className="sm:h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
+					<div className="h-[calc(100vh-140px)] max-w-6xl mt-[5rem] sm:mt-24 pb-5 mx-auto md:px-6 lg:px-8 bg-white md:bg-[#fcfcfc]">
 						<Menu title={quiz.title} />
 						<div className="flex sm:items-center justify-center w-full h-full sm:px-5 md:px-24 gap-5">
 							<div className="relative w-full flex flex-col justify-between p-5 bg-white mt-2 min-h-[30rem] h-fit md:bg-card-texture bg-no-repeat bg-top md:rounded-2xl md:shadow-xl">
