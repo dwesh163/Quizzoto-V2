@@ -129,7 +129,6 @@ export default async function getRoomsInfo(req, res) {
 
 			const csv = json2csv(results, { fields });
 
-			console.log(room.link.slug);
 			res.setHeader('Content-Type', 'text/csv');
 			res.setHeader(`Content-Disposition`, `attachment; filename="${room.link.slug}.csv"`);
 
