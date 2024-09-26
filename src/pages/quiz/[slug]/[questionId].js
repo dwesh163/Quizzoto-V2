@@ -461,6 +461,12 @@ export default function Question() {
 		}
 	}, []);
 
+	useEffect(() => {
+		if (router.query.questionId == 'start' && !quiz?.starter) {
+			router.push('/quiz/' + router.query.slug + '/1');
+		}
+	}, []);
+
 	return (
 		<>
 			<Head>
