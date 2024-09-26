@@ -46,8 +46,6 @@ export default async function Results(req, res) {
 		const name = starter.fields.find((field) => field.type === 'name')?.value;
 		const username = starter.fields.find((field) => field.type === 'username')?.value;
 
-		console.log('new User :', email, name, username, points);
-
 		if (email && !session) {
 			existingUser = await db.collection('users').findOne({ email: email });
 			if (!existingUser) {
@@ -81,6 +79,8 @@ export default async function Results(req, res) {
 			date: new Date(),
 			visibility: session ? 'private' : 'hidden',
 		};
+
+		console.log(returnObject);
 
 		db.collection('results').insertOne(returnObject);
 
