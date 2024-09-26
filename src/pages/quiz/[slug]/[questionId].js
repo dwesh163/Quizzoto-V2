@@ -108,7 +108,6 @@ const AnswersBox = ({ answers, setAnswers, question }) => {
 };
 
 const ResultsPage = ({ resultId, room }) => {
-	const { data: session, status } = useSession();
 	const router = useRouter();
 	const [result, setResult] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -124,17 +123,29 @@ const ResultsPage = ({ resultId, room }) => {
 				.then((data) => {
 					if (data.error !== 'Not Found') {
 						setResult(data);
+					} else {
+						if (room) {
+							router.push('/r/' + room.slug);
+						}
 					}
 				});
+		} else {
+			if (room) {
+				router.push('/r/' + room.slug);
+			} else {
+				router.push('/quiz/' + router.query.slug);
+			}
 		}
 	}, [resultId]);
 	const results = result && result.quiz?.info?.points === result.points;
 
 	useEffect(() => {
 		localStorage.removeItem('room');
-		setTimeout(() => {
-			router.push('/r/' + room.slug);
-		}, parseInt(room.timeout));
+		if (room && room.timeout) {
+			setTimeout(() => {
+				router.push('/r/' + room.slug);
+			}, parseInt(room.timeout));
+		}
 	}, []);
 
 	function showResults() {
