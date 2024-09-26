@@ -81,6 +81,8 @@ export default async function getResults(req, res) {
 
 		if (!result) {
 			return res.status(404).json({ error: 'Not Found' });
+		} else {
+			return res.status(200).send(result);
 		}
 
 		return res.status(404).json({ error: 'Not Found' });
