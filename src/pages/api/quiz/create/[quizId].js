@@ -76,7 +76,6 @@ export default async function getQuizInfo(req, res) {
 			const data = JSON.parse(req.body);
 
 			if (data.visibility) {
-				console.log(data.visibility);
 				await db.collection('quizzes').updateOne({ id: req.query.quizId }, { $set: { visibility: data.visibility } });
 				return res.status(200).send({ message: 'Ok', slug: quiz.slug });
 			}
