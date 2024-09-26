@@ -9,7 +9,6 @@ const Donut = ({ data }) => {
 	useEffect(() => {
 		const chartData = Object.entries(data).map(([label, value]) => ({ x: label, y: value }));
 
-		console.log(chartData);
 		setSeries(chartData.map((entry) => entry.y));
 		setOptions({
 			colors: ['#348888', '#22BABB', '#FA7F08', '#FF5F5D', '#FFB30D'],
