@@ -164,7 +164,6 @@ export default function Page() {
 					setQuizzData(data);
 				}
 			}
-			console.log(data.visibility);
 			setLoading(false);
 		}
 	};
