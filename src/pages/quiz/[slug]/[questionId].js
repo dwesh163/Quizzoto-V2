@@ -142,6 +142,8 @@ const ResultsPage = ({ resultId, room }) => {
 	useEffect(() => {
 		localStorage.removeItem('room');
 		if (room && room.timeout) {
+			window.history.replaceState(null, '', '/r/' + room.slug);
+
 			setTimeout(() => {
 				router.push('/r/' + room.slug);
 			}, parseInt(room.timeout));
@@ -422,7 +424,7 @@ export default function Question() {
 			.then((jsonData) => {
 				if (jsonData.id) {
 					setResultId(jsonData.id);
-					router.push('/quiz/' + router.query.slug + '/result');
+					router.replace('/quiz/' + router.query.slug + '/result');
 				}
 			});
 	}
@@ -463,7 +465,7 @@ export default function Question() {
 
 	useEffect(() => {
 		if (router.query.questionId == 'start' && !quiz?.starter) {
-			router.push('/quiz/' + router.query.slug + '/1');
+			router.replace('/quiz/' + router.query.slug + '/1');
 		}
 	}, []);
 
@@ -535,14 +537,14 @@ export default function Question() {
 										className={'w-28 h-10 text-center text-white font-medium rounded-lg text-sm ' + (router.query.questionId > 1 ? 'bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none' : 'bg-white cursor-default')}
 										onClick={() => {
 											if (router.query.questionId > 1) {
-												router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) - 1));
+												router.replace('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) - 1));
 											}
 										}}>
 										{router.query.questionId > 1 && '← Previous'}
 									</button>
 									{question != 'end' && <span className="text-sm font-medium text-gray-700">{(router.query.questionId >= quiz?.info?.length ? quiz.info.length : router.query.questionId) + '/' + (quiz.info ? quiz.info.length : '0')}</span>}
 									{question != 'end' && (
-										<button className="w-28 h-10 text-center text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none font-medium rounded-lg text-sm" onClick={() => router.push('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>
+										<button className="w-28 h-10 text-center text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none font-medium rounded-lg text-sm" onClick={() => router.replace('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>
 											Next →
 										</button>
 									)}
