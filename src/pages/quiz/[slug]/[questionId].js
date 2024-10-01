@@ -226,6 +226,11 @@ const Starter = ({ starter, setStarter }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
 
+	if (!starter && router.query.questionId == 'start') {
+		router.push('/quiz/' + router.query.slug + '/1');
+		return <></>;
+	}
+
 	const validateEmail = (email) => {
 		const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		return re.test(String(email).toLowerCase());
@@ -370,8 +375,12 @@ export default function Question() {
 					setTitle(jsonData.quiz.title + ' - Quizzoto');
 					getQuestion();
 				} else {
-					setQuiz('404');
-					setIsLoading(false);
+					if (router.query.questionId == 'start') {
+						router.push('/quiz/' + router.query.slug + '/1');
+					} else {
+						setQuiz('404');
+						setIsLoading(false);
+					}
 				}
 			});
 	}
@@ -398,9 +407,15 @@ export default function Question() {
 				}
 
 				if (router.query.questionId == 'start') {
-					setTimeout(() => {
-						setIsLoading(false);
-					}, 1000);
+					if (jsonData != '404') {
+						setTimeout(() => {
+							setIsLoading(false);
+						}, 1000);
+					} else {
+						setTimeout(() => {
+							router.push('/quiz/' + router.query.slug + '/1');
+						}, 1000);
+					}
 				} else {
 					setIsLoading(false);
 				}
@@ -460,14 +475,6 @@ export default function Question() {
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			setRoom(JSON.parse(localStorage.getItem('room')));
-		}
-	}, []);
-
-	useEffect(() => {
-		if (router.query.questionId == 'start' && !quiz?.starter) {
-			setInterval(() => {
-				router.push('/quiz/' + router.query.slug + '/1');
-			}, 500);
 		}
 	}, []);
 
