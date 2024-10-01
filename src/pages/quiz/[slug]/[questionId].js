@@ -412,6 +412,7 @@ export default function Question() {
 							setIsLoading(false);
 						}, 1000);
 					} else {
+						setGlobalAnswers({});
 						setTimeout(() => {
 							router.push('/quiz/' + router.query.slug + '/1');
 						}, 1000);
