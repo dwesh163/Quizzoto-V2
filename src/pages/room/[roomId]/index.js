@@ -637,7 +637,7 @@ export default function Rooms() {
 
 							<div className="flex items-center">
 								<button
-									className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg sm:text-sm text-xs sm:px-5 px-2 sm:py-2.5 py-2 me-2 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none flex items-center gap-1"
+									className="text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg sm:text-sm text-xs sm:px-5 px-2 sm:py-2.5 py-2 me-2 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none flex items-center gap-1"
 									onClick={(e) => {
 										navigator.clipboard
 											.writeText(url)

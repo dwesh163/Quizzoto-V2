@@ -20,7 +20,7 @@ function shuffle(array) {
 
 const AnswersBox = ({ answers, setAnswers, question }) => {
 	const color = 'bg-[#FFC50F]';
-	// const color = 'bg-sky-500 bg-opacity-30';
+	// const color = 'bg-red-500 bg-opacity-30';
 
 	switch (question.type) {
 		case 'textfield':
@@ -309,7 +309,7 @@ const Starter = ({ starter, setStarter }) => {
 				<div className="flex items-center w-full relative justify-center flex-col  gap-4">
 					<div className="flex items-center w-full justify-center">
 						<div className="flex w-full justify-center">
-							<button className="text-white w-full sm:max-w-96 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 bg-sky-500 hover:bg-sky-600 focus:outline-none disabled:bg-gray-400" disabled={!isFormValid() || isLoading} onClick={handleStartClick}>
+							<button className="text-white w-full sm:max-w-96 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 bg-red-500 hover:bg-red-600 focus:outline-none disabled:bg-gray-400" disabled={!isFormValid() || isLoading} onClick={handleStartClick}>
 								{isLoading ? 'Loading...' : 'Start'}
 							</button>
 						</div>
@@ -528,7 +528,7 @@ export default function Question() {
 									<div className="flex items-center justify-center flex-col min-h-[25rem] gap-4">
 										<p className="text-center">Are you sure you want to submit your answers ?</p>
 										<div className="flex w-full justify-center">
-											<button className="text-white w-full sm:max-w-96 bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none" onClick={() => submit()}>
+											<button className="text-white w-full sm:max-w-96 bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none" onClick={() => submit()}>
 												submit
 											</button>
 										</div>
@@ -536,7 +536,7 @@ export default function Question() {
 								)}
 								<div className="flex justify-between items-center mb-0 h-6">
 									<button
-										className={'w-28 h-10 text-center text-white font-medium rounded-lg text-sm ' + (router.query.questionId > 1 ? 'bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none' : 'bg-white cursor-default')}
+										className={'w-28 h-10 text-center text-white font-medium rounded-lg text-sm ' + (router.query.questionId > 1 ? 'bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-sky-300 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none' : 'bg-white cursor-default')}
 										onClick={() => {
 											if (router.query.questionId > 1) {
 												router.replace('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) - 1));
@@ -546,7 +546,7 @@ export default function Question() {
 									</button>
 									{question != 'end' && <span className="text-sm font-medium text-gray-700">{(router.query.questionId >= quiz?.info?.length ? quiz.info.length : router.query.questionId) + '/' + (quiz.info ? quiz.info.length : '0')}</span>}
 									{question != 'end' && (
-										<button className="w-28 h-10 text-center text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none font-medium rounded-lg text-sm" onClick={() => router.replace('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>
+										<button className="w-28 h-10 text-center text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-sky-300 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none font-medium rounded-lg text-sm" onClick={() => router.replace('/quiz/' + router.query.slug + '/' + (parseInt(router.query.questionId) + 1))}>
 											Next →
 										</button>
 									)}

@@ -74,7 +74,7 @@ export default function Results() {
 								</tbody>
 							</table>
 						</div>
-						<button className="bg-sky-500 text-white px-4 py-2 rounded-lg mt-8" onClick={() => router.push('/room/create')}>
+						<button className="bg-red-500 text-white px-4 py-2 rounded-lg mt-8" onClick={() => router.push('/room/create')}>
 							Create Room
 						</button>
 					</div>

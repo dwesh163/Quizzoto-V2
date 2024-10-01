@@ -8,7 +8,7 @@ export default function Header() {
 	const router = useRouter();
 
 	return (
-		<div className="absolute top-0 w-full z-30 shadow-xl bg-sky-600 bg-opacity-90 transition duration-300 ease-in-out">
+		<div className="absolute top-0 w-full z-30 shadow-xl bg-red-600 bg-opacity-90 transition duration-300 ease-in-out">
 			<div className="flex flex-col max-w-6xl px-2 mx-auto items-center justify-between md:flex-row md:px-6 lg:px-8">
 				<div className="flex items-center justify-between p-4 md:w-fit w-full">
 					<button onClick={() => router.push('/')} className="text-lg font-semibold rounded-lg tracking-widest focus:outline-none focus:shadow-outline">

@@ -36,7 +36,7 @@ export default function Home() {
 								</p>
 								<div className="max-w-xs mx-auto sm:max-w-none select-none flex justify-center aos-init aos-animate gap-4" data-aos="zoom-y-out" data-aos-delay="300">
 									<div>
-										<a onClick={() => router.push('/quiz')} className="btn cursor-pointer px-6 py-3 rounded-lg text-white bg-sky-500 hover:bg-sky-600 w-full mb-4 sm:w-auto sm:mb-0">
+										<a onClick={() => router.push('/quiz')} className="btn cursor-pointer px-6 py-3 rounded-lg text-white bg-red-500 hover:bg-red-600 w-full mb-4 sm:w-auto sm:mb-0">
 											Start quizz
 										</a>
 									</div>

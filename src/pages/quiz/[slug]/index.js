@@ -123,7 +123,7 @@ export default function Quiz() {
 										</span>
 									</div>
 									<div className="mt-4 self-center sm:mt-0 lg:mt-6 col-start-1 row-start-3 row-end-4 flex">
-										<button onClick={() => router.push(quiz.slug + '/1')} type="button" className="text-white w-full sm:w-fit bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none">
+										<button onClick={() => router.push(quiz.slug + '/1')} type="button" className="text-white w-full sm:w-fit bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none">
 											Start
 										</button>
 										{quiz?.user?.username == session?.user?.username && (

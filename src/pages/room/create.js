@@ -87,7 +87,7 @@ export default function Results() {
 				<div className="flex flex-col mt-20 md:bg-[#fcfcfc] bg-white max-w-6xl px-4 mx-auto items-center justify-between md:flex-col md:px-6 lg:px-8">
 					<div className="w-full flex justify-between mt-3">
 						<h3 className="text-3xl mt-3 font-bold text-black text-left">Info</h3>
-						<button onClick={() => createRoom()} type="button" className="text-white bg-sky-700 h-10 hover:bg-sky-400 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-4 py-1 dark:bg-sky-500 focus:outline-none">
+						<button onClick={() => createRoom()} type="button" className="text-white bg-red-700 h-10 hover:bg-sky-400 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-4 py-1 dark:bg-red-500 focus:outline-none">
 							Create room
 						</button>
 					</div>

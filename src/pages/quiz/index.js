@@ -182,7 +182,7 @@ export default function User() {
 								</svg>
 							</div>
 							<input type="search" name="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 md:rounded-lg rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500 outline-none" placeholder="Search quizzes" required value={search} onChange={handleSearchChange} onKeyDown={handleKeyDown} />
-							<button onClick={() => fetchData()} className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 absolute end-2.5 bottom-2.5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none font-medium rounded-lg text-sm px-4 py-2">
+							<button onClick={() => fetchData()} className="text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-sky-300 absolute end-2.5 bottom-2.5 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none font-medium rounded-lg text-sm px-4 py-2">
 								Search
 							</button>
 						</div>
@@ -195,7 +195,7 @@ export default function User() {
 								fetchData();
 							}}
 							type="button"
-							className="text-white bg-sky-700 hover:bg-sky-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-sky-500 dark:hover:bg-sky-600 focus:outline-none">
+							className="text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none">
 							Show more
 						</button>
 					) : (

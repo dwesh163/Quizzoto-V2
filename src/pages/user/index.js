@@ -142,7 +142,7 @@ export default function User() {
 
 								for (let i = startPage; i <= endPage; i++) {
 									buttons.push(
-										<button key={i + '-switch-page'} className={`relative h-10 md:max-h-[40px] max-h-[25px] w-10 md:max-w-[40px] max-w-[25px] select-none md:rounded-lg rounded-md text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 ${i === currentPage ? 'bg-sky-500 bg-opacity-90 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none' : ''} ${i === currentPage ? 'disabled:pointer-events-none disabled:opacity-90 disabled:shadow-none' : ''}`} type="button" onClick={() => setCurrentPage(i)} disabled={isLoading || i === currentPage}>
+										<button key={i + '-switch-page'} className={`relative h-10 md:max-h-[40px] max-h-[25px] w-10 md:max-w-[40px] max-w-[25px] select-none md:rounded-lg rounded-md text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 ${i === currentPage ? 'bg-red-500 bg-opacity-90 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none' : ''} ${i === currentPage ? 'disabled:pointer-events-none disabled:opacity-90 disabled:shadow-none' : ''}`} type="button" onClick={() => setCurrentPage(i)} disabled={isLoading || i === currentPage}>
 											<span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">{i}</span>
 										</button>
 									);
